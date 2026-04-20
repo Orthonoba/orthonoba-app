@@ -1,92 +1,48 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/v1/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Error al iniciar sesión");
-        setLoading(false);
-        return;
-      }
-
-      // Guardar token (simulado)
-      localStorage.setItem("token", data.token);
-
-      // Redirigir a dashboard
-      router.push("/dashboard");
-    } catch (err) {
-      setError("Error de conexión");
-    }
-
-    setLoading(false);
+    console.log("Login:", { email, password });
   };
 
   return (
-    <div style={{ padding: "40px", maxWidth: "400px", margin: "auto" }}>
-      <h1>Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h1>
 
-      <form onSubmit={handleLogin}>
-        <div style={{ marginBottom: "10px" }}>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Correo"
+            className="w-full border p-3 rounded-md"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: "100%", padding: "10px" }}
           />
-        </div>
 
-        <div style={{ marginBottom: "10px" }}>
           <input
             type="password"
             placeholder="Contraseña"
+            className="w-full border p-3 rounded-md"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            style={{ width: "100%", padding: "10px" }}
           />
-        </div>
 
-        {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
-
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: "100%",
-            padding: "10px",
-            background: "#000",
-            color: "#fff",
-          }}
-        >
-          {loading ? "Cargando..." : "Iniciar sesión"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

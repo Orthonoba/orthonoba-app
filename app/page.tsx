@@ -1,11 +1,15 @@
 import Link from "next/link";
 
-export default function Page() {
+export default function Home() {
   return (
-    <div className="p-10 space-y-4">
-      <Link href="/login">Ir a Login</Link>
-      <br />
-      <Link href="/register">Ir a Register</Link>
-    </div>
+    <main className="min-h-screen flex flex-col items-center justify-center gap-6">
+      <Link href="/login" className="text-xl underline">
+        Ir a Login
+      </Link>
+
+      <Link href="/register" className="text-xl underline">
+        Ir a Register
+      </Link>
+    </main>
   );
 }
