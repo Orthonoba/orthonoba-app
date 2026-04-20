@@ -1,0 +1,46 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =====================
+// MODELOS BASE ORTHONOBA
+// =====================
+
+model Paciente {
+  id        String   @id @default(uuid())
+  nombre    String
+  email     String?
+  telefono  String?
+  createdAt DateTime @default(now())
+
+  casos     Caso[]
+}
+
+model Caso {
+  id          String   @id @default(uuid())
+  titulo      String
+  descripcion String?
+  createdAt   DateTime @default(now())
+
+  pacienteId  String
+  paciente    Paciente @relation(fields: [pacienteId], references: [id])
+
+  archivos    Archivo[]
+}
+
+model Archivo {
+  id        String   @id @default(uuid())
+  tipo      String   // STL, imagen, etc
+  url       String
+  createdAt DateTime @default(now())
+
+  casoId    String
+  caso      Caso @relation(fields: [casoId], references: [id])
+}
