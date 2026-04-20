@@ -1,6 +1,11 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
 
+export const metadata = {
+  title: "ORTHONOBA | Ortodoncia Digital",
+  description: "Innovación en ortodoncia digital, CAD y automatización",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -8,10 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
+      <body className="bg-white text-gray-900">
         <Navbar />
-        {children}
+        <main className="pt-20">{children}</main>
       </body>
     </html>
   );
 }
+npm
