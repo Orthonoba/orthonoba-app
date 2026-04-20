@@ -1,9 +1,11 @@
-export default function Home() {
-  return (
-    <main className="p-10">
-      <h1 className="text-3xl font-bold">Orthonoba App 🚀</h1>
+import Link from "next/link";
 
-      <p className="mt-4">Plataforma SaaS dental en desarrollo</p>
-    </main>
+export default function Page() {
+  return (
+    <div className="p-10 space-y-4">
+      <Link href="/login">Ir a Login</Link>
+      <br />
+      <Link href="/register">Ir a Register</Link>
+    </div>
   );
 }
