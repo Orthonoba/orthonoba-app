@@ -1,9 +1,10 @@
 import "./globals.css";
-import Navbar from "@/components/navbar";
+import type { Metadata } from "next";
+import React from "react";
 
-export const metadata = {
-  title: "ORTHONOBA | Ortodoncia Digital",
-  description: "Innovación en ortodoncia digital, CAD y automatización",
+export const metadata: Metadata = {
+  title: "Orthonoba",
+  description: "Laboratorio digital de ortodoncia",
 };
 
 export default function RootLayout({
@@ -13,11 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="bg-white text-gray-900">
-        <Navbar />
-        <main className="pt-20">{children}</main>
-      </body>
+      <body className="bg-white text-black">{children}</body>
     </html>
   );
 }
-npm
