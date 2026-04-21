@@ -1,3 +1,3 @@
-export default function page() {
-  return <h1>VERCEL TEST 999</h1>;
+export default function () {
+  return <h1>en construccion</h1>;
 }
