@@ -1,3 +1,5 @@
-export default function page() {
-  return <h1>En construcción</h1>;
-}
+import Link from "next/link";
+
+<Link href="/solicitar-demo">
+  <button>Solicitar demo</button>
+</Link>;
