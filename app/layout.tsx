@@ -1,8 +1,9 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import type { Metadata } from "next";
+import Navbar from "@/components/navbar";
 import type { ReactNode } from "react";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Orthonoba",
   description: "Plataforma de ortodoncia digital",
 };
@@ -14,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
+      <body className="bg-white text-black">
         <Navbar />
         {children}
       </body>
