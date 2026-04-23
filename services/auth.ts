@@ -1,4 +1,4 @@
-import { getPool } from "@/components/lib/db";
+import { getPool } from "@/lib/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

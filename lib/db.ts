@@ -21,7 +21,7 @@ export function getPool(): Pool {
   const connectionString = process.env.DATABASE_URL?.trim();
   if (!connectionString) {
     throw new Error(
-      "DATABASE_URL no está definida. En Neon: Dashboard → Connection string → copia la URI (recomendado: pooled) en .env.local."
+      "DATABASE_URL no está definida. En Neon: Dashboard → Connection string → copia la URI (recomendado: pooled) en .env.local.",
     );
   }
 
@@ -37,3 +37,4 @@ export function getPool(): Pool {
 
   return pool;
 }
+

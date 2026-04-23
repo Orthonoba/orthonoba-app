@@ -1,14 +1,17 @@
 import { NextResponse } from "next/server";
-import { pool } from "@/lib/db";
+import { getPool } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
+    const pool = getPool();
     const formData = await req.formData();
 
     const nombre = String(formData.get("nombre") ?? "").trim();
     const emailRaw = String(formData.get("email") ?? "").trim();
     const telefonoRaw = String(formData.get("telefono") ?? "").trim();
-    const fecha_nacimientoRaw = String(formData.get("fecha_nacimiento") ?? "").trim();
+    const fecha_nacimientoRaw = String(
+      formData.get("fecha_nacimiento") ?? "",
+    ).trim();
 
     if (!nombre) {
       return NextResponse.json({ error: "Nombre obligatorio" }, { status: 400 });
