@@ -46,6 +46,8 @@ export default function PacientesPage() {
   const [form, setForm] = useState({
     nombre: "",
     email: "",
+    telefono: "",
+    fecha_nacimiento: "",
   });
 
   const [imagenes, setImagenes] = useState<ImagesState>({
@@ -99,7 +101,10 @@ export default function PacientesPage() {
 
   const missing = useMemo(() => {
     const nombreOk = form.nombre.trim().length >= 2;
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+    const emailTrim = form.email.trim();
+    const emailOk = emailTrim.length === 0
+      ? true
+      : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim);
     return {
       nombreOk,
       emailOk,
@@ -148,6 +153,8 @@ export default function PacientesPage() {
       const data = new FormData();
       data.append("nombre", form.nombre.trim());
       data.append("email", form.email.trim());
+      data.append("telefono", form.telefono.trim());
+      data.append("fecha_nacimiento", form.fecha_nacimiento.trim());
 
       (Object.entries(imagenes) as Array<[ImageKey, File | null]>).forEach(
         ([key, file]) => {
@@ -177,7 +184,7 @@ export default function PacientesPage() {
 
       setStatus({ type: "success", message: "Paciente guardado correctamente." });
 
-      setForm({ nombre: "", email: "" });
+      setForm({ nombre: "", email: "", telefono: "", fecha_nacimiento: "" });
       setImagenes({
         frontal: null,
         sonrisa: null,
@@ -288,8 +295,54 @@ export default function PacientesPage() {
                       />
                     </div>
                     <p className="mt-2 text-xs text-slate-500">
-                      Usaremos este email para identificar al paciente.
+                      Opcional. Si lo completas, debe ser un email válido.
                     </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="text-sm font-medium text-slate-800">
+                        Teléfono
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          value={form.telefono}
+                          onChange={handleChange}
+                          name="telefono"
+                          type="tel"
+                          placeholder="Ej. +34 600 123 456"
+                          className={cn(
+                            "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition",
+                            "placeholder:text-slate-400",
+                            "focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10",
+                          )}
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-500">
+                        Opcional. Útil para contacto y seguimiento.
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-slate-800">
+                        Fecha de nacimiento
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          value={form.fecha_nacimiento}
+                          onChange={handleChange}
+                          name="fecha_nacimiento"
+                          type="date"
+                          className={cn(
+                            "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition",
+                            "focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10",
+                          )}
+                        />
+                      </div>
+                      <p className="mt-2 text-xs text-slate-500">
+                        Opcional. Para ficha clínica.
+                      </p>
+                    </div>
                   </div>
 
                   {status.type !== "idle" && (
