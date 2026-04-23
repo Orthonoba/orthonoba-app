@@ -1,4 +1,4 @@
-import { pool } from "@/components/lib/db";
+import { getPool } from "@/components/lib/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -43,9 +43,14 @@ function getJwtSecret(): string | null {
   return secret && secret.length > 0 ? secret : null;
 }
 
-function isPgError(err: unknown): err is { code?: string } {
+function isPgError(err: unknown): err is { code?: string; message?: string } {
   return typeof err === "object" && err !== null && "code" in err;
 }
+
+/** undefined_table */
+const PG_UNDEFINED_TABLE = "42P01";
+/** not_null_violation */
+const PG_NOT_NULL = "23502";
 
 /**
  * Registro: hash de contraseña e inserción en `users`.
@@ -75,7 +80,7 @@ export async function register(
   try {
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
 
-    const result = await pool.query<RegisterResult>(
+    const result = await getPool().query<RegisterResult>(
       `INSERT INTO users (name, email, password, role)
        VALUES ($1, $2, $3, $4)
        RETURNING id, email, role`,
@@ -91,6 +96,20 @@ export async function register(
   } catch (err) {
     if (isPgError(err) && err.code === PG_UNIQUE_VIOLATION) {
       return { data: null, error: "Ya existe una cuenta con ese email." };
+    }
+    if (isPgError(err) && err.code === PG_UNDEFINED_TABLE) {
+      return {
+        data: null,
+        error:
+          "La tabla de usuarios no existe en la base de datos. Crea la tabla `users` en Neon o ejecuta la migración SQL correspondiente.",
+      };
+    }
+    if (isPgError(err) && err.code === PG_NOT_NULL) {
+      return {
+        data: null,
+        error:
+          "Faltan datos obligatorios en la base de datos. Revisa el esquema de la tabla `users`.",
+      };
     }
     const message =
       err instanceof Error ? err.message : "Error al registrar el usuario.";
@@ -121,7 +140,7 @@ export async function login(
   }
 
   try {
-    const result = await pool.query<UserRow>(
+    const result = await getPool().query<UserRow>(
       `SELECT id, name, email, password, role
        FROM users
        WHERE email = $1
@@ -162,6 +181,20 @@ export async function login(
       error: null,
     };
   } catch (err) {
+    if (isPgError(err) && err.code === PG_UNDEFINED_TABLE) {
+      return {
+        data: null,
+        error:
+          "La tabla de usuarios no existe en la base de datos. Crea la tabla `users` en Neon o ejecuta la migración SQL correspondiente.",
+      };
+    }
+    if (isPgError(err) && err.code === PG_NOT_NULL) {
+      return {
+        data: null,
+        error:
+          "Faltan datos obligatorios en la base de datos. Revisa el esquema de la tabla `users`.",
+      };
+    }
     const message =
       err instanceof Error ? err.message : "Error al iniciar sesión.";
     return { data: null, error: message };
