@@ -8,6 +8,10 @@ type RegisterResponse =
   | { ok: true; user: { id: number; email: string; role: string } }
   | { error: string };
 
+type LoginResponse =
+  | { token: string; user: { id: number; email: string; role: string; name: string } }
+  | { error: string };
+
 export default function RegisterPage() {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -35,7 +39,27 @@ export default function RegisterPage() {
         return;
       }
 
-      router.push("/login");
+      // Auto-login para que el botón "registrarse" dé acceso inmediato.
+      const loginRes = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const loginData = (await loginRes.json()) as LoginResponse;
+      if (!loginRes.ok || "error" in loginData) {
+        // Si falla el auto-login, al menos enviamos al login.
+        router.push("/login");
+        router.refresh();
+        return;
+      }
+
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("token", loginData.token);
+        window.localStorage.setItem("user", JSON.stringify(loginData.user));
+      }
+
+      router.push("/pacientes");
       router.refresh();
     } catch {
       setError("Error de red. Comprueba tu conexión e inténtalo de nuevo.");
