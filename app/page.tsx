@@ -2,96 +2,120 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="relative isolate overflow-hidden bg-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-15%,rgba(250,204,21,0.22),transparent_60%)]" />
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-12">
+    <main className="relative min-h-screen bg-white overflow-hidden">
+      
+      {/* Background effects */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-15%,rgba(250,204,21,0.20),transparent_60%)]" />
+
+      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24 lg:px-8">
+
+        {/* HERO */}
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+
+          {/* LEFT */}
           <section className="lg:col-span-7">
+
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              Plataforma clínica · Orthonoba
+              Orthonoba · Clinical SaaS Platform
             </div>
 
-            <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-              Ortodoncia digital, flujo claro y entregables consistentes
+            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl leading-tight">
+              Gestión digital de ortodoncia con flujo clínico inteligente
             </h1>
-            <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-slate-600 sm:text-lg">
-              Centraliza registro de pacientes, fotografías clínicas y comunicación
-              del caso en un flujo moderno. Pensado para trabajar rápido, con menos
-              fricción.
+
+            <p className="mt-5 max-w-2xl text-slate-600 text-lg leading-relaxed">
+              Centraliza pacientes, fotografías intraorales y comunicación clínica en un solo sistema.
+              Diseñado para laboratorios, clínicas y ortodoncia invisible.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            {/* CTA */}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+
               <Link
                 href="/pacientes"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-slate-900 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 focus:outline-none focus:ring-4 focus:ring-slate-900/15"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-slate-900 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
               >
                 Ir a Pacientes
               </Link>
+
               <Link
                 href="/solicitar-demo"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-slate-200 bg-white px-6 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-900/10"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-slate-200 bg-white px-6 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
               >
                 Solicitar demo
               </Link>
+
             </div>
 
-            <div className="mt-10 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
-              {[
-                { k: "Registro", v: "Paciente + fotos" },
-                { k: "Calidad", v: "Validaciones claras" },
-                { k: "UI", v: "Diseño consistente" },
-              ].map((item) => (
-                <div
-                  key={item.k}
-                  className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-                >
-                  <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                    {item.k}
-                  </div>
-                  <div className="mt-2 text-sm font-semibold text-slate-900">
-                    {item.v}
-                  </div>
-                </div>
-              ))}
+            {/* FEATURES */}
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <p className="text-xs uppercase text-slate-500 font-semibold">Pacientes</p>
+                <p className="mt-2 text-sm font-medium text-slate-900">
+                  Registro clínico completo
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <p className="text-xs uppercase text-slate-500 font-semibold">Fotografía</p>
+                <p className="mt-2 text-sm font-medium text-slate-900">
+                  Captura intraoral guiada
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 p-5">
+                <p className="text-xs uppercase text-slate-500 font-semibold">Flujo</p>
+                <p className="mt-2 text-sm font-medium text-slate-900">
+                  Comunicación clínica centralizada
+                </p>
+              </div>
+
             </div>
+
           </section>
 
+          {/* RIGHT */}
           <aside className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white p-7 shadow-sm sm:p-9">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-yellow-300/30 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-sky-200/35 blur-3xl" />
 
-              <h2 className="relative text-xl font-semibold tracking-tight text-slate-900">
-                Empieza en 2 pasos
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white p-8 shadow-sm">
+
+              <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full bg-yellow-300/30 blur-3xl" />
+              <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-sky-200/30 blur-3xl" />
+
+              <h2 className="text-xl font-semibold text-slate-900">
+                Inicio rápido
               </h2>
-              <ol className="relative mt-4 space-y-3 text-sm text-slate-600">
-                <li className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
-                  Crea tu cuenta o inicia sesión.
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" />
-                  Registra un paciente y adjunta fotografías clínicas.
-                </li>
+
+              <ol className="mt-5 space-y-3 text-sm text-slate-600">
+                <li>1. Crea o inicia sesión en tu cuenta</li>
+                <li>2. Registra pacientes con fotos clínicas</li>
+                <li>3. Gestiona casos en tiempo real</li>
               </ol>
 
-              <div className="relative mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-3">
+
                 <Link
                   href="/login"
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-xl bg-yellow-400 px-5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-200"
+                  className="h-11 flex items-center justify-center rounded-xl bg-yellow-400 font-semibold text-slate-900 hover:bg-yellow-500 transition"
                 >
                   Login
                 </Link>
+
                 <Link
                   href="/register"
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-900/10"
+                  className="h-11 flex items-center justify-center rounded-xl border border-slate-200 font-semibold text-slate-900 hover:bg-slate-50 transition"
                 >
                   Registrarse
                 </Link>
+
               </div>
+
             </div>
+
           </aside>
+
         </div>
       </div>
     </main>
