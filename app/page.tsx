@@ -819,6 +819,380 @@ function IntegrationsBar() {
   );
 }
 
+/* ─── TESTIMONIOS ─── */
+function Testimonios() {
+  const testimonials = [
+    {
+      quote:
+        "Desde que usamos ORTHONOBA el tiempo de prescripción bajó de 20 minutos a menos de 3. El visor 3D nos permite aprobar diseños sin mover a los pacientes del sillón.",
+      name: "Dra. Elena Morales",
+      role: "Ortodoncista",
+      clinic: "Clínica Sonrisas Madrid",
+      initials: "EM",
+      color: "#3b82f6",
+    },
+    {
+      quote:
+        "Procesamos 40 casos diarios con el mismo equipo de antes. El flujo Kanban y las notificaciones automáticas eliminaron las llamadas de seguimiento.",
+      name: "Marco Fernández",
+      role: "Director Técnico",
+      clinic: "Lab Dental Precision BCN",
+      initials: "MF",
+      color: "#10b981",
+    },
+    {
+      quote:
+        "La revisión con IA detecta errores que antes nos costaban retrabajos caros. La integración con Exocad fue inmediata sin configuración adicional.",
+      name: "Dra. Sofía Ruiz",
+      role: "Prostodoncista",
+      clinic: "Instituto Dental Valencia",
+      initials: "SR",
+      color: "#8b5cf6",
+    },
+  ];
+
+  return (
+    <section
+      style={{
+        padding: "80px 0",
+        background: "linear-gradient(180deg, #0f172a 0%, #020617 100%)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle grid decoration */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.03,
+          backgroundImage:
+            "linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      <div className="container-ortho" style={{ position: "relative", zIndex: 2 }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <span
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              color: "#f59e0b",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              display: "block",
+              marginBottom: 12,
+            }}
+          >
+            TESTIMONIOS
+          </span>
+          <h2
+            style={{
+              fontSize: 36,
+              fontWeight: 800,
+              color: "#f8fafc",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Lo que dicen quienes ya trabajan{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              con ORTHONOBA
+            </span>
+          </h2>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 24,
+          }}
+        >
+          {testimonials.map((t) => (
+            <div
+              key={t.name}
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 20,
+                padding: 36,
+                display: "flex",
+                flexDirection: "column",
+                gap: 24,
+              }}
+            >
+              {/* Stars */}
+              <div style={{ display: "flex", gap: 4 }}>
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} style={{ color: "#f59e0b", fontSize: 16 }}>
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              {/* Quote */}
+              <p
+                style={{
+                  fontSize: 15,
+                  color: "#cbd5e1",
+                  lineHeight: 1.7,
+                  flex: 1,
+                  fontStyle: "italic",
+                }}
+              >
+                &ldquo;{t.quote}&rdquo;
+              </p>
+
+              {/* Author */}
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: "50%",
+                    background: t.color + "22",
+                    border: `2px solid ${t.color}44`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 13,
+                    fontWeight: 800,
+                    color: t.color,
+                    flexShrink: 0,
+                  }}
+                >
+                  {t.initials}
+                </div>
+                <div>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 700,
+                      color: "#f1f5f9",
+                      margin: 0,
+                    }}
+                  >
+                    {t.name}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 12,
+                      color: "#64748b",
+                      margin: 0,
+                      marginTop: 2,
+                    }}
+                  >
+                    {t.role} · {t.clinic}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Social proof bar */}
+        <div
+          style={{
+            marginTop: 52,
+            display: "flex",
+            justifyContent: "center",
+            gap: 48,
+            flexWrap: "wrap",
+          }}
+        >
+          {[
+            { n: "4.9/5", l: "Valoración media" },
+            { n: "500+", l: "Profesionales activos" },
+            { n: "98%", l: "Renovación anual" },
+          ].map((s) => (
+            <div
+              key={s.l}
+              style={{ textAlign: "center" }}
+            >
+              <p
+                style={{
+                  fontSize: 28,
+                  fontWeight: 900,
+                  color: "#f59e0b",
+                  margin: 0,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {s.n}
+              </p>
+              <p style={{ fontSize: 13, color: "#64748b", margin: 0, marginTop: 4 }}>
+                {s.l}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── CALL TO ACTION ─── */
+function CallToAction() {
+  return (
+    <section
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background:
+          "linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%)",
+        padding: "96px 0",
+      }}
+    >
+      {/* Amber glow */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: -120,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 700,
+          height: 400,
+          borderRadius: "50%",
+          background:
+            "radial-gradient(ellipse, rgba(245,158,11,0.14) 0%, transparent 70%)",
+          filter: "blur(40px)",
+        }}
+      />
+
+      <div
+        className="container-ortho"
+        style={{ position: "relative", zIndex: 2, textAlign: "center" }}
+      >
+        {/* Badge */}
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "6px 20px",
+            borderRadius: 100,
+            marginBottom: 28,
+            background: "rgba(245,158,11,0.1)",
+            border: "1px solid rgba(245,158,11,0.3)",
+          }}
+        >
+          <span
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "#10b981",
+              boxShadow: "0 0 8px #10b981",
+            }}
+          />
+          <span style={{ fontSize: 13, color: "#fbbf24", fontWeight: 600 }}>
+            Demo gratuita · Sin compromiso · Configuración en 24h
+          </span>
+        </div>
+
+        <h2
+          style={{
+            fontSize: 48,
+            fontWeight: 900,
+            color: "#f8fafc",
+            letterSpacing: "-0.03em",
+            lineHeight: 1.1,
+            maxWidth: 680,
+            margin: "0 auto",
+          }}
+        >
+          Empieza a digitalizar tu{" "}
+          <span
+            style={{
+              background: "linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            flujo dental hoy
+          </span>
+        </h2>
+
+        <p
+          style={{
+            fontSize: 18,
+            color: "#94a3b8",
+            marginTop: 20,
+            lineHeight: 1.7,
+            maxWidth: 520,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          Únete a más de 500 profesionales que ya conectan su clínica,
+          laboratorio y pacientes con ORTHONOBA.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            gap: 16,
+            marginTop: 40,
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Link
+            href="/solicitar-demo"
+            style={{
+              padding: "18px 44px",
+              background: "#f59e0b",
+              color: "#000",
+              fontWeight: 800,
+              fontSize: 16,
+              borderRadius: 14,
+              textDecoration: "none",
+              boxShadow: "0 4px 32px rgba(245,158,11,0.35)",
+              transition: "all 0.2s",
+            }}
+          >
+            Reserva tu Demo Gratis →
+          </Link>
+          <Link
+            href="/contacto"
+            style={{
+              padding: "18px 44px",
+              background: "rgba(255,255,255,0.06)",
+              color: "#e2e8f0",
+              fontWeight: 600,
+              fontSize: 16,
+              borderRadius: 14,
+              textDecoration: "none",
+              border: "1.5px solid rgba(255,255,255,0.14)",
+              transition: "all 0.2s",
+            }}
+          >
+            Hablar con un especialista
+          </Link>
+        </div>
+
+        {/* Micro-trust */}
+        <p
+          style={{
+            marginTop: 28,
+            fontSize: 13,
+            color: "#475569",
+          }}
+        >
+          Sin tarjeta de crédito · Soporte en español · RGPD compliant
+        </p>
+      </div>
+    </section>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
    PAGE EXPORT
    ═══════════════════════════════════════════════════ */
@@ -830,8 +1204,10 @@ export default function HomePage() {
       <ProblemSolution />
       <PlatformFeatures />
       <WorkflowSteps />
+      <Testimonios />
       <SolutionsByRole />
       <IntegrationsBar />
+      <CallToAction />
     </>
   );
 }
