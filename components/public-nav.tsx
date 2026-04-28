@@ -12,13 +12,9 @@ const LINKS = [
   { href: "/contacto", label: "Contacto" },
 ];
 
-const HIDDEN_ON = ["/dashboard", "/login", "/register", "/forgot-password"];
-
 export default function PublicNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  if (HIDDEN_ON.some((p) => pathname.startsWith(p))) return null;
 
   return (
     <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-white/[0.06]">

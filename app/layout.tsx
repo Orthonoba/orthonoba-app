@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
-import PublicNav from "@/components/public-nav";
-import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title:
@@ -38,11 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
-        <PublicNav />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
