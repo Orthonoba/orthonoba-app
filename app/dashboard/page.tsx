@@ -1,24 +1,19 @@
 import Header from "@/components/header";
 
-const stats = [
-  { label: "Pacientes activos", value: "128" },
-  { label: "Citas hoy", value: "14" },
-  { label: "Pendientes", value: "5" },
-  { label: "Ingresos mes", value: "$12.4k" },
-];
+const SLOTS = 4;
 
 export default function DashboardPage() {
   return (
     <>
-      <Header title="Dashboard" subtitle="Bienvenido a Orthonoba" />
+      <Header title="Dashboard" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map(({ label, value }) => (
+        {Array.from({ length: SLOTS }).map((_, i) => (
           <div
-            key={label}
+            key={i}
             className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm"
           >
-            <p className="text-sm text-gray-500 mb-2">{label}</p>
-            <p className="text-3xl font-bold text-gray-900">{value}</p>
+            <div className="h-3 w-24 bg-gray-100 rounded mb-3" />
+            <div className="h-8 w-16 bg-gray-100 rounded" />
           </div>
         ))}
       </div>
