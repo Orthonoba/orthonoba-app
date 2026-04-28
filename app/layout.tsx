@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
-import Header from "@/components/header";
+import PublicNav from "@/components/public-nav";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
@@ -39,8 +39,8 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <Header />
-        <main style={{ minHeight: "calc(100vh - 72px)" }}>{children}</main>
+        <PublicNav />
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
