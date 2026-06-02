@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Bot, CheckCircle2, ArrowRight } from "lucide-react";
+import { Bot, CheckCircle2, ArrowRight, FlaskConical } from "lucide-react";
 
 export default function AISolutions() {
   const t = useTranslations("aiSolutions");
@@ -20,7 +20,7 @@ export default function AISolutions() {
             <Bot size={13} />
             AI Agents
           </div>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
             {t("title")}
           </h2>
           <p className="text-slate-400 mb-8 leading-relaxed">{t("subtitle")}</p>
@@ -28,7 +28,7 @@ export default function AISolutions() {
           <ul className="space-y-3 mb-10">
             {features.map((f: string, i: number) => (
               <li key={i} className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-violet-400 mt-0.5 shrink-0" />
+                <CheckCircle2 size={17} className="text-violet-400 mt-0.5 shrink-0" />
                 <span className="text-slate-300 text-sm">{f}</span>
               </li>
             ))}
@@ -43,43 +43,31 @@ export default function AISolutions() {
           </Link>
         </div>
 
-        {/* Right: visual */}
+        {/* Right: Demo coming soon */}
         <div className="relative">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-            {/* Mock chat UI */}
-            {[
-              { role: "user", text: "Vorrei prenotare una consulenza" },
-              { role: "ai", text: "Certo! Ho trovato 3 slot disponibili questa settimana. Quale preferisce?" },
-              { role: "user", text: "Giovedì alle 15:00" },
-              { role: "ai", text: "Perfetto! Appuntamento confermato per giovedì 5 giugno alle 15:00. Riceverà una email di conferma." },
-            ].map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${
-                    msg.role === "user"
-                      ? "bg-violet-600 text-white rounded-br-sm"
-                      : "bg-slate-800 text-slate-200 rounded-bl-sm"
-                  }`}
-                >
-                  {msg.role === "ai" && (
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <Bot size={11} className="text-violet-400" />
-                      <span className="text-[10px] text-violet-400 font-semibold">AI Agent</span>
-                    </div>
-                  )}
-                  {msg.text}
-                </div>
-              </div>
-            ))}
-            <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
-              <div className="flex-1 h-9 bg-slate-800 rounded-xl" />
-              <div className="w-9 h-9 bg-violet-600 rounded-xl flex items-center justify-center">
-                <ArrowRight size={14} className="text-white" />
-              </div>
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center min-h-[300px]">
+            <div className="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 mb-5">
+              <FlaskConical size={26} />
             </div>
+            <p className="text-xs font-semibold text-violet-400 uppercase tracking-wider mb-2">
+              Live Demo
+            </p>
+            <h3 className="text-xl font-bold text-white mb-3">
+              {t("demoTitle")}
+            </h3>
+            <p className="text-sm text-slate-400 max-w-xs leading-relaxed">
+              {t("demoDesc")}
+            </p>
+            <Link
+              href={`/${locale}/contact`}
+              className="mt-6 inline-flex items-center gap-2 px-4 py-2.5 border border-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:border-violet-500/40 hover:text-violet-400 transition-colors"
+            >
+              {t("demoRequest")}
+              <ArrowRight size={13} />
+            </Link>
           </div>
           {/* Glow */}
-          <div className="absolute -inset-4 bg-violet-500/10 rounded-3xl blur-xl -z-10" />
+          <div className="absolute -inset-4 bg-violet-500/[0.05] rounded-3xl blur-2xl -z-10" />
         </div>
       </div>
     </section>

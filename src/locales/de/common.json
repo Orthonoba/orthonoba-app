@@ -10,6 +10,7 @@
     "blog": "Blog",
     "about": "Über Uns",
     "contact": "Kontakt",
+    "pricing": "Preise",
     "getStarted": "Jetzt Starten",
     "login": "Anmelden"
   },
@@ -72,7 +73,10 @@
       "Datenanalyse und intelligentes Reporting",
       "Integration in bestehende Systeme"
     ],
-    "cta": "AI Agents Entdecken"
+    "cta": "AI Agents Entdecken",
+    "demoTitle": "Interaktive Demo in Kürze",
+    "demoDesc": "Wir bereiten eine Live-Demo unseres AI Agents vor. Kontaktieren Sie uns für eine private Vorschau.",
+    "demoRequest": "Private Vorschau Anfordern"
   },
   "automationSection": {
     "title": "Automatisierung für Geschäftswachstum",
@@ -179,6 +183,9 @@
     "title": "Blog & Ressourcen",
     "subtitle": "Guides, Strategien und Updates aus der KI- und Digital-Welt",
     "readMore": "Mehr Lesen",
+    "cmsLabel": "In Kürze",
+    "cmsTitle": "Blog & Ressourcen in Vorbereitung",
+    "cmsDesc": "Wir bauen unsere Wissensdatenbank zu KI, Automatisierung und digitaler Transformation für den Schweizer Markt auf. Bald verfügbar.",
     "categories": {
       "ai": "Künstliche Intelligenz",
       "automation": "Automatisierung",
@@ -246,6 +253,80 @@
     "contact": {
       "title": "Kontakt | ORTHONOBA",
       "description": "Sprechen Sie mit einem KI-Experten und erhalten Sie eine kostenlose Beratung zur digitalen Transformation."
+    }
+  },
+  "servicesPage": {
+    "title": "Unsere Leistungen",
+    "subtitle": "Zwei spezialisierte Divisionen für jeden Bedarf Ihres Unternehmens",
+    "agencyLabel": "Agency Division",
+    "agencyDesc": "WordPress, SEO und Marketing für KMU und lokale Unternehmen — schnelle Ergebnisse, faire Kosten",
+    "studioLabel": "Software & AI Studio",
+    "studioDesc": "AI Agents, Automatisierung und massgeschneiderte SaaS-Lösungen für strukturierte Unternehmen",
+    "agency": {
+      "webDesign": { "title": "Webdesign", "desc": "Professionelle, konversionsorientierte Websites" },
+      "wordpress": { "title": "WordPress", "desc": "Skalierbares CMS mit Elementor Pro und Premium-Themes" },
+      "seo": { "title": "SEO", "desc": "Mehrsprachiges Ranking IT/DE/FR für den Schweizer Markt" },
+      "marketing": { "title": "Marketing", "desc": "E-Mail-, Social- und Content-Marketing-Kampagnen" },
+      "googleAds": { "title": "Google Ads", "desc": "Performance-Werbung mit messbarem ROI" }
+    },
+    "studio": {
+      "aiAgents": { "title": "AI Agents", "desc": "Massgeschneiderte Agenten für Prozess- und Kundenautomatisierung" },
+      "voiceAI": { "title": "Voice AI", "desc": "Virtuelle Rezeption und Sprach-Kundenservice rund um die Uhr" },
+      "whatsappAI": { "title": "WhatsApp AI", "desc": "Intelligenter Chatbot für Vertrieb und Support auf WhatsApp" },
+      "automation": { "title": "Automatisierung", "desc": "n8n/Make-Workflows zur Eliminierung manueller Arbeit" },
+      "saas": { "title": "SaaS Dev", "desc": "Massgeschneiderte Softwareplattformen mit Next.js und KI" }
+    }
+  },
+  "trust": {
+    "title": "Warum ORTHONOBA Wählen",
+    "subtitle": "Ein zuverlässiger Partner für Ihre digitale Transformation",
+    "switzerland": "Basiert in der Schweiz",
+    "switzerlandDesc": "Wir sind im Schweizer Markt tätig und verstehen den lokalen und internationalen Kontext",
+    "multilingual": "Mehrsprachige Kompetenz",
+    "multilingualDesc": "Wir bedienen Kunden auf Italienisch, Deutsch, Französisch und Englisch — nativ",
+    "aiFirst": "KI-First Ansatz",
+    "aiFirstDesc": "Wir nutzen modernste KI-Technologien: OpenAI, Anthropic Claude, Custom-Modelle",
+    "privacy": "Datenschutz & Compliance",
+    "privacyDesc": "Schweizer und europäische DSGVO-Standards. Ihre Daten und die Ihrer Kunden sind geschützt",
+    "caseStudiesLabel": "Erfolgsgeschichten",
+    "caseStudiesTitle": "Case Studies in Kürze",
+    "caseStudiesDesc": "Wir dokumentieren die Ergebnisse unserer ersten Pilotprojekte. Bald verfügbar."
+  },
+  "pricing": {
+    "title": "Preise & Pakete",
+    "subtitle": "Lösungen für jede Wachstumsphase Ihres Unternehmens",
+    "agencyTitle": "Agency Division",
+    "agencyDesc": "Websites, SEO und Marketing für KMU und lokale Unternehmen",
+    "studioTitle": "Studio Division",
+    "studioDesc": "AI Agents, Automatisierung und massgeschneiderte Softwareentwicklung",
+    "enterprise": "Enterprise & Custom",
+    "enterpriseDesc": "Vollständige Lösungen für strukturierte Unternehmen mit spezifischen Anforderungen",
+    "requestQuote": "Angebot Anfordern",
+    "contactUs": "Kontakt Aufnehmen",
+    "included": "Inklusive:",
+    "agency": {
+      "starter": {
+        "name": "Web Starter",
+        "tagline": "Ihr Business in 2 Wochen online",
+        "features": ["Professionelle WordPress-Website","Individuelles Design","Basis On-Page SEO","Hosting konfiguriert","1 Monat Support"]
+      },
+      "growth": {
+        "name": "Digital Growth",
+        "tagline": "Sichtbarkeit und Lead-Generierung",
+        "features": ["Alles aus Web Starter","Google Ads Setup","Erweitertes SEO","Analytics & monatliche Reports","3 Monate Support"]
+      }
+    },
+    "studio": {
+      "agent": {
+        "name": "AI Agent",
+        "tagline": "Ihr erster aktiver KI-Agent",
+        "features": ["Voice AI oder WhatsApp AI","CRM-Integration","Personalisiertes Training","Monitoring-Dashboard","Laufender Support"]
+      },
+      "automation": {
+        "name": "Full Automation",
+        "tagline": "End-to-End automatisiertes Business",
+        "features": ["Mehrere AI Agents","Custom n8n-Workflows","Integration bestehender Systeme","Erweitertes Reporting","Garantierter SLA"]
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Hero from "@/components/sections/hero";
@@ -7,7 +6,7 @@ import AISolutions from "@/components/sections/ai-solutions";
 import AutomationSection from "@/components/sections/automation-section";
 import WebDevSection from "@/components/sections/webdev-section";
 import Industries from "@/components/sections/industries";
-import Testimonials from "@/components/sections/testimonials";
+import TrustSection from "@/components/sections/testimonials";
 import ContactCTA from "@/components/sections/contact-cta";
 
 export async function generateMetadata({
@@ -49,7 +48,7 @@ export default function HomePage() {
       <AutomationSection />
       <WebDevSection />
       <Industries />
-      <Testimonials />
+      <TrustSection />
       <ContactCTA />
     </>
   );

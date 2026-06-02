@@ -10,6 +10,7 @@
     "blog": "Blog",
     "about": "À Propos",
     "contact": "Contact",
+    "pricing": "Tarifs",
     "getStarted": "Commencer",
     "login": "Connexion"
   },
@@ -72,7 +73,10 @@
       "Analyse de données et reporting intelligent",
       "Intégration avec vos systèmes existants"
     ],
-    "cta": "Découvrir les AI Agents"
+    "cta": "Découvrir les AI Agents",
+    "demoTitle": "Démo Interactive à Venir",
+    "demoDesc": "Nous préparons une démo live de notre Agent IA. Contactez-nous pour un aperçu privé.",
+    "demoRequest": "Demander un Aperçu Privé"
   },
   "automationSection": {
     "title": "L'Automatisation qui Fait Croître le Business",
@@ -179,6 +183,9 @@
     "title": "Blog & Ressources",
     "subtitle": "Guides, stratégies et actualités du monde IA et Digital",
     "readMore": "Lire la Suite",
+    "cmsLabel": "À Venir",
+    "cmsTitle": "Blog & Ressources en Préparation",
+    "cmsDesc": "Nous construisons notre base de connaissances sur l'IA, l'automatisation et la transformation digitale pour le marché suisse. Bientôt disponible.",
     "categories": {
       "ai": "Intelligence Artificielle",
       "automation": "Automatisation",
@@ -246,6 +253,80 @@
     "contact": {
       "title": "Contact | ORTHONOBA",
       "description": "Parlez à un expert IA et recevez une consultation gratuite pour transformer numériquement votre entreprise."
+    }
+  },
+  "servicesPage": {
+    "title": "Nos Services",
+    "subtitle": "Deux divisions spécialisées pour chaque besoin de votre entreprise",
+    "agencyLabel": "Agency Division",
+    "agencyDesc": "WordPress, SEO et Marketing pour PME et commerces locaux — résultats rapides, coûts maîtrisés",
+    "studioLabel": "Software & AI Studio",
+    "studioDesc": "Agents IA, Automatisation et SaaS sur mesure pour entreprises structurées",
+    "agency": {
+      "webDesign": { "title": "Web Design", "desc": "Sites web professionnels à haute conversion" },
+      "wordpress": { "title": "WordPress", "desc": "CMS évolutif avec Elementor Pro et thèmes premium" },
+      "seo": { "title": "SEO", "desc": "Positionnement multilingue IT/DE/FR pour le marché suisse" },
+      "marketing": { "title": "Marketing", "desc": "Campagnes email, social et content marketing" },
+      "googleAds": { "title": "Google Ads", "desc": "Publicité à la performance avec ROI mesurable" }
+    },
+    "studio": {
+      "aiAgents": { "title": "AI Agents", "desc": "Agents personnalisés pour l'automatisation des processus et clients" },
+      "voiceAI": { "title": "Voice IA", "desc": "Réception virtuelle et service client vocal 24h/7j" },
+      "whatsappAI": { "title": "WhatsApp IA", "desc": "Chatbot intelligent pour ventes et support sur WhatsApp" },
+      "automation": { "title": "Automatisation", "desc": "Workflows n8n/Make pour éliminer le travail manuel" },
+      "saas": { "title": "SaaS Dev", "desc": "Plateformes logicielles sur mesure avec Next.js et IA" }
+    }
+  },
+  "trust": {
+    "title": "Pourquoi Choisir ORTHONOBA",
+    "subtitle": "Un partenaire fiable pour votre transformation digitale",
+    "switzerland": "Basés en Suisse",
+    "switzerlandDesc": "Nous opérons sur le marché suisse avec une compréhension approfondie du contexte local et international",
+    "multilingual": "Expertise Multilingue",
+    "multilingualDesc": "Nous servons nos clients en italien, allemand, français et anglais — nativement",
+    "aiFirst": "Approche IA-First",
+    "aiFirstDesc": "Nous utilisons les technologies IA les plus avancées: OpenAI, Anthropic Claude, modèles custom",
+    "privacy": "Confidentialité & Conformité",
+    "privacyDesc": "Standards RGPD suisses et européens. Vos données et celles de vos clients sont protégées",
+    "caseStudiesLabel": "Histoires de Succès",
+    "caseStudiesTitle": "Études de Cas à Venir",
+    "caseStudiesDesc": "Nous documentons les résultats de nos premiers projets pilotes. Disponibles bientôt."
+  },
+  "pricing": {
+    "title": "Tarifs & Forfaits",
+    "subtitle": "Solutions pour chaque phase de croissance de votre entreprise",
+    "agencyTitle": "Division Agency",
+    "agencyDesc": "Sites web, SEO et marketing pour PME et commerces locaux",
+    "studioTitle": "Division Studio",
+    "studioDesc": "Agents IA, automatisation et développement logiciel sur mesure",
+    "enterprise": "Entreprise & Custom",
+    "enterpriseDesc": "Solutions complètes pour entreprises structurées avec des besoins spécifiques",
+    "requestQuote": "Demander un Devis",
+    "contactUs": "Nous Contacter",
+    "included": "Inclus:",
+    "agency": {
+      "starter": {
+        "name": "Web Starter",
+        "tagline": "Votre business en ligne en 2 semaines",
+        "features": ["Site WordPress professionnel","Design personnalisé","SEO on-page de base","Hébergement configuré","1 mois de support"]
+      },
+      "growth": {
+        "name": "Digital Growth",
+        "tagline": "Visibilité et génération de leads",
+        "features": ["Tout de Web Starter","Setup Google Ads","SEO avancé","Analytics & rapports mensuels","3 mois de support"]
+      }
+    },
+    "studio": {
+      "agent": {
+        "name": "AI Agent",
+        "tagline": "Votre premier agent IA actif",
+        "features": ["Voice IA ou WhatsApp IA","Intégration CRM","Formation personnalisée","Dashboard de surveillance","Support continu"]
+      },
+      "automation": {
+        "name": "Full Automation",
+        "tagline": "Business automatisé de bout en bout",
+        "features": ["Agents IA multiples","Workflows n8n custom","Intégration systèmes existants","Reporting avancé","SLA garanti"]
+      }
     }
   }
 }
