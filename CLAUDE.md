@@ -1,3 +1,250 @@
+# CLAUDE.md — ORTHONOBA.APP SYSTEM
+
+## 🧠 ROL DEL SISTEMA
+
+Este proyecto corresponde a **Orthonoba.app**, una plataforma SaaS tecnológica especializada para:
+
+- Clínicas dentales
+- Laboratorios dentales
+- Profesionales odontológicos
+- Gestión de pacientes
+- Producción CAD/CAM dental
+
+El sistema combina:
+
+- CRM dental básico
+- Gestión de pacientes
+- Fichas clínicas digitales
+- Subida de archivos STL / OBJ / DICOM
+- Flujo de trabajo laboratorio → clínica
+- Facturación integrada
+- Panel multi-rol (clínica / laboratorio / paciente / admin)
+
+---
+
+# 🔄 FLUJO DE TRABAJO DEL AGENTE IA
+
+1. Analizar contexto del usuario o módulo
+2. Identificar rol (clínica, laboratorio, admin, paciente)
+3. Proponer estructura modular sin romper arquitectura base
+4. Generar código limpio en Next.js + TypeScript
+5. Mantener separación estricta de módulos
+6. Validar consistencia visual + UX
+7. No inventar datos médicos ni funcionales no definidos
+
+---
+
+# ❓ PREGUNTAS (SOLO UNA VEZ)
+
+Antes de generar estructuras complejas, el sistema debe preguntar:
+
+- ¿El módulo es para clínica o laboratorio?
+- ¿Es funcionalidad CRM, CAD, o administrativa?
+- ¿Debe ser visible en menú o interno?
+- ¿Requiere integración con archivos STL / DICOM?
+
+Estas preguntas se hacen una sola vez por contexto de tarea.
+
+---
+
+# 🎨 AJUSTES ESTÉTICOS GLOBALES
+
+## PRESSET A — "ORTHONOBA.APP CORE"
+
+Sistema principal SaaS dental
+
+### Identidad visual:
+
+- Limpio, clínico, tecnológico
+- Alto nivel profesional (tipo software médico)
+- UX optimizada para uso rápido en clínicas
+
+### Paleta base:
+
+- Azul clínico profundo (#1E3A8A)
+- Blanco médico (#FFFFFF)
+- Gris suave (#F3F4F6)
+- Verde validación (#10B981)
+- Rojo alerta (#EF4444)
+
+### Tipografía:
+
+- Inter / Geist / SF Pro
+
+### Animaciones:
+
+- Framer Motion
+- easing: `power3.out`
+- transiciones suaves pero rápidas
+
+### UI:
+
+- Dashboards modulares
+- Sidebar por roles
+- Cards clínicas limpias
+- Tablas médicas optimizadas
+
+---
+
+## 🧩 SISTEMA DE DISEÑO FIJO (NO CAMBIAR)
+
+- Componentes reutilizables obligatorios
+- No crear estilos inconsistentes
+- UI basada en design system central
+- Tokens de diseño centralizados
+- Layout responsive obligatorio
+- Dark mode compatible
+
+---
+
+## 🎞 TEXTURA VISUAL
+
+- Superficie limpia tipo SaaS médico
+- Profundidad suave (elevación ligera)
+- Sombras sutiles
+- Glassmorphism controlado (solo en headers)
+- Evitar saturación visual
+
+---
+
+## ⚙️ ARQUITECTURA DE COMPONENTES
+
+### Filosofía:
+
+- Modular
+- Escalable
+- Separación por dominio (clínica / laboratorio)
+
+### Estructura:
+
+- /components (UI global)
+- /modules (funcionalidad SaaS)
+- /app (routing Next.js)
+- /lib (lógica de negocio)
+- /config (menús + roles)
+
+### Protocolo:
+
+- No lógica dentro de UI
+- No mezclar clínica y laboratorio
+- Cada módulo independiente
+
+---
+
+## 🧱 FOOTER SYSTEM
+
+El footer debe contener:
+
+- Información legal dental
+- GDPR compliance
+- Soporte técnico
+- Versión del sistema
+- Branding Orthonoba
+
+Debe ser:
+
+- Minimalista
+- Informativo
+- No invasivo
+
+---
+
+# 🧪 REQUISITOS TÉCNICOS
+
+- Next.js (App Router)
+- TypeScript obligatorio
+- TailwindCSS
+- Neon PostgreSQL
+- Prisma o Drizzle ORM
+- Autenticación por roles
+- Multi-tenant (clínicas/labs separados)
+- Subida de archivos (STL / OBJ / DICOM)
+- Seguridad médica (GDPR)
+
+---
+
+# 🌙 PRESET B — "MIDNIGHT LUXE"
+
+## Estilo:
+
+- Oscuro elegante
+- Alta gama premium
+- Inspirado en software médico privado
+
+### Paleta:
+
+- Negro profundo (#0B0F1A)
+- Azul noche (#111827)
+- Dorado suave (#C9A227)
+- Gris humo (#9CA3AF)
+
+### Uso:
+
+- Clínicas premium
+- Laboratorios de alta gama
+- Panel administrativo avanzado
+
+---
+
+# 🧱 PRESET C — "BRUTALIST SIGNAL"
+
+## Estilo:
+
+- Crudo
+- Técnico
+- Funcional
+- Sin decoración innecesaria
+
+### Paleta:
+
+- Blanco puro (#FFFFFF)
+- Negro absoluto (#000000)
+- Rojo técnico (#FF0000)
+- Gris estructura (#D1D5DB)
+
+### Características:
+
+- UI directa sin adornos
+- Máxima velocidad de lectura
+- Enfoque en datos
+- Tablas densas
+- Interfaces tipo ingeniería
+
+---
+
+# 🧠 PRINCIPIO GENERAL DEL SISTEMA
+
+Orthonoba.app no es una web.
+
+Es un:
+
+- Sistema operativo dental SaaS
+- Infraestructura clínica digital
+- Plataforma de laboratorio CAD/CAM
+- CRM médico especializado
+
+---
+
+# 🚫 RESTRICCIONES IMPORTANTES
+
+- No inventar datos médicos
+- No romper estructura modular
+- No mezclar presets visuales sin control
+- No generar UI sin contexto de rol
+- No modificar sistema de diseño base
+
+---
+
+# 🚀 OBJETIVO FINAL
+
+Construir una plataforma escalable para:
+
+- Clínicas dentales digitales
+- Laboratorios CAD/CAM
+- Gestión completa del paciente
+- Automatización clínica
+- Producción dental digital STL → laboratorio → entrega
+
 # Orthonoba — Contexto del proyecto
 
 ## Qué es
@@ -84,4 +331,3 @@ Plataforma healthtech para el sector Odontológico/médico/Clínicas dentales/Pa
 - No usar `getServerSideProps` ni `getStaticProps` (eso es Pages Router)
 - No hardcodear strings de UI — preparar para i18n (español por defecto)
 - No instalar librerías sin justificarlo (preferir nativo de Next/React)
-- No proponer cambios masivos sin antes hacer un plan en respuesta

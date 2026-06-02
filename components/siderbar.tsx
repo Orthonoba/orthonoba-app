@@ -10,7 +10,7 @@ import {
   Settings,
   HelpCircle,
 } from "lucide-react";
-import styles from "./Sidebar.module.css";
+import styles from "./siderbar.module.css";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },

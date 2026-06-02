@@ -1,0 +1,251 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "aiAgents": "AI Agents",
+    "automation": "Automation",
+    "webDevelopment": "Web Development",
+    "marketing": "Marketing",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "About Us",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "login": "Login"
+  },
+  "hero": {
+    "badge": "AI & Digital Transformation Agency",
+    "headline": "We Transform Your Business with Artificial Intelligence",
+    "subheadline": "AI Agents, Automation and Web Development for SMBs in Switzerland and Worldwide",
+    "cta": "Explore Services",
+    "ctaSecondary": "Talk to an Expert"
+  },
+  "servicesOverview": {
+    "title": "Our Services",
+    "subtitle": "Complete digital solutions to transform your business",
+    "items": {
+      "aiAgents": {
+        "title": "AI Agents",
+        "description": "Intelligent automation with custom AI agents tailored to your business"
+      },
+      "voiceAI": {
+        "title": "Voice AI",
+        "description": "AI voice agents for customer service and automated reception 24/7"
+      },
+      "whatsappAI": {
+        "title": "WhatsApp AI",
+        "description": "Intelligent chatbots on WhatsApp for sales and customer support"
+      },
+      "automation": {
+        "title": "Business Automation",
+        "description": "Automated processes that eliminate repetitive manual work"
+      },
+      "webDev": {
+        "title": "Web Development",
+        "description": "Modern, fast and conversion-optimized websites and web apps"
+      },
+      "saas": {
+        "title": "SaaS Development",
+        "description": "Custom SaaS platforms built for your business model"
+      },
+      "marketing": {
+        "title": "Marketing Automation",
+        "description": "AI-powered automated marketing campaigns to maximize ROI"
+      },
+      "seo": {
+        "title": "SEO Services",
+        "description": "Multilingual search engine optimization for the Swiss and European market"
+      },
+      "consulting": {
+        "title": "Digital Consulting",
+        "description": "Strategic consulting for your company's digital transformation"
+      }
+    }
+  },
+  "aiSolutions": {
+    "title": "AI Solutions for Your Business",
+    "subtitle": "We deploy AI agents that work for you around the clock",
+    "features": [
+      "Automated responses to customers and leads",
+      "Automatic prospect qualification",
+      "AI-powered appointment management",
+      "Data analysis and intelligent reporting",
+      "Integration with your existing systems"
+    ],
+    "cta": "Explore AI Agents"
+  },
+  "automationSection": {
+    "title": "Automation that Grows Your Business",
+    "subtitle": "Eliminate repetitive tasks and focus on what truly matters",
+    "items": [
+      {
+        "title": "CRM Automation",
+        "description": "Automatic lead management, follow-ups and sales pipeline"
+      },
+      {
+        "title": "Email Marketing",
+        "description": "Personalized email sequences triggered by user behaviors"
+      },
+      {
+        "title": "Workflow Automation",
+        "description": "Connect apps and systems with N8N and Make automations"
+      }
+    ]
+  },
+  "webDevelopmentSection": {
+    "title": "Professional Web Development",
+    "subtitle": "Sites and apps that convert and grow with your business",
+    "items": [
+      {
+        "title": "High-Conversion Landing Pages",
+        "description": "Optimized pages to turn visitors into customers"
+      },
+      {
+        "title": "Web Apps & SaaS",
+        "description": "Scalable web applications built with modern technologies"
+      },
+      {
+        "title": "E-Commerce",
+        "description": "Online stores optimized for selling in Switzerland and Europe"
+      }
+    ]
+  },
+  "industries": {
+    "title": "Industries We Serve",
+    "subtitle": "Specialized solutions for every type of business",
+    "items": [
+      "SMBs and Startups",
+      "Healthcare and Dental Clinics",
+      "Real Estate",
+      "Restaurants",
+      "Luxury and Jewelry",
+      "Law Firms",
+      "Consulting",
+      "Logistics and Moving",
+      "Local Businesses"
+    ]
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Real projects, measurable results",
+    "cta": "View All Projects"
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Concrete results for real businesses"
+  },
+  "contactCta": {
+    "title": "Ready to Digitize Your Business?",
+    "subtitle": "Free 30-minute consultation with an AI expert",
+    "cta": "Contact Us Now"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are ready to help you grow with AI",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "company": "Company",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Message sent! We will contact you within 24 hours.",
+      "error": "Error sending message. Please try again."
+    },
+    "info": {
+      "email": "info@orthonoba.app",
+      "response": "Response within 24 hours"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "A team of AI and Digital Transformation experts at your service",
+    "mission": "Our mission is to make artificial intelligence accessible to Swiss and international SMBs, helping them compete in the digital age.",
+    "values": {
+      "title": "Our Values",
+      "items": [
+        { "title": "Innovation", "description": "We use the most advanced AI technologies" },
+        { "title": "Results", "description": "We measure success with concrete KPIs" },
+        { "title": "Transparency", "description": "Clear communication and honest pricing" },
+        { "title": "Partnership", "description": "We are partners of your business, not suppliers" }
+      ]
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Everything you need for digital transformation",
+    "cta": "Request a Quote"
+  },
+  "blog": {
+    "title": "Blog & Resources",
+    "subtitle": "Guides, strategies and updates from the AI and Digital world",
+    "readMore": "Read More",
+    "categories": {
+      "ai": "Artificial Intelligence",
+      "automation": "Automation",
+      "web": "Web Development",
+      "marketing": "Marketing",
+      "seo": "SEO"
+    }
+  },
+  "aiAgents": {
+    "title": "AI Agents for Business",
+    "subtitle": "Automate customer interactions and internal processes with custom AI agents",
+    "types": {
+      "voice": {
+        "title": "Voice AI Agent",
+        "description": "Virtual receptionist that answers calls 24/7, books appointments and qualifies leads"
+      },
+      "whatsapp": {
+        "title": "WhatsApp AI Agent",
+        "description": "Intelligent assistant on WhatsApp that automatically sells, supports and retains customers"
+      },
+      "email": {
+        "title": "Email AI Agent",
+        "description": "Automatic inbox management with AI-powered personalized responses"
+      },
+      "crm": {
+        "title": "CRM AI Agent",
+        "description": "Agent that enriches, qualifies and tracks leads in the CRM without human intervention"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI & Digital Transformation Agency",
+    "services": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "links": {
+      "aiAgents": "AI Agents",
+      "automation": "Automation",
+      "webDev": "Web Development",
+      "marketing": "Marketing",
+      "about": "About Us",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "gdpr": "GDPR Compliance"
+    },
+    "rights": "All rights reserved",
+    "swissMarket": "Switzerland · UK · Europe"
+  },
+  "meta": {
+    "home": {
+      "title": "ORTHONOBA | AI & Digital Transformation Agency",
+      "description": "AI Agents, Automation and Web Development for SMBs in Switzerland. Transform your business with artificial intelligence."
+    },
+    "services": {
+      "title": "AI & Digital Services | ORTHONOBA",
+      "description": "AI Agents, Business Automation, Web Development, Marketing Automation and SEO for Swiss and international SMBs."
+    },
+    "aiAgents": {
+      "title": "AI Agents | ORTHONOBA",
+      "description": "Voice AI, WhatsApp AI and custom intelligent agents to automate your business."
+    },
+    "contact": {
+      "title": "Contact | ORTHONOBA",
+      "description": "Talk to an AI expert and get a free consultation to digitally transform your company."
+    }
+  }
+}

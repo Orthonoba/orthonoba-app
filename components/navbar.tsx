@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Bell, Search, LogOut, User, ChevronDown } from "lucide-react";
-import styles from "./Navbar.module.css";
+import styles from "./navbar.module.css";
 
 export default function Navbar() {
   const router = useRouter();

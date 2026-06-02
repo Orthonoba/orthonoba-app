@@ -1,0 +1,251 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Servizi",
+    "aiAgents": "AI Agents",
+    "automation": "Automazione",
+    "webDevelopment": "Sviluppo Web",
+    "marketing": "Marketing",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "Chi Siamo",
+    "contact": "Contatto",
+    "getStarted": "Inizia Ora",
+    "login": "Accedi"
+  },
+  "hero": {
+    "badge": "AI & Digital Transformation Agency",
+    "headline": "Trasformiamo il tuo Business con l'Intelligenza Artificiale",
+    "subheadline": "Agenti AI, Automazione e Sviluppo Web per PMI in Svizzera e nel Mondo",
+    "cta": "Scopri i Servizi",
+    "ctaSecondary": "Parla con un Esperto"
+  },
+  "servicesOverview": {
+    "title": "I Nostri Servizi",
+    "subtitle": "Soluzioni digitali complete per trasformare la tua azienda",
+    "items": {
+      "aiAgents": {
+        "title": "Agenti AI",
+        "description": "Automazione intelligente con agenti AI personalizzati per il tuo business"
+      },
+      "voiceAI": {
+        "title": "Voice AI",
+        "description": "Agenti vocali AI per customer service e reception automatizzata 24/7"
+      },
+      "whatsappAI": {
+        "title": "WhatsApp AI",
+        "description": "Chatbot intelligenti su WhatsApp per vendite e assistenza clienti"
+      },
+      "automation": {
+        "title": "Automazione Business",
+        "description": "Processi automatizzati che eliminano il lavoro manuale ripetitivo"
+      },
+      "webDev": {
+        "title": "Sviluppo Web",
+        "description": "Siti web e applicazioni web moderne, veloci e ottimizzate per la conversione"
+      },
+      "saas": {
+        "title": "SaaS Development",
+        "description": "Piattaforme SaaS personalizzate per il tuo modello di business"
+      },
+      "marketing": {
+        "title": "Marketing Automation",
+        "description": "Campagne marketing automatizzate con AI per massimizzare il ROI"
+      },
+      "seo": {
+        "title": "SEO Services",
+        "description": "Ottimizzazione multilingue per i motori di ricerca nel mercato svizzero"
+      },
+      "consulting": {
+        "title": "Digital Consulting",
+        "description": "Consulenza strategica per la trasformazione digitale della tua azienda"
+      }
+    }
+  },
+  "aiSolutions": {
+    "title": "Soluzioni AI per il Tuo Business",
+    "subtitle": "Implementiamo agenti AI che lavorano per te 24 ore su 24",
+    "features": [
+      "Risposta automatica a clienti e lead",
+      "Qualificazione automatica dei prospect",
+      "Gestione appuntamenti con AI",
+      "Analisi dati e reportistica intelligente",
+      "Integrazione con i tuoi sistemi esistenti"
+    ],
+    "cta": "Scopri gli AI Agents"
+  },
+  "automationSection": {
+    "title": "Automazione che fa Crescere il Business",
+    "subtitle": "Elimina le attività ripetitive e concentrati su ciò che conta davvero",
+    "items": [
+      {
+        "title": "CRM Automation",
+        "description": "Gestione automatica di lead, follow-up e pipeline vendite"
+      },
+      {
+        "title": "Email Marketing",
+        "description": "Sequenze email personalizzate attivate da comportamenti utente"
+      },
+      {
+        "title": "Workflow Automation",
+        "description": "Connessione tra app e sistemi con automazioni N8N e Make"
+      }
+    ]
+  },
+  "webDevelopmentSection": {
+    "title": "Sviluppo Web Professionale",
+    "subtitle": "Siti e app che convertono e crescono con il tuo business",
+    "items": [
+      {
+        "title": "Landing Pages ad Alta Conversione",
+        "description": "Pagine ottimizzate per trasformare visitatori in clienti"
+      },
+      {
+        "title": "Web App & SaaS",
+        "description": "Applicazioni web scalabili costruite con tecnologie moderne"
+      },
+      {
+        "title": "E-Commerce",
+        "description": "Store online ottimizzati per vendere in Svizzera e in Europa"
+      }
+    ]
+  },
+  "industries": {
+    "title": "Settori che Serviamo",
+    "subtitle": "Soluzioni specializzate per ogni tipo di business",
+    "items": [
+      "PMI e Startup",
+      "Sanità e Cliniche Dentali",
+      "Immobiliare",
+      "Ristorazione",
+      "Lusso e Gioielleria",
+      "Studi Legali",
+      "Consulenza",
+      "Logistica e Traslochi",
+      "Business Locali"
+    ]
+  },
+  "portfolio": {
+    "title": "Il Nostro Portfolio",
+    "subtitle": "Progetti reali, risultati misurabili",
+    "cta": "Vedi Tutti i Progetti"
+  },
+  "testimonials": {
+    "title": "I Nostri Clienti Parlano",
+    "subtitle": "Risultati concreti per aziende reali"
+  },
+  "contactCta": {
+    "title": "Pronto a Digitalizzare il Tuo Business?",
+    "subtitle": "Consulenza gratuita di 30 minuti con un esperto AI",
+    "cta": "Contattaci Ora"
+  },
+  "contact": {
+    "title": "Contattaci",
+    "subtitle": "Siamo pronti ad aiutarti a crescere con l'AI",
+    "form": {
+      "name": "Nome e Cognome",
+      "email": "Email",
+      "company": "Azienda",
+      "message": "Messaggio",
+      "submit": "Invia Messaggio",
+      "success": "Messaggio inviato! Ti contatteremo entro 24 ore.",
+      "error": "Errore nell'invio. Riprova."
+    },
+    "info": {
+      "email": "info@orthonoba.app",
+      "response": "Risposta entro 24 ore"
+    }
+  },
+  "about": {
+    "title": "Chi Siamo",
+    "subtitle": "Un team di esperti AI e Digital Transformation al tuo servizio",
+    "mission": "La nostra missione è rendere l'intelligenza artificiale accessibile alle PMI svizzere e internazionali, aiutandole a competere nell'era digitale.",
+    "values": {
+      "title": "I Nostri Valori",
+      "items": [
+        { "title": "Innovazione", "description": "Utilizziamo le tecnologie AI più avanzate" },
+        { "title": "Risultati", "description": "Misuriamo il successo con KPI concreti" },
+        { "title": "Trasparenza", "description": "Comunicazione chiara e prezzi onesti" },
+        { "title": "Partnership", "description": "Siamo partner del tuo business, non fornitori" }
+      ]
+    }
+  },
+  "services": {
+    "title": "I Nostri Servizi",
+    "subtitle": "Tutto ciò di cui hai bisogno per la trasformazione digitale",
+    "cta": "Richiedi un Preventivo"
+  },
+  "blog": {
+    "title": "Blog & Risorse",
+    "subtitle": "Guide, strategie e aggiornamenti sul mondo AI e Digital",
+    "readMore": "Leggi di più",
+    "categories": {
+      "ai": "Intelligenza Artificiale",
+      "automation": "Automazione",
+      "web": "Sviluppo Web",
+      "marketing": "Marketing",
+      "seo": "SEO"
+    }
+  },
+  "aiAgents": {
+    "title": "Agenti AI per il Business",
+    "subtitle": "Automatizza le interazioni con clienti e processi interni con agenti AI personalizzati",
+    "types": {
+      "voice": {
+        "title": "Voice AI Agent",
+        "description": "Receptionist virtuale che risponde alle chiamate 24/7, prenota appuntamenti e qualifica lead"
+      },
+      "whatsapp": {
+        "title": "WhatsApp AI Agent",
+        "description": "Assistente intelligente su WhatsApp che vende, supporta e fidelizza clienti automaticamente"
+      },
+      "email": {
+        "title": "Email AI Agent",
+        "description": "Gestione automatica della posta in arrivo con risposte personalizzate basate sull'AI"
+      },
+      "crm": {
+        "title": "CRM AI Agent",
+        "description": "Agente che arricchisce, qualifica e segue i lead nel CRM senza intervento umano"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI & Digital Transformation Agency",
+    "services": "Servizi",
+    "company": "Azienda",
+    "legal": "Legale",
+    "links": {
+      "aiAgents": "AI Agents",
+      "automation": "Automazione",
+      "webDev": "Sviluppo Web",
+      "marketing": "Marketing",
+      "about": "Chi Siamo",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "contact": "Contatto",
+      "privacy": "Privacy Policy",
+      "terms": "Termini di Servizio",
+      "gdpr": "GDPR Compliance"
+    },
+    "rights": "Tutti i diritti riservati",
+    "swissMarket": "Svizzera · Italia · Europa"
+  },
+  "meta": {
+    "home": {
+      "title": "ORTHONOBA | AI & Digital Transformation Agency",
+      "description": "Agenti AI, Automazione e Sviluppo Web per PMI in Svizzera e nel Mondo. Trasforma il tuo business con l'intelligenza artificiale."
+    },
+    "services": {
+      "title": "Servizi AI & Digitali | ORTHONOBA",
+      "description": "AI Agents, Automazione Business, Sviluppo Web, Marketing Automation e SEO per PMI svizzere e internazionali."
+    },
+    "aiAgents": {
+      "title": "AI Agents | ORTHONOBA",
+      "description": "Voice AI, WhatsApp AI e agenti intelligenti personalizzati per automatizzare il tuo business."
+    },
+    "contact": {
+      "title": "Contattaci | ORTHONOBA",
+      "description": "Parla con un esperto AI e ricevi una consulenza gratuita per trasformare digitalmente la tua azienda."
+    }
+  }
+}
