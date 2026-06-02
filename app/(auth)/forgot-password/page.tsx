@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
 
   const emailOk = useMemo(
     () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()),
-    [email],
+    [email]
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
