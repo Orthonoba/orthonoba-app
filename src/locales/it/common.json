@@ -20,11 +20,11 @@
     "login": "Accedi"
   },
   "hero": {
-    "badge": "AI · Automazione · Software · Crescita",
-    "headline": "Trasforma il Business attraverso l'AI",
-    "subheadline": "Agenti AI, Automazione, Software e Soluzioni di Crescita per le Aziende Moderne.",
-    "cta": "Prenota una Strategy Call",
-    "ctaSecondary": "Esplora le Soluzioni"
+    "badge": "AI · Automazione · Software",
+    "headline": "Trasformiamo le aziende attraverso <gold>IA, automazione e software scalabile</gold>.",
+    "subheadline": "Agenti intelligenti, automazioni aziendali, piattaforme SaaS e soluzioni digitali per aziende in Europa e America Latina.",
+    "cta": "Richiedi una Demo",
+    "ctaSecondary": "Parla con un Esperto"
   },
   "servicesOverview": {
     "title": "I Nostri Servizi",

@@ -20,11 +20,11 @@
     "login": "Login"
   },
   "hero": {
-    "badge": "AI · Automation · Software · Growth",
-    "headline": "Transform Business Through AI",
-    "subheadline": "AI Agents, Automation, Software and Growth Solutions for Modern Companies.",
-    "cta": "Book a Strategy Call",
-    "ctaSecondary": "Explore Solutions"
+    "badge": "AI · Automation · Software",
+    "headline": "We transform businesses through <gold>AI, automation and scalable software</gold>.",
+    "subheadline": "Intelligent agents, enterprise automations, SaaS platforms and digital solutions for companies across Europe and Latin America.",
+    "cta": "Request a Demo",
+    "ctaSecondary": "Talk to an Expert"
   },
   "servicesOverview": {
     "title": "Our Services",

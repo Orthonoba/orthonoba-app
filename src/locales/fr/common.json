@@ -20,11 +20,11 @@
     "login": "Connexion"
   },
   "hero": {
-    "badge": "IA · Automatisation · Logiciels · Croissance",
-    "headline": "Transformez Votre Business par l'IA",
-    "subheadline": "Agents IA, Automatisation, Logiciels et Solutions de Croissance pour les Entreprises Modernes.",
-    "cta": "Réserver un Appel Stratégique",
-    "ctaSecondary": "Explorer les Solutions"
+    "badge": "IA · Automatisation · Logiciels",
+    "headline": "Nous transformons les entreprises grâce à <gold>l'IA, l'automatisation et les logiciels évolutifs</gold>.",
+    "subheadline": "Agents intelligents, automatisations d'entreprise, plateformes SaaS et solutions numériques pour les entreprises en Europe et en Amérique latine.",
+    "cta": "Demander une Démo",
+    "ctaSecondary": "Parler à un Expert"
   },
   "servicesOverview": {
     "title": "Nos Services",

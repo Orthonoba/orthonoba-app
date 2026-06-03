@@ -4,6 +4,7 @@ import Hero from "@/components/sections/hero";
 import TrustBar from "@/components/sections/trust-bar";
 import CoreSolutions from "@/components/sections/core-solutions";
 import Industries from "@/components/sections/industries";
+import Platform from "@/components/sections/platform";
 import FounderStory from "@/components/sections/founder-story";
 import WhyOrthonoba from "@/components/sections/why-orthonoba";
 import HomeCTA from "@/components/sections/home-cta";
@@ -45,6 +46,7 @@ export default function HomePage() {
       <TrustBar />
       <CoreSolutions />
       <Industries />
+      <Platform />
       <FounderStory />
       <WhyOrthonoba />
       <HomeCTA />

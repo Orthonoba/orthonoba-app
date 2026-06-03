@@ -20,11 +20,11 @@
     "login": "Anmelden"
   },
   "hero": {
-    "badge": "KI · Automatisierung · Software · Wachstum",
-    "headline": "Business durch KI transformieren",
-    "subheadline": "KI-Agenten, Automatisierung, Software und Wachstumslösungen für moderne Unternehmen.",
-    "cta": "Strategiegespräch Buchen",
-    "ctaSecondary": "Lösungen Erkunden"
+    "badge": "KI · Automatisierung · Software",
+    "headline": "Wir transformieren Unternehmen durch <gold>KI, Automatisierung und skalierbare Software</gold>.",
+    "subheadline": "Intelligente Agenten, Unternehmensautomatisierungen, SaaS-Plattformen und digitale Lösungen für Unternehmen in Europa und Lateinamerika.",
+    "cta": "Demo Anfragen",
+    "ctaSecondary": "Mit Experten Sprechen"
   },
   "servicesOverview": {
     "title": "Unsere Leistungen",
