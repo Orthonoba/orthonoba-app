@@ -1,0 +1,44 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ORTHONOBA — Design Tokens
+   Source of truth for all brand values as CSS custom properties.
+
+   Usage in inline styles:   style={{ color: "var(--orthonoba-gold)" }}
+   Usage in CSS:             color: var(--orthonoba-gold);
+   Usage via Tailwind class: text-gold  (mapped in @theme in globals.css)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Dark Surfaces ─────────────────────────────────────────────────────── */
+  --orthonoba-black:      #050505;   /* Page background — deepest level     */
+  --orthonoba-panel:      #0E0E0E;   /* Cards, footer, sidebar              */
+  --orthonoba-panel-2:    #161616;   /* Hover states, secondary panels      */
+  --orthonoba-panel-3:    #1E1E1E;   /* Borders, dividers, elevated panels  */
+
+  /* ── Gold Accent ───────────────────────────────────────────────────────── */
+  --orthonoba-gold:       #D4AF37;   /* Primary brand accent — CTAs, icons  */
+  --orthonoba-gold-light: #F5C542;   /* Hover state for gold                */
+  --orthonoba-gold-dim:   #B8962E;   /* Active / pressed state              */
+
+  /* ── Neutrals ──────────────────────────────────────────────────────────── */
+  --orthonoba-silver:     #A1A1AA;   /* Secondary text, labels              */
+  --orthonoba-muted:      #71717A;   /* Tertiary text, hints, geo strips    */
+  --orthonoba-border:     #2A2519;   /* Subtle warm borders                 */
+  --orthonoba-white:      #FFFFFF;   /* Pure white                          */
+
+  /* ── Semantic Aliases ──────────────────────────────────────────────────── */
+  --surface-base:     var(--orthonoba-black);
+  --surface-raised:   var(--orthonoba-panel);
+  --surface-overlay:  var(--orthonoba-panel-2);
+  --surface-elevated: var(--orthonoba-panel-3);
+  --accent-primary:   var(--orthonoba-gold);
+  --accent-hover:     var(--orthonoba-gold-light);
+  --text-primary:     var(--orthonoba-white);
+  --text-secondary:   var(--orthonoba-silver);
+  --text-tertiary:    var(--orthonoba-muted);
+
+  /* ── Gold Gradient Presets ─────────────────────────────────────────────── */
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%);
+  --gradient-gold-text: linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%);
+  --gradient-gold-subtle: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(212,175,55,0.18) 0%, transparent 65%);
+  --gradient-gold-glow: rgba(212, 175, 55, 0.25);
+}

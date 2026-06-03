@@ -331,3 +331,80 @@ Plataforma healthtech para el sector Odontológico/médico/Clínicas dentales/Pa
 - No usar `getServerSideProps` ni `getStaticProps` (eso es Pages Router)
 - No hardcodear strings de UI — preparar para i18n (español por defecto)
 - No instalar librerías sin justificarlo (preferir nativo de Next/React)
+
+---
+
+# ORTHONOBA DESIGN SYSTEM
+
+## Principios
+
+- **Ultra Premium** — Cada píxel debe comunicar excelencia
+- **Swiss Design** — Orden, jerarquía tipográfica, retícula clara
+- **Minimalismo** — Si puede removerse sin perder sentido, se remueve
+- **Espacio en blanco** — Es un elemento activo de diseño, no espacio vacío
+- **Tipografía grande** — Los títulos dominan. La jerarquía es visual y clara
+- **Máximo contraste** — Negro profundo + oro. Sin ambigüedad de lectura
+- **Mobile First** — Diseñar desde 375px, escalar hacia arriba
+- **B2B Enterprise** — Audiencia profesional. Sin decoración infantil
+
+## Paleta de Colores
+
+| Token Tailwind   | Variable CSS              | Valor     | Uso                          |
+|------------------|---------------------------|-----------|------------------------------|
+| `bg-obsidian`    | `--orthonoba-black`       | `#050505` | Fondo base de página         |
+| `bg-panel`       | `--orthonoba-panel`       | `#0E0E0E` | Cards, footer, sidebar       |
+| `bg-panel-2`     | `--orthonoba-panel-2`     | `#161616` | Hover states, paneles sec.   |
+| `bg-panel-3`     | `--orthonoba-panel-3`     | `#1E1E1E` | Bordes elevados              |
+| `text-gold`      | `--orthonoba-gold`        | `#D4AF37` | Acento principal, CTAs       |
+| `bg-gold-light`  | `--orthonoba-gold-light`  | `#F5C542` | Hover del acento gold        |
+| `text-silver`    | `--orthonoba-silver`      | `#A1A1AA` | Texto secundario             |
+| `text-muted`     | `--orthonoba-muted`       | `#71717A` | Texto terciario, hints       |
+
+## Arquitectura del Design System
+
+```
+styles/
+  design-tokens.css   ← Fuente de verdad: --orthonoba-* variables
+  colors.css          ← Estados interactivos, bordes, opacidades
+  typography.css      ← Escala tipográfica, tracking, line-heights
+  spacing.css         ← Section gaps, container widths, border-radius
+app/
+  globals.css         ← @import "tailwindcss" + @theme (tokens → utilities)
+```
+
+## Uso Correcto
+
+```tsx
+/* VÍA CLASES TAILWIND (preferido para layout/color) */
+<div className="bg-obsidian text-gold">...</div>
+<button className="bg-gold text-obsidian hover:bg-gold-light">...</button>
+
+/* VÍA VARIABLES CSS (para inline styles, gradients, sombras) */
+<div style={{ color: "var(--orthonoba-gold)" }}>...</div>
+<div style={{ background: "var(--gradient-gold-subtle)" }}>...</div>
+```
+
+## Regla Crítica: NUNCA saturar visualmente
+
+- Sin gradientes de colores múltiples en una sola sección
+- Sin más de 2 tipografías en una pantalla
+- Sin tarjetas con múltiples colores de acento
+- Sin testimonios, métricas o datos inventados
+- Sin elementos decorativos sin función
+
+## Stack de Estilos
+
+- **Tailwind v4** — `@import "tailwindcss"` + `@theme {}` (no `tailwind.config.ts`)
+- **PostCSS** — Solo `@tailwindcss/postcss` (sin `autoprefixer`, incluido en v4)
+- **Fuente** — Inter (variable `--font-inter` desde Next.js Font Optimization)
+- **VS Code warning `@theme`** — Falsa alarma del CSS Language Server. No es un error real.
+
+## Comando Post-Cambios CSS
+
+Después de modificar cualquier archivo en `styles/` o `app/globals.css`:
+
+```bash
+# Detener dev server, limpiar caché y reiniciar
+Remove-Item -Recurse -Force .next
+npm run dev
+```

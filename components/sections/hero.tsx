@@ -15,10 +15,7 @@ export default function Hero() {
       <div
         aria-hidden="true"
         className="absolute inset-x-0 top-0 h-[700px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(212,175,55,0.18) 0%, transparent 65%)",
-        }}
+        style={{ background: "var(--gradient-gold-subtle)" }}
       />
       {/* Dot grid */}
       <div
@@ -26,7 +23,7 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(212,175,55,0.5) 1px, transparent 1px)",
+            "radial-gradient(circle, var(--orthonoba-gold) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
           opacity: 0.035,
         }}
@@ -37,7 +34,7 @@ export default function Hero() {
         className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-96 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at left, rgba(212,175,55,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse at left, var(--gold-6) 0%, transparent 70%)",
         }}
       />
 
@@ -53,8 +50,7 @@ export default function Hero() {
             gold: (chunks) => (
               <span
                 style={{
-                  background:
-                    "linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%)",
+                  background: "var(--gradient-gold-text)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",

@@ -1,23 +1,48 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ORTHONOBA — Global CSS Entry Point
+   Tailwind v4 + Custom Design System
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @import "tailwindcss";
 
+/* ─── ORTHONOBA Design Token Files ──────────────────────────────────────── */
+/* These define CSS custom properties for direct use in inline styles        */
+@import "../styles/design-tokens.css";
+@import "../styles/colors.css";
+@import "../styles/typography.css";
+@import "../styles/spacing.css";
+
+/* ─── Tailwind v4 Theme Extension ────────────────────────────────────────── */
+/* This @theme block extends Tailwind's design system.                        */
+/* It generates utility classes: bg-obsidian, text-gold, bg-panel, etc.      */
+/* IMPORTANT: These must be explicit hex values (not var() references).       */
+
 @theme {
+  /* Typography */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
 
-  /* ORTHONOBA Design System — Gold Premium */
-  --color-obsidian: #050505;
-  --color-panel:    #0E0E0E;
-  --color-panel-2:  #161616;
-  --color-panel-3:  #1E1E1E;
-  --color-gold:     #D4AF37;
+  /* ── ORTHONOBA Brand Palette ─────────────────────────────────────────── */
+
+  /* Dark Surfaces */
+  --color-obsidian:   #050505;
+  --color-panel:      #0E0E0E;
+  --color-panel-2:    #161616;
+  --color-panel-3:    #1E1E1E;
+
+  /* Gold Accent */
+  --color-gold:       #D4AF37;
   --color-gold-light: #F5C542;
-  --color-gold-dim: #B8962E;
-  --color-silver:   #A1A1AA;
-  --color-muted:    #71717A;
-  --color-border:   #2A2519;
+  --color-gold-dim:   #B8962E;
+
+  /* Neutrals */
+  --color-silver:     #A1A1AA;
+  --color-muted:      #71717A;
+  --color-ono-border: #2A2519;
 }
 
-/* ── Base resets ─────────────────────────────────────────── */
+/* ─── Base Resets ────────────────────────────────────────────────────────── */
+
 *,
 *::before,
 *::after {
