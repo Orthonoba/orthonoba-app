@@ -1,36 +1,41 @@
-import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import ContactCTA from "@/components/sections/contact-cta";
-import {
-  Globe, Search, TrendingUp, LayoutTemplate, ShoppingBag,
-  Bot, Mic, MessageCircle, Zap, Server,
-} from "lucide-react";
+import Link from "next/link";
+import { Globe, Search, TrendingUp, ShoppingBag, LayoutTemplate, Bot, Megaphone, LineChart, ArrowRight, ExternalLink } from "lucide-react";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "meta.services" });
-  return { title: t("title"), description: t("description") };
-}
+export const metadata: Metadata = {
+  title: "Services | ORTHONOBA",
+  description: "Web development, SEO, Google Ads, Meta Ads, AI Consulting and Digital Transformation services.",
+};
 
-const AGENCY_SERVICES = [
-  { icon: Globe,          color: "text-sky-400",    bg: "bg-sky-500/10 border-sky-500/20",    key: "webDesign" },
-  { icon: LayoutTemplate, color: "text-blue-400",   bg: "bg-blue-500/10 border-blue-500/20",  key: "wordpress" },
-  { icon: Search,         color: "text-lime-400",   bg: "bg-lime-500/10 border-lime-500/20",  key: "seo" },
-  { icon: TrendingUp,     color: "text-pink-400",   bg: "bg-pink-500/10 border-pink-500/20",  key: "marketing" },
-  { icon: ShoppingBag,    color: "text-orange-400", bg: "bg-orange-500/10 border-orange-500/20", key: "googleAds" },
-] as const;
-
-const STUDIO_SERVICES = [
-  { icon: Bot,            color: "text-violet-400", bg: "bg-violet-500/10 border-violet-500/20", key: "aiAgents" },
-  { icon: Mic,            color: "text-indigo-400", bg: "bg-indigo-500/10 border-indigo-500/20", key: "voiceAI" },
-  { icon: MessageCircle,  color: "text-green-400",  bg: "bg-green-500/10 border-green-500/20",   key: "whatsappAI" },
-  { icon: Zap,            color: "text-amber-400",  bg: "bg-amber-500/10 border-amber-500/20",   key: "automation" },
-  { icon: Server,         color: "text-rose-400",   bg: "bg-rose-500/10 border-rose-500/20",     key: "saas" },
-] as const;
+const SERVICE_GROUPS = [
+  {
+    label: "Web & Digital",
+    services: [
+      { icon: Globe,         label: "Web Development",    href: "services/web-development",  desc: "High-performance websites and web apps" },
+      { icon: LayoutTemplate, label: "WordPress",          href: "services/wordpress",         desc: "Scalable CMS with premium themes" },
+      { icon: ShoppingBag,   label: "E-Commerce",         href: "services/ecommerce",         desc: "Online stores optimised for conversion" },
+      { icon: Megaphone,     label: "Landing Pages",       href: "services/landing-pages",    desc: "High-converting campaign pages" },
+    ],
+  },
+  {
+    label: "SEO & Advertising",
+    services: [
+      { icon: Search,        label: "SEO Local",           href: "services/seo-local",            desc: "Local search visibility and rankings" },
+      { icon: Search,        label: "SEO International",   href: "services/seo-international",    desc: "Multilingual international SEO" },
+      { icon: TrendingUp,    label: "Google Ads",          href: "services/google-ads",           desc: "Performance advertising with ROI focus" },
+      { icon: LineChart,     label: "Meta Ads",            href: "services/meta-ads",             desc: "Facebook & Instagram advertising" },
+      { icon: ExternalLink,  label: "LinkedIn Ads",        href: "services/linkedin-ads",         desc: "B2B advertising on LinkedIn" },
+    ],
+  },
+  {
+    label: "AI & Growth",
+    services: [
+      { icon: Bot,           label: "Marketing Automation", href: "services/marketing-automation",    desc: "AI-powered automated marketing campaigns" },
+      { icon: Bot,           label: "AI Consulting",        href: "services/ai-consulting",           desc: "Strategic AI implementation guidance" },
+      { icon: TrendingUp,    label: "Digital Transformation", href: "services/digital-transformation", desc: "End-to-end digital business transformation" },
+    ],
+  },
+];
 
 export default async function ServicesPage({
   params,
@@ -38,83 +43,67 @@ export default async function ServicesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "servicesPage" });
 
   return (
-    <>
-      {/* Header */}
-      <section className="pt-24 pb-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-            {t("title")}
+    <div className="bg-obsidian min-h-screen">
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-24 pb-16 px-6 border-b border-white/6">
+        <div
+          className="absolute inset-x-0 top-0 h-[400px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(212,175,55,0.10) 0%, transparent 70%)" }}
+        />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-gold mb-4">Services</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-5 tracking-tight">
+            Digital Services for Modern Business
           </h1>
-          <p className="text-lg text-slate-400 max-w-xl mx-auto">{t("subtitle")}</p>
+          <p className="text-silver text-lg max-w-2xl mx-auto leading-relaxed">
+            Web development, SEO, advertising and AI services that deliver measurable results for your business.
+          </p>
         </div>
       </section>
 
-      {/* Agency Division */}
-      <section className="pb-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="h-px flex-1 bg-slate-800" />
-            <div className="px-4 py-1.5 rounded-full border border-sky-500/30 bg-sky-500/5">
-              <span className="text-sky-400 text-xs font-bold uppercase tracking-widest">
-                {t("agencyLabel")}
-              </span>
-            </div>
-            <div className="h-px flex-1 bg-slate-800" />
-          </div>
-          <p className="text-slate-500 text-sm text-center mb-8">{t("agencyDesc")}</p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {AGENCY_SERVICES.map(({ icon: Icon, color, bg, key }) => (
-              <div
-                key={key}
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors"
-              >
-                <div className={`w-10 h-10 rounded-xl ${bg} border flex items-center justify-center ${color} mb-4`}>
-                  <Icon size={18} />
-                </div>
-                <h3 className="font-semibold text-white text-sm mb-1.5">{t(`agency.${key}.title`)}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{t(`agency.${key}.desc`)}</p>
+      {/* Service Groups */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto space-y-16">
+          {SERVICE_GROUPS.map(({ label, services }) => (
+            <div key={label}>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gold mb-6">{label}</p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {services.map(({ icon: Icon, label: slabel, href, desc }) => (
+                  <Link
+                    key={href}
+                    href={`/${locale}/${href}`}
+                    className="group bg-panel border border-white/6 rounded-2xl p-5 hover:border-gold/20 hover:bg-panel-2 transition-all"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-gold/8 border border-gold/15 flex items-center justify-center text-gold mb-4">
+                      <Icon size={15} />
+                    </div>
+                    <p className="text-sm font-semibold text-white group-hover:text-gold transition-colors mb-1.5">
+                      {slabel}
+                    </p>
+                    <p className="text-xs text-silver/70 leading-relaxed mb-4">{desc}</p>
+                    <div className="flex items-center gap-1 text-xs text-gold/50 group-hover:text-gold transition-colors">
+                      Learn more <ArrowRight size={11} />
+                    </div>
+                  </Link>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Studio Division */}
-      <section className="pb-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="h-px flex-1 bg-slate-800" />
-            <div className="px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/5">
-              <span className="text-violet-400 text-xs font-bold uppercase tracking-widest">
-                {t("studioLabel")}
-              </span>
             </div>
-            <div className="h-px flex-1 bg-slate-800" />
-          </div>
-          <p className="text-slate-500 text-sm text-center mb-8">{t("studioDesc")}</p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {STUDIO_SERVICES.map(({ icon: Icon, color, bg, key }) => (
-              <div
-                key={key}
-                className="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-violet-500/20 transition-colors"
-              >
-                <div className={`w-10 h-10 rounded-xl ${bg} border flex items-center justify-center ${color} mb-4`}>
-                  <Icon size={18} />
-                </div>
-                <h3 className="font-semibold text-white text-sm mb-1.5">{t(`studio.${key}.title`)}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{t(`studio.${key}.desc`)}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
-      <ContactCTA />
-    </>
+      {/* CTA */}
+      <section className="border-t border-white/6 py-16 px-6 text-center">
+        <p className="text-silver text-sm mb-4">Ready to grow your business?</p>
+        <Link
+          href={`/${locale}/consultation`}
+          className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-obsidian rounded-lg font-bold text-sm hover:bg-gold-light transition-colors"
+        >
+          Book a Free Strategy Call <ArrowRight size={14} />
+        </Link>
+      </section>
+    </div>
   );
 }

@@ -3,71 +3,78 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, MoveRight } from "lucide-react";
 
 export default function Hero() {
   const t = useTranslations("hero");
   const { locale } = useParams<{ locale: string }>();
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 pt-28 pb-24 px-6">
-      {/* Subtle grid */}
+    <section className="relative overflow-hidden bg-obsidian pt-32 pb-28 px-6">
+      {/* Radial gold glow */}
       <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        className="absolute inset-x-0 top-0 h-[600px] pointer-events-none"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212,175,55,0.12) 0%, transparent 70%)",
         }}
       />
-      {/* Amber glow — top right */}
-      <div className="absolute -top-40 right-[-10%] w-[700px] h-[700px] rounded-full bg-amber-500/[0.06] blur-[100px] pointer-events-none" />
-      {/* Blue glow — bottom left */}
-      <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-blue-600/[0.05] blur-[80px] pointer-events-none" />
+      {/* Subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.018] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(212,175,55,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.4) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium mb-10">
-          <Sparkles size={13} />
-          {t("badge")}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gold/25 bg-gold/[0.06] text-gold text-xs font-semibold tracking-wide mb-8">
+          AI · Automation · Software · Growth
         </div>
 
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.04] tracking-tight mb-6 max-w-4xl">
+        {/* Headline */}
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-6">
           {t("headline")}
         </h1>
 
-        <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed font-light">
+        {/* Subheadline */}
+        <p className="text-lg md:text-xl text-silver max-w-2xl mx-auto leading-relaxed mb-10 font-light">
           {t("subheadline")}
         </p>
 
-        <div className="flex flex-wrap gap-3">
+        {/* CTAs */}
+        <div className="flex flex-wrap gap-3 justify-center">
           <Link
-            href={`/${locale}/services`}
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 rounded-xl font-semibold text-sm hover:bg-slate-100 transition-colors shadow-sm"
+            href={`/${locale}/consultation`}
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-gold text-obsidian rounded-lg font-bold text-sm hover:bg-gold-light transition-colors shadow-lg shadow-gold/20"
           >
             {t("cta")}
             <ArrowRight size={15} />
           </Link>
           <Link
-            href={`/${locale}/contact`}
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-slate-300 rounded-xl font-medium text-sm border border-slate-700 hover:border-slate-600 hover:text-white transition-colors"
+            href={`/${locale}/solutions`}
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-white rounded-lg font-medium text-sm border border-white/15 hover:border-white/30 hover:bg-white/[0.04] transition-all"
           >
             {t("ctaSecondary")}
+            <MoveRight size={15} className="text-silver" />
           </Link>
         </div>
 
-        {/* Trust strip — verified facts only */}
-        <div className="mt-16 pt-8 border-t border-slate-800/60 flex flex-wrap items-center gap-8 text-sm text-slate-500">
+        {/* Trust strip */}
+        <div className="mt-20 pt-8 border-t border-white/[0.06] flex flex-wrap justify-center items-center gap-8 text-xs text-muted">
           <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-            Switzerland · Italy · Europe
+            <span className="w-1.5 h-1.5 rounded-full bg-gold/70 inline-block" />
+            Switzerland · Europe · Latin America
           </span>
           <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block" />
-            IT · DE · FR · EN
+            <span className="w-1.5 h-1.5 rounded-full bg-gold/70 inline-block" />
+            IT · DE · FR · EN · ES
           </span>
           <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-gold/70 inline-block" />
             OpenAI · Anthropic · n8n
           </span>
         </div>

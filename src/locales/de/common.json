@@ -1,7 +1,11 @@
 {
   "nav": {
     "home": "Home",
+    "solutions": "Lösungen",
     "services": "Leistungen",
+    "industries": "Branchen",
+    "resources": "Ressourcen",
+    "company": "Unternehmen",
     "aiAgents": "AI Agents",
     "automation": "Automatisierung",
     "webDevelopment": "Webentwicklung",
@@ -12,14 +16,15 @@
     "contact": "Kontakt",
     "pricing": "Preise",
     "getStarted": "Jetzt Starten",
+    "bookConsultation": "Beratung Buchen",
     "login": "Anmelden"
   },
   "hero": {
-    "badge": "AI & Digital Transformation Agency",
-    "headline": "Wir Transformieren Ihr Business mit Künstlicher Intelligenz",
-    "subheadline": "AI Agents, Automatisierung und Webentwicklung für KMU in der Schweiz und weltweit",
-    "cta": "Leistungen Entdecken",
-    "ctaSecondary": "Mit Experten Sprechen"
+    "badge": "KI · Automatisierung · Software · Wachstum",
+    "headline": "Business durch KI transformieren",
+    "subheadline": "KI-Agenten, Automatisierung, Software und Wachstumslösungen für moderne Unternehmen.",
+    "cta": "Strategiegespräch Buchen",
+    "ctaSecondary": "Lösungen Erkunden"
   },
   "servicesOverview": {
     "title": "Unsere Leistungen",

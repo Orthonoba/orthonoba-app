@@ -1,13 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Hero from "@/components/sections/hero";
-import ServicesOverview from "@/components/sections/services-overview";
-import AISolutions from "@/components/sections/ai-solutions";
-import AutomationSection from "@/components/sections/automation-section";
-import WebDevSection from "@/components/sections/webdev-section";
+import TrustBar from "@/components/sections/trust-bar";
+import CoreSolutions from "@/components/sections/core-solutions";
 import Industries from "@/components/sections/industries";
-import TrustSection from "@/components/sections/testimonials";
-import ContactCTA from "@/components/sections/contact-cta";
+import FounderStory from "@/components/sections/founder-story";
+import WhyOrthonoba from "@/components/sections/why-orthonoba";
+import HomeCTA from "@/components/sections/home-cta";
 
 export async function generateMetadata({
   params,
@@ -43,13 +42,12 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ServicesOverview />
-      <AISolutions />
-      <AutomationSection />
-      <WebDevSection />
+      <TrustBar />
+      <CoreSolutions />
       <Industries />
-      <TrustSection />
-      <ContactCTA />
+      <FounderStory />
+      <WhyOrthonoba />
+      <HomeCTA />
     </>
   );
 }

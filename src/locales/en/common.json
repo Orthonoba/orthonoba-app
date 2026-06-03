@@ -1,7 +1,11 @@
 {
   "nav": {
     "home": "Home",
+    "solutions": "Solutions",
     "services": "Services",
+    "industries": "Industries",
+    "resources": "Resources",
+    "company": "Company",
     "aiAgents": "AI Agents",
     "automation": "Automation",
     "webDevelopment": "Web Development",
@@ -12,14 +16,15 @@
     "contact": "Contact",
     "pricing": "Pricing",
     "getStarted": "Get Started",
+    "bookConsultation": "Book Consultation",
     "login": "Login"
   },
   "hero": {
-    "badge": "AI & Digital Transformation Agency",
-    "headline": "We Transform Your Business with Artificial Intelligence",
-    "subheadline": "AI Agents, Automation and Web Development for SMBs in Switzerland and Worldwide",
-    "cta": "Explore Services",
-    "ctaSecondary": "Talk to an Expert"
+    "badge": "AI · Automation · Software · Growth",
+    "headline": "Transform Business Through AI",
+    "subheadline": "AI Agents, Automation, Software and Growth Solutions for Modern Companies.",
+    "cta": "Book a Strategy Call",
+    "ctaSecondary": "Explore Solutions"
   },
   "servicesOverview": {
     "title": "Our Services",

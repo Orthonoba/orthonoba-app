@@ -35,11 +35,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={inter.variable}>
-      <body className="bg-slate-950 text-white antialiased min-h-screen">
+      <body className="bg-obsidian text-white antialiased min-h-screen">
         <NextIntlClientProvider messages={messages}>
           <Nav />
           <main>{children}</main>
-          <Footer />
+          <Footer locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>

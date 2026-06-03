@@ -1,7 +1,11 @@
 {
   "nav": {
     "home": "Accueil",
+    "solutions": "Solutions",
     "services": "Services",
+    "industries": "Secteurs",
+    "resources": "Ressources",
+    "company": "Entreprise",
     "aiAgents": "AI Agents",
     "automation": "Automatisation",
     "webDevelopment": "Développement Web",
@@ -12,14 +16,15 @@
     "contact": "Contact",
     "pricing": "Tarifs",
     "getStarted": "Commencer",
+    "bookConsultation": "Réserver Consultation",
     "login": "Connexion"
   },
   "hero": {
-    "badge": "Agence IA & Transformation Digitale",
-    "headline": "Nous Transformons Votre Business avec l'Intelligence Artificielle",
-    "subheadline": "Agents IA, Automatisation et Développement Web pour les PME en Suisse et dans le Monde",
-    "cta": "Découvrir les Services",
-    "ctaSecondary": "Parler à un Expert"
+    "badge": "IA · Automatisation · Logiciels · Croissance",
+    "headline": "Transformez Votre Business par l'IA",
+    "subheadline": "Agents IA, Automatisation, Logiciels et Solutions de Croissance pour les Entreprises Modernes.",
+    "cta": "Réserver un Appel Stratégique",
+    "ctaSecondary": "Explorer les Solutions"
   },
   "servicesOverview": {
     "title": "Nos Services",
