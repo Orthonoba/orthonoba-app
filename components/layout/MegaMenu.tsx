@@ -95,7 +95,7 @@ export default function MegaMenu({ label, sections, cols = 1 }: MegaMenuProps) {
               )}
               {section.items.map((item) => (
                 <Link
-                  key={item.href}
+                  key={`${item.href}-${item.label}`}
                   href={item.href}
                   className={[
                     "block px-5 py-2.5 group",

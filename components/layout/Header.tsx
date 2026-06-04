@@ -230,7 +230,7 @@ export default function Header() {
             <MegaMenu {...transformationMenu} />
             {simpleNavLinks.map((link) => (
               <Link
-                key={link.href}
+                key={`${link.href}-${link.label}`}
                 href={link.href}
                 className="text-silver text-xs tracking-[0.15em] uppercase hover:text-white transition-colors duration-200"
               >
@@ -278,7 +278,7 @@ export default function Header() {
           <div className="lg:hidden border-t border-panel-3 py-6 space-y-1">
             {mobileLinks.map((link) => (
               <Link
-                key={link.href}
+                key={`${link.href}-${link.label}`}
                 href={link.href}
                 className="block py-3 text-silver text-xs tracking-[0.2em] uppercase hover:text-white transition-colors duration-200"
                 onClick={() => setMobileOpen(false)}
