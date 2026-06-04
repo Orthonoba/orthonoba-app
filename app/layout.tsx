@@ -1,4 +1,8 @@
 import type { ReactNode } from "react";
+import { Geist } from "next/font/google";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
 
 /*
  * Root Layout — Intentionally minimal.
