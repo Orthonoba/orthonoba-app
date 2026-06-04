@@ -1,125 +1,125 @@
-import { getPool } from "@/lib/db";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { prisma } from "@/lib/prisma";
+import { signToken } from "@/lib/auth-helpers";
+import type { OrgRole } from "@prisma/client";
 
 const SALT_ROUNDS = 10;
-const TOKEN_EXPIRES: jwt.SignOptions["expiresIn"] = "7d";
-
-/** Código PostgreSQL: unique_violation */
-const PG_UNIQUE_VIOLATION = "23505";
 
 export type AuthError = string;
 
 export type RegisterResult = {
-  id: number;
+  userId: string;
   email: string;
-  role: string;
+  organizationId: string;
+  slug: string;
 };
 
 export type LoginResult = {
   token: string;
   user: {
-    id: number;
+    id: string;
     email: string;
-    role: string;
     name: string;
+    avatarUrl: string | null;
   };
-};
-
-type UserRow = {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  role: string;
+  organization: {
+    id: string;
+    name: string;
+    slug: string;
+    plan: string;
+  };
+  role: OrgRole;
 };
 
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
-function getJwtSecret(): string | null {
-  const secret = process.env.JWT_SECRET?.trim();
-  return secret && secret.length > 0 ? secret : null;
+function toSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 60);
 }
 
-function isPgError(err: unknown): err is { code?: string; message?: string } {
-  return typeof err === "object" && err !== null && "code" in err;
+async function uniqueSlug(base: string): Promise<string> {
+  let slug = base;
+  let attempt = 0;
+  while (true) {
+    const exists = await prisma.organization.findUnique({ where: { slug } });
+    if (!exists) return slug;
+    attempt++;
+    slug = `${base}-${attempt}`;
+  }
 }
 
-/** undefined_table */
-const PG_UNDEFINED_TABLE = "42P01";
-/** not_null_violation */
-const PG_NOT_NULL = "23502";
-
-/**
- * Registro: hash de contraseña e inserción en `users`.
- * Email se normaliza (trim + minúsculas) para evitar duplicados por mayúsculas.
- */
 export async function register(
   email: string,
   password: string,
   name: string,
-  role: string
+  organizationName: string
 ): Promise<{ data: RegisterResult | null; error: AuthError | null }> {
   const normalizedEmail = normalizeEmail(email);
-  const trimmedName = name.trim();
-  const trimmedRole = role.trim() || "user";
 
-  if (!normalizedEmail || !password || !trimmedName) {
-    return { data: null, error: "Completa nombre, email y contraseña." };
+  if (!normalizedEmail || !password || !name.trim() || !organizationName.trim()) {
+    return { data: null, error: "Completa todos los campos." };
   }
 
   if (password.length < 8) {
-    return {
-      data: null,
-      error: "La contraseña debe tener al menos 8 caracteres.",
-    };
+    return { data: null, error: "La contraseña debe tener al menos 8 caracteres." };
   }
 
   try {
-    const hash = await bcrypt.hash(password, SALT_ROUNDS);
-
-    const result = await getPool().query<RegisterResult>(
-      `INSERT INTO users (name, email, password, role)
-       VALUES ($1, $2, $3, $4)
-       RETURNING id, email, role`,
-      [trimmedName, normalizedEmail, hash, trimmedRole]
-    );
-
-    const row = result.rows[0];
-    if (!row) {
-      return { data: null, error: "No se pudo crear el usuario." };
-    }
-
-    return { data: row, error: null };
-  } catch (err) {
-    if (isPgError(err) && err.code === PG_UNIQUE_VIOLATION) {
+    const existing = await prisma.user.findUnique({ where: { email: normalizedEmail } });
+    if (existing) {
       return { data: null, error: "Ya existe una cuenta con ese email." };
     }
-    if (isPgError(err) && err.code === PG_UNDEFINED_TABLE) {
-      return {
-        data: null,
-        error:
-          "La tabla de usuarios no existe en la base de datos. Crea la tabla `users` en Neon o ejecuta la migración SQL correspondiente.",
-      };
-    }
-    if (isPgError(err) && err.code === PG_NOT_NULL) {
-      return {
-        data: null,
-        error:
-          "Faltan datos obligatorios en la base de datos. Revisa el esquema de la tabla `users`.",
-      };
-    }
-    const message =
-      err instanceof Error ? err.message : "Error al registrar el usuario.";
+
+    const hash = await bcrypt.hash(password, SALT_ROUNDS);
+    const slug = await uniqueSlug(toSlug(organizationName));
+
+    const result = await prisma.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          email: normalizedEmail,
+          name: name.trim(),
+          passwordHash: hash,
+        },
+      });
+
+      const org = await tx.organization.create({
+        data: {
+          name: organizationName.trim(),
+          slug,
+          members: {
+            create: {
+              userId: user.id,
+              role: "OWNER",
+            },
+          },
+        },
+      });
+
+      return { user, org };
+    });
+
+    return {
+      data: {
+        userId: result.user.id,
+        email: result.user.email,
+        organizationId: result.org.id,
+        slug: result.org.slug,
+      },
+      error: null,
+    };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Error al registrar el usuario.";
     return { data: null, error: message };
   }
 }
 
-/**
- * Login: misma respuesta genérica si falla email o contraseña (no filtra usuarios existentes).
- */
 export async function login(
   email: string,
   password: string
@@ -130,43 +130,39 @@ export async function login(
     return { data: null, error: "Introduce email y contraseña." };
   }
 
-  const secret = getJwtSecret();
-  if (!secret) {
-    return {
-      data: null,
-      error:
-        "JWT_SECRET no está definido en el entorno. Añádelo en .env.local.",
-    };
-  }
-
   try {
-    const result = await getPool().query<UserRow>(
-      `SELECT id, name, email, password, role
-       FROM users
-       WHERE email = $1
-       LIMIT 1`,
-      [normalizedEmail]
-    );
-
-    const user = result.rows[0];
-    if (!user) {
-      return { data: null, error: "Credenciales incorrectas." };
-    }
-
-    const passwordOk = await bcrypt.compare(password, user.password);
-    if (!passwordOk) {
-      return { data: null, error: "Credenciales incorrectas." };
-    }
-
-    const token = jwt.sign(
-      {
-        userId: user.id,
-        email: user.email,
-        role: user.role,
+    const user = await prisma.user.findUnique({
+      where: { email: normalizedEmail },
+      include: {
+        memberships: {
+          include: { organization: { include: { subscription: true } } },
+          orderBy: { joinedAt: "asc" },
+          take: 1,
+        },
       },
-      secret,
-      { expiresIn: TOKEN_EXPIRES }
-    );
+    });
+
+    if (!user) return { data: null, error: "Credenciales incorrectas." };
+
+    const passwordOk = await bcrypt.compare(password, user.passwordHash);
+    if (!passwordOk) return { data: null, error: "Credenciales incorrectas." };
+
+    const membership = user.memberships[0];
+    if (!membership) {
+      return { data: null, error: "El usuario no pertenece a ninguna organización." };
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { lastLoginAt: new Date() },
+    });
+
+    const token = signToken({
+      userId: user.id,
+      organizationId: membership.organizationId,
+      role: membership.role,
+      email: user.email,
+    });
 
     return {
       data: {
@@ -174,29 +170,21 @@ export async function login(
         user: {
           id: user.id,
           email: user.email,
-          role: user.role,
           name: user.name,
+          avatarUrl: user.avatarUrl,
         },
+        organization: {
+          id: membership.organization.id,
+          name: membership.organization.name,
+          slug: membership.organization.slug,
+          plan: membership.organization.plan,
+        },
+        role: membership.role,
       },
       error: null,
     };
   } catch (err) {
-    if (isPgError(err) && err.code === PG_UNDEFINED_TABLE) {
-      return {
-        data: null,
-        error:
-          "La tabla de usuarios no existe en la base de datos. Crea la tabla `users` en Neon o ejecuta la migración SQL correspondiente.",
-      };
-    }
-    if (isPgError(err) && err.code === PG_NOT_NULL) {
-      return {
-        data: null,
-        error:
-          "Faltan datos obligatorios en la base de datos. Revisa el esquema de la tabla `users`.",
-      };
-    }
-    const message =
-      err instanceof Error ? err.message : "Error al iniciar sesión.";
+    const message = err instanceof Error ? err.message : "Error al iniciar sesión.";
     return { data: null, error: message };
   }
 }

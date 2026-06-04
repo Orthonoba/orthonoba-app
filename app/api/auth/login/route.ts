@@ -63,7 +63,15 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json(result.data, { status: 200 });
+    const response = NextResponse.json(result.data, { status: 200 });
+    response.cookies.set("auth_token", result.data!.token, {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      secure: process.env.NODE_ENV === "production",
+    });
+    return response;
   } catch (err) {
     console.error("[api/auth/login]", err);
 

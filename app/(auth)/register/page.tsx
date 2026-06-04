@@ -76,7 +76,7 @@ export default function RegisterPage() {
         window.localStorage.setItem("user", JSON.stringify(loginData.user));
       }
 
-      router.push("/dashboard");
+      router.push("/dashboard/onboarding");
       router.refresh();
     } catch {
       setError("Error de conexión. Intenta de nuevo.");

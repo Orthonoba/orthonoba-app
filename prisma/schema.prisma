@@ -1,4 +1,6 @@
 // prisma/schema.prisma
+// ORTHONOBA Platform — Multi-Tenant SaaS Schema
+// Phase 7: Commercial SaaS Foundation
 
 generator client {
   provider = "prisma-client-js"
@@ -9,38 +11,654 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// =====================
-// MODELOS BASE ORTHONOBA
-// =====================
+// ═══════════════════════════════════════════════════
+// CORE PLATFORM — Multi-Tenant Foundation
+// ═══════════════════════════════════════════════════
+
+model Organization {
+  id                String   @id @default(uuid())
+  name              String
+  slug              String   @unique
+  plan              PlanTier @default(STARTER)
+  locale            String   @default("en")
+  timezone          String   @default("Europe/Zurich")
+  settings          Json     @default("{}")
+  logoUrl           String?
+  billingCustomerId String?
+  billingEmail      String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  members       OrganizationMember[]
+  workspaces    Workspace[]
+  subscription  Subscription?
+  invoices      Invoice[]
+  billingEvents BillingEvent[]
+  auditLogs     AuditLog[]
+  aiAgents      AIAgent[]
+  automations   Automation[]
+  workflows     Workflow[]
+  conversations Conversation[]
+  leads         Lead[]
+  contacts      Contact[]
+  usageRecords  UsageRecord[]
+  whatsAppAccounts WhatsAppAccount[]
+  whatsAppContacts WhatsAppContact[]
+  // Vertical: Dental
+  pacientes     Paciente[]
+}
+
+model Workspace {
+  id             String       @id @default(uuid())
+  name           String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+
+  members WorkspaceMember[]
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  avatarUrl    String?
+  locale       String    @default("en")
+  timezone     String    @default("Europe/Zurich")
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  memberships OrganizationMember[]
+  workspaces  WorkspaceMember[]
+  auditLogs   AuditLog[]
+
+  @@map("platform_users")
+}
+
+model OrganizationMember {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           OrgRole      @default(MEMBER)
+  joinedAt       DateTime     @default(now())
+
+  @@unique([organizationId, userId])
+}
+
+model WorkspaceMember {
+  id          String    @id @default(uuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+}
+
+// ═══════════════════════════════════════════════════
+// BILLING — Stripe Integration
+// ═══════════════════════════════════════════════════
+
+model Subscription {
+  id                   String             @id @default(uuid())
+  organizationId       String             @unique
+  organization         Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  stripeSubscriptionId String             @unique
+  stripePriceId        String
+  stripeCustomerId     String?
+  plan                 PlanTier
+  status               SubscriptionStatus
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+  trialEndsAt          DateTime?
+  canceledAt           DateTime?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+}
+
+model Invoice {
+  id              String        @id @default(uuid())
+  organizationId  String
+  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  stripeInvoiceId String        @unique
+  amount          Int
+  currency        String        @default("eur")
+  status          InvoiceStatus
+  paidAt          DateTime?
+  hostedUrl       String?
+  pdfUrl          String?
+  periodStart     DateTime?
+  periodEnd       DateTime?
+  createdAt       DateTime      @default(now())
+
+  @@index([organizationId, status])
+}
+
+model BillingEvent {
+  id             String       @id @default(uuid())
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  stripeEventId  String        @unique
+  type           String
+  data           Json
+  processedAt    DateTime?
+  error          String?
+  createdAt      DateTime     @default(now())
+
+  @@index([stripeEventId])
+}
+
+model UsageRecord {
+  id             String      @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  metric         UsageMetric
+  quantity       Int
+  periodStart    DateTime
+  periodEnd      DateTime
+  reportedAt     DateTime    @default(now())
+
+  @@index([organizationId, metric, periodStart])
+}
+
+// ═══════════════════════════════════════════════════
+// AI PLATFORM — Agents & Conversations
+// ═══════════════════════════════════════════════════
+
+model AIAgent {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String
+  type           AgentType
+  model          String       @default("claude-sonnet-4-6")
+  systemPrompt   String
+  settings       Json         @default("{}")
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  conversations Conversation[]
+}
+
+model Conversation {
+  id             String             @id @default(uuid())
+  organizationId String
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  agentId        String?
+  agent          AIAgent?           @relation(fields: [agentId], references: [id])
+  channel        Channel
+  externalId     String?
+  contactId      String?
+  contact        Contact?           @relation(fields: [contactId], references: [id])
+  status         ConversationStatus @default(OPEN)
+  metadata       Json               @default("{}")
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  messages ConversationMessage[]
+
+  @@index([organizationId, channel, status])
+}
+
+model ConversationMessage {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           MessageRole
+  content        String
+  metadata       Json         @default("{}")
+  createdAt      DateTime     @default(now())
+}
+
+// ═══════════════════════════════════════════════════
+// AUTOMATION ENGINE — Foundation
+// ═══════════════════════════════════════════════════
+
+model Automation {
+  id             String            @id @default(uuid())
+  organizationId String
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String
+  description    String?
+  trigger        AutomationTrigger
+  steps          Json              @default("[]")
+  isActive       Boolean           @default(false)
+  lastRunAt      DateTime?
+  runCount       Int               @default(0)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+model Workflow {
+  id             String      @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  name           String
+  description    String?
+  isActive       Boolean     @default(false)
+  triggerType    TriggerType
+  triggerConfig  Json        @default("{}")
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  actions    WorkflowAction[]
+  executions WorkflowExecution[]
+
+  @@index([organizationId, isActive])
+}
+
+model WorkflowAction {
+  id         String   @id @default(uuid())
+  workflowId String
+  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  order      Int
+  type       ActionType
+  config     Json     @default("{}")
+  createdAt  DateTime @default(now())
+
+  @@index([workflowId, order])
+}
+
+model WorkflowExecution {
+  id             String          @id @default(uuid())
+  workflowId     String
+  workflow       Workflow        @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  organizationId String
+  status         ExecutionStatus @default(PENDING)
+  triggeredBy    String?
+  startedAt      DateTime        @default(now())
+  finishedAt     DateTime?
+  error          String?
+
+  logs ExecutionLog[]
+
+  @@index([workflowId, status])
+  @@index([organizationId, startedAt])
+}
+
+model ExecutionLog {
+  id          String            @id @default(uuid())
+  executionId String
+  execution   WorkflowExecution @relation(fields: [executionId], references: [id], onDelete: Cascade)
+  level       LogLevel          @default(INFO)
+  message     String
+  data        Json              @default("{}")
+  createdAt   DateTime          @default(now())
+}
+
+// ═══════════════════════════════════════════════════
+// CRM — Contacts, Leads, Pipeline
+// ═══════════════════════════════════════════════════
+
+model Contact {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  firstName      String
+  lastName       String?
+  email          String?
+  phone          String?
+  company        String?
+  jobTitle       String?
+  source         String?
+  tags           String[]     @default([])
+  notes          String?
+  metadata       Json         @default("{}")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  leads         Lead[]
+  conversations Conversation[]
+
+  @@index([organizationId, email])
+}
+
+model Lead {
+  id              String       @id @default(uuid())
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  contactId       String?
+  contact         Contact?     @relation(fields: [contactId], references: [id])
+  title           String
+  value           Decimal?     @db.Decimal(12, 2)
+  currency        String       @default("EUR")
+  status          LeadStatus   @default(NEW)
+  stage           String?
+  score           Int          @default(0)
+  assignedToId    String?
+  closedAt        DateTime?
+  expectedCloseAt DateTime?
+  notes           String?
+  metadata        Json         @default("{}")
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([organizationId, status])
+}
+
+// ═══════════════════════════════════════════════════
+// WHATSAPP PLATFORM
+// ═══════════════════════════════════════════════════
+
+model WhatsAppAccount {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  phoneNumberId  String       @unique
+  wabaId         String
+  displayName    String?
+  accessToken    String?
+  webhookSecret  String?
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  conversations WhatsAppConversation[]
+
+  @@index([organizationId])
+}
+
+model WhatsAppConversation {
+  id               String              @id @default(uuid())
+  accountId        String
+  account          WhatsAppAccount     @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  organizationId   String
+  waContactId      String
+  waConversationId String?
+  status           WaConversationStatus @default(OPEN)
+  leadId           String?
+  contactId        String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  messages WhatsAppMessage[]
+
+  @@index([organizationId, status])
+  @@index([accountId, waContactId])
+}
+
+model WhatsAppMessage {
+  id             String           @id @default(uuid())
+  conversationId String
+  conversation   WhatsAppConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  waMessageId    String           @unique
+  direction      WaMessageDirection
+  type           WaMessageType    @default(TEXT)
+  content        String
+  status         WaMessageStatus  @default(SENT)
+  sentAt         DateTime?
+  deliveredAt    DateTime?
+  readAt         DateTime?
+  createdAt      DateTime         @default(now())
+
+  @@index([conversationId])
+}
+
+model WhatsAppContact {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  waId           String
+  name           String?
+  profilePicUrl  String?
+  contactId      String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([organizationId, waId])
+}
+
+// ═══════════════════════════════════════════════════
+// AUDIT LOG — GDPR & Compliance
+// ═══════════════════════════════════════════════════
+
+model AuditLog {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String?
+  user           User?        @relation(fields: [userId], references: [id])
+  action         String
+  resource       String
+  resourceId     String?
+  metadata       Json         @default("{}")
+  ipAddress      String?
+  userAgent      String?
+  createdAt      DateTime     @default(now())
+
+  @@index([organizationId, createdAt])
+  @@index([organizationId, resource])
+}
+
+// ═══════════════════════════════════════════════════
+// VERTICAL: DENTAL
+// ═══════════════════════════════════════════════════
 
 model Paciente {
-  id        String   @id @default(uuid())
-  nombre    String
-  email     String?
-  telefono  String?
-  createdAt DateTime @default(now())
+  id             String        @id @default(uuid())
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  nombre         String
+  email          String?
+  telefono       String?
+  createdAt      DateTime      @default(now())
 
-  casos     Caso[]
+  casos Caso[]
 }
 
 model Caso {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   titulo      String
   descripcion String?
-  createdAt   DateTime @default(now())
+  estado      CasoEstado @default(RECIBIDO)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
-  pacienteId  String
-  paciente    Paciente @relation(fields: [pacienteId], references: [id])
+  pacienteId String
+  paciente   Paciente   @relation(fields: [pacienteId], references: [id])
 
-  archivos    Archivo[]
+  archivos Archivo[]
 }
 
 model Archivo {
   id        String   @id @default(uuid())
-  tipo      String   // STL, imagen, etc
+  tipo      String
   url       String
+  nombre    String?
+  sizeBytes Int?
   createdAt DateTime @default(now())
 
-  casoId    String
-  caso      Caso @relation(fields: [casoId], references: [id])
+  casoId String
+  caso   Caso   @relation(fields: [casoId], references: [id])
+}
+
+// ═══════════════════════════════════════════════════
+// ENUMS
+// ═══════════════════════════════════════════════════
+
+enum PlanTier {
+  FREE
+  STARTER
+  PROFESSIONAL
+  BUSINESS
+  ENTERPRISE
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  MANAGER
+  SALES
+  SUPPORT
+  OPERATOR
+  VIEWER
+  MEMBER
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  INCOMPLETE
+  PAUSED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  VOID
+  UNCOLLECTIBLE
+}
+
+enum UsageMetric {
+  AI_MESSAGES
+  VOICE_MINUTES
+  AUTOMATIONS_RUN
+  STORAGE_GB
+  ACTIVE_USERS
+  API_CALLS
+  WHATSAPP_MESSAGES
+}
+
+enum AgentType {
+  CHAT
+  VOICE
+  WHATSAPP
+  EMAIL
+  CRM
+  LEAD_QUALIFIER
+  APPOINTMENT
+  CUSTOM
+}
+
+enum Channel {
+  CHAT
+  VOICE
+  WHATSAPP
+  EMAIL
+  SMS
+  API
+}
+
+enum ConversationStatus {
+  OPEN
+  PENDING
+  RESOLVED
+  CLOSED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum AutomationTrigger {
+  WEBHOOK
+  SCHEDULE
+  NEW_LEAD
+  NEW_CONTACT
+  CONVERSATION_ENDED
+  FORM_SUBMITTED
+  MANUAL
+}
+
+enum TriggerType {
+  WEBHOOK
+  SCHEDULE
+  NEW_LEAD
+  NEW_CONTACT
+  NEW_MESSAGE
+  FORM_SUBMITTED
+  MANUAL
+  API
+}
+
+enum ActionType {
+  SEND_EMAIL
+  SEND_WHATSAPP
+  CREATE_LEAD
+  UPDATE_LEAD
+  CREATE_CONTACT
+  UPDATE_CONTACT
+  NOTIFY_SLACK
+  CALL_WEBHOOK
+  ASSIGN_AGENT
+  DELAY
+  CONDITION
+  CUSTOM
+}
+
+enum ExecutionStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+enum LogLevel {
+  DEBUG
+  INFO
+  WARN
+  ERROR
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum CasoEstado {
+  RECIBIDO
+  EN_PROCESO
+  EN_REVISION
+  COMPLETADO
+  ENTREGADO
+  CANCELADO
+}
+
+enum WaConversationStatus {
+  OPEN
+  PENDING
+  RESOLVED
+  CLOSED
+}
+
+enum WaMessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum WaMessageType {
+  TEXT
+  IMAGE
+  AUDIO
+  VIDEO
+  DOCUMENT
+  LOCATION
+  TEMPLATE
+  INTERACTIVE
+}
+
+enum WaMessageStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  READ
+  FAILED
 }
