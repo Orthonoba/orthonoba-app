@@ -2,15 +2,15 @@ import { Link } from "@/src/i18n/navigation";
 import Container from "@/components/ui/Container";
 
 const trust = [
-  "No credit card required",
-  "14-day free trial",
-  "Cancel anytime",
+  "Free 30-min strategy session",
+  "No commitment",
+  "Response within 24h",
   "GDPR compliant",
 ];
 
 export default function CTA() {
   return (
-    <section className="bg-panel py-32 border-t border-panel-3">
+    <section className="bg-panel section-py border-t border-panel-3">
       <Container>
         <div className="max-w-3xl mx-auto text-center">
           {/* Eyebrow */}
@@ -29,8 +29,8 @@ export default function CTA() {
 
           {/* Subtext */}
           <p className="mt-6 text-silver text-lg leading-relaxed max-w-xl mx-auto">
-            Book a demo and see how ORTHONOBA can automate your operations,
-            qualify your leads and serve your customers — 24 hours a day.
+            Book a free demo and see how ORTHONOBA deploys AI agents, automates
+            your operations and qualifies leads — around the clock.
           </p>
 
           {/* CTAs */}
@@ -39,7 +39,7 @@ export default function CTA() {
               href="/consultation"
               className="inline-block bg-gold text-obsidian px-12 py-4 text-xs font-bold tracking-widest uppercase hover:bg-gold-light transition-colors duration-200"
             >
-              Book a Demo
+              Book a Free Demo
             </Link>
             <Link
               href="/contact"

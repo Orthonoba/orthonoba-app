@@ -84,7 +84,7 @@ const plans = [
 
 export default function PricingPreview() {
   return (
-    <section className="bg-obsidian py-32">
+    <section className="bg-obsidian section-py">
       <Container>
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">

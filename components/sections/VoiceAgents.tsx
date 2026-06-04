@@ -35,7 +35,7 @@ const capabilities = [
 
 export default function VoiceAgents() {
   return (
-    <section className="bg-panel py-32">
+    <section className="bg-panel section-py">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 

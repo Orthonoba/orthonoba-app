@@ -33,7 +33,7 @@ const steps = [
 
 export default function DigitalTransformationSection() {
   return (
-    <section className="bg-panel py-32">
+    <section className="bg-panel section-py">
       <Container>
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">

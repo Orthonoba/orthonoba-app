@@ -38,7 +38,7 @@ const outcomes = [
 
 export default function BusinessAutomationSection() {
   return (
-    <section className="bg-obsidian py-32">
+    <section className="bg-obsidian section-py">
       <Container>
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
@@ -52,7 +52,7 @@ export default function BusinessAutomationSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight max-w-2xl">
             Automate everything.
             <br />
-            <span className="text-gold">Operate without limits.</span>
+            <span className="text-gold">Every system connected.</span>
           </h2>
           <p className="text-silver text-sm leading-relaxed max-w-sm lg:text-right">
             Complete automation of business processes. From simple tasks to complex multi-system workflows — designed to scale with your operations.
@@ -111,10 +111,10 @@ export default function BusinessAutomationSection() {
 
         <div className="flex justify-center">
           <Link
-            href="/automation"
-            className="border border-panel-3 text-silver px-9 py-4 text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white transition-all duration-200"
+            href="/consultation"
+            className="bg-gold text-obsidian px-9 py-4 text-xs font-bold tracking-widest uppercase hover:bg-gold-light transition-colors duration-200"
           >
-            Explore All Automations
+            Book a Free Demo
           </Link>
         </div>
       </Container>

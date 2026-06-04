@@ -62,7 +62,7 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section className="bg-obsidian py-32">
+    <section className="bg-obsidian section-py">
       <Container>
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-px bg-gold" />

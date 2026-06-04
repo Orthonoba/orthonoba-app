@@ -12,9 +12,9 @@ const securityFeatures = [
       "All data encrypted at rest (AES-256) and in transit (TLS 1.3). Encryption keys managed per organization.",
   },
   {
-    title: "SOC 2 Preparation",
+    title: "SOC 2-Aligned Practices",
     description:
-      "Infrastructure designed against SOC 2 Type II controls. Audit-ready from day one. Trust Center available.",
+      "Infrastructure built against SOC 2 Type II controls. Security policies, access controls and audit logging aligned with SOC 2 requirements.",
   },
   {
     title: "Role-Based Access",
@@ -35,8 +35,8 @@ const securityFeatures = [
 
 const certifications = [
   "GDPR",
-  "ISO 27001 Aligned",
-  "HIPAA Preparation",
+  "ISO 27001 Principles",
+  "HIPAA-Ready Architecture",
   "TLS 1.3",
   "AES-256",
   "Neon PostgreSQL",
@@ -46,7 +46,7 @@ const certifications = [
 
 export default function SecuritySection() {
   return (
-    <section className="bg-panel py-32 border-t border-panel-3">
+    <section className="bg-panel section-py border-t border-panel-3">
       <Container>
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">

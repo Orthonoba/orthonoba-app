@@ -31,7 +31,7 @@ const modules = [
 
 export default function CustomerOperationsSection() {
   return (
-    <section className="bg-panel py-32">
+    <section className="bg-panel section-py">
       <Container>
         <div className="grid lg:grid-cols-5 gap-16 items-start">
 
@@ -72,10 +72,10 @@ export default function CustomerOperationsSection() {
               </div>
             </div>
             <Link
-              href="/platform/crm"
+              href="/consultation"
               className="inline-block mt-10 bg-gold text-obsidian px-7 py-3.5 text-xs font-bold tracking-widest uppercase hover:bg-gold-light transition-colors"
             >
-              Explore CRM Platform
+              Book a Free Demo
             </Link>
           </div>
 

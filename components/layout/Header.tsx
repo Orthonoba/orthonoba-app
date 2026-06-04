@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@/src/i18n/navigation";
 import Container from "@/components/ui/Container";
 import MegaMenu from "@/components/layout/MegaMenu";
@@ -10,7 +10,7 @@ import type { NavDropdown } from "@/types";
 
 const servicesMenu: NavDropdown = {
   label: "Services",
-  cols: 3,
+  cols: 2,
   sections: [
     {
       title: "AI Workforce",
@@ -18,7 +18,7 @@ const servicesMenu: NavDropdown = {
         {
           label: "AI Receptionist",
           href: "/products/ai-receptionist",
-          description: "Front desk AI — 24/7 across all channels",
+          description: "Front desk AI — voice, chat and WhatsApp",
         },
         {
           label: "AI Sales Agent",
@@ -26,54 +26,24 @@ const servicesMenu: NavDropdown = {
           description: "Automated pipeline — lead to close",
         },
         {
-          label: "AI Customer Support",
-          href: "/products/ai-support",
-          description: "Instant resolution at 95% CSAT",
-        },
-        {
           label: "AI Lead Qualifier",
           href: "/products/lead-qualifier",
-          description: "Score and qualify every inbound lead",
+          description: "Score and route every inbound lead",
         },
         {
           label: "AI Appointment Assistant",
           href: "/products/appointments",
-          description: "Zero friction scheduling — 60% fewer no-shows",
+          description: "Zero friction scheduling across all channels",
         },
         {
-          label: "AI Knowledge Assistant",
-          href: "/products/knowledge",
-          description: "Instant answers from your business knowledge",
+          label: "AI Customer Support",
+          href: "/products/ai-support",
+          description: "Instant resolution from your knowledge base",
         },
       ],
     },
     {
-      title: "Voice Intelligence",
-      items: [
-        {
-          label: "Voice Receptionist",
-          href: "/platform/voice-agents",
-          description: "Every call answered, every opportunity captured",
-        },
-        {
-          label: "Call Automation",
-          href: "/automation/voice",
-          description: "Outbound campaigns at scale",
-        },
-        {
-          label: "Appointment Confirmation",
-          href: "/products/appointments",
-          description: "Automated reminders and confirmations",
-        },
-        {
-          label: "Customer Follow-Up",
-          href: "/automation/crm",
-          description: "Post-service calls that recover and retain",
-        },
-      ],
-    },
-    {
-      title: "Business Automation",
+      title: "Automation & Integrations",
       items: [
         {
           label: "Workflow Automation",
@@ -91,9 +61,9 @@ const servicesMenu: NavDropdown = {
           description: "Lifecycle flows that adapt in real time",
         },
         {
-          label: "Marketing Automation",
-          href: "/automation/marketing",
-          description: "Campaigns that run themselves",
+          label: "500+ Integrations",
+          href: "/platform",
+          description: "Connect any tool via API or pre-built connector",
         },
       ],
     },
@@ -105,7 +75,7 @@ const growthMenu: NavDropdown = {
   cols: 2,
   sections: [
     {
-      title: "Customer Operations",
+      title: "CRM & Revenue Operations",
       items: [
         {
           label: "Lead Management",
@@ -120,17 +90,12 @@ const growthMenu: NavDropdown = {
         {
           label: "Communication Hub",
           href: "/platform/crm",
-          description: "All channels unified — email, WhatsApp, voice",
-        },
-        {
-          label: "Customer Intelligence",
-          href: "/platform/analytics",
-          description: "Predict churn, identify upsell, act on data",
+          description: "Email, WhatsApp and voice in one inbox",
         },
       ],
     },
     {
-      title: "Marketing Growth",
+      title: "Marketing & Demand",
       items: [
         {
           label: "SEO & Local SEO",
@@ -138,24 +103,14 @@ const growthMenu: NavDropdown = {
           description: "Dominate search in your market",
         },
         {
-          label: "Google Ads",
+          label: "Performance Ads",
           href: "/marketing",
-          description: "Performance campaigns with AI optimization",
-        },
-        {
-          label: "Meta Ads",
-          href: "/marketing",
-          description: "Social advertising at scale",
+          description: "Google Ads + Meta Ads with AI optimization",
         },
         {
           label: "Lead Generation",
           href: "/marketing",
-          description: "Predictable pipeline from multiple channels",
-        },
-        {
-          label: "Conversion Optimization",
-          href: "/marketing",
-          description: "Turn more visitors into paying customers",
+          description: "Predictable pipeline from all channels",
         },
       ],
     },
@@ -175,19 +130,14 @@ const transformationMenu: NavDropdown = {
           description: "Custom apps, platforms and SaaS products",
         },
         {
-          label: "Business Systems Integration",
-          href: "/platform",
-          description: "Connect your entire technology stack",
-        },
-        {
           label: "AI Adoption",
           href: "/ai-agents",
           description: "Embed AI into your existing processes",
         },
         {
-          label: "Digital Infrastructure",
+          label: "Systems Integration",
           href: "/platform",
-          description: "Scalable, secure modern foundations",
+          description: "Connect your entire technology stack",
         },
       ],
     },
@@ -197,31 +147,21 @@ const transformationMenu: NavDropdown = {
         {
           label: "Healthcare & Dental",
           href: "/industries/healthcare",
-          description: "Patient operations, clinical workflows",
+          description: "Clinical workflows and patient operations",
         },
         {
-          label: "Legal",
+          label: "Legal & Professional",
           href: "/industries/legal",
           description: "Case management and client automation",
         },
         {
-          label: "Real Estate",
+          label: "Real Estate & Finance",
           href: "/industries/real-estate",
           description: "Property CRM and client engagement",
         },
         {
-          label: "Consulting & Professional Services",
-          href: "/industries/consulting",
-          description: "Project delivery and client intelligence",
-        },
-        {
-          label: "Education",
+          label: "Education & Enterprise",
           href: "/industries/education",
-          description: "Student management and learning automation",
-        },
-        {
-          label: "Enterprise",
-          href: "/solutions/enterprise",
           description: "Custom enterprise deployments",
         },
       ],
@@ -231,19 +171,17 @@ const transformationMenu: NavDropdown = {
 
 const simpleNavLinks = [
   { label: "Pricing", href: "/pricing" },
-  { label: "Resources", href: "/resources" },
+  { label: "Company", href: "/company" },
 ];
 
 const mobileLinks = [
-  { label: "Services", href: "/solutions" },
   { label: "AI Workforce", href: "/products" },
-  { label: "Voice Intelligence", href: "/platform/voice-agents" },
-  { label: "Business Automation", href: "/automation" },
-  { label: "Customer Operations", href: "/platform/crm" },
-  { label: "Marketing Growth", href: "/marketing" },
-  { label: "Digital Transformation", href: "/web-development" },
+  { label: "Automation", href: "/automation" },
+  { label: "CRM & Growth", href: "/platform/crm" },
+  { label: "Marketing", href: "/marketing" },
   { label: "Industries", href: "/industries" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Company", href: "/company" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -251,9 +189,24 @@ const mobileLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-panel-3 bg-obsidian/98 backdrop-blur-md">
+    <header
+      className={[
+        "fixed top-0 left-0 right-0 z-50",
+        "border-b transition-all duration-300",
+        scrolled
+          ? "border-panel-3 bg-obsidian/98 backdrop-blur-xl shadow-lg shadow-black/40"
+          : "border-transparent bg-obsidian/60 backdrop-blur-sm",
+      ].join(" ")}
+    >
       <Container>
         <div className="flex items-center justify-between h-16">
 

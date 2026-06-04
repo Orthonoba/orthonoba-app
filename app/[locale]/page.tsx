@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 
 import Hero from "@/components/sections/Hero";
+import BusinessOutcomesSection from "@/components/sections/BusinessOutcomesSection";
 import AIWorkforceSection from "@/components/sections/AIWorkforceSection";
-import VoiceIntelligenceSection from "@/components/sections/VoiceIntelligenceSection";
 import BusinessAutomationSection from "@/components/sections/BusinessAutomationSection";
 import CustomerOperationsSection from "@/components/sections/CustomerOperationsSection";
 import MarketingGrowthSection from "@/components/sections/MarketingGrowthSection";
-import DigitalTransformationSection from "@/components/sections/DigitalTransformationSection";
 import WhyOrthonobaSection from "@/components/sections/WhyOrthonobaSection";
 import EnterpriseIntegrationsSection from "@/components/sections/EnterpriseIntegrationsSection";
 import Industries from "@/components/sections/Industries";
-import BusinessOutcomesSection from "@/components/sections/BusinessOutcomesSection";
 import SecuritySection from "@/components/sections/SecuritySection";
 import CTA from "@/components/sections/CTA";
 
@@ -66,11 +64,11 @@ export default function HomePage() {
       {/* 1. Hero — Enterprise AI Growth Platform */}
       <Hero />
 
-      {/* 2. AI Workforce — 6 specialized agents */}
-      <AIWorkforceSection />
+      {/* 2. Business Outcomes — Proof before features */}
+      <BusinessOutcomesSection />
 
-      {/* 3. Voice Intelligence */}
-      <VoiceIntelligenceSection />
+      {/* 3. AI Workforce — 7 agents including Voice */}
+      <AIWorkforceSection />
 
       {/* 4. Business Automation */}
       <BusinessAutomationSection />
@@ -81,25 +79,19 @@ export default function HomePage() {
       {/* 6. Marketing Growth */}
       <MarketingGrowthSection />
 
-      {/* 7. Digital Transformation */}
-      <DigitalTransformationSection />
-
-      {/* 8. Why Orthonoba */}
+      {/* 7. Why Orthonoba */}
       <WhyOrthonobaSection />
 
-      {/* 9. Enterprise Integrations */}
+      {/* 8. Enterprise Integrations */}
       <EnterpriseIntegrationsSection />
 
-      {/* 10. Industries */}
+      {/* 9. Industries */}
       <Industries />
 
-      {/* 11. Business Outcomes — Real results */}
-      <BusinessOutcomesSection />
-
-      {/* 12. Enterprise Security */}
+      {/* 10. Enterprise Security */}
       <SecuritySection />
 
-      {/* 13. Final CTA */}
+      {/* 11. Final CTA */}
       <CTA />
     </>
   );

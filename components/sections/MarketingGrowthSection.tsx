@@ -36,7 +36,7 @@ const services = [
 
 export default function MarketingGrowthSection() {
   return (
-    <section className="bg-obsidian py-32">
+    <section className="bg-obsidian section-py">
       <Container>
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
@@ -59,10 +59,10 @@ export default function MarketingGrowthSection() {
               Marketing automation and performance advertising designed to grow your business — not just generate traffic.
             </p>
             <Link
-              href="/marketing"
+              href="/consultation"
               className="inline-block mt-4 text-xs text-gold font-semibold tracking-widest uppercase border-b border-gold/30 hover:border-gold pb-0.5 transition-colors"
             >
-              View Marketing Services →
+              Book a Free Demo →
             </Link>
           </div>
         </div>

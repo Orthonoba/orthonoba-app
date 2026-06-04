@@ -2,10 +2,10 @@ import { Link } from "@/src/i18n/navigation";
 import Container from "@/components/ui/Container";
 
 const stats = [
-  { value: "500+", label: "Companies Scaled" },
-  { value: "12M+", label: "Automations Executed" },
-  { value: "8", label: "Industries Served" },
-  { value: "99.9%", label: "Platform Uptime" },
+  { value: "10M+", label: "Automations Executed" },
+  { value: "40+", label: "Languages Supported" },
+  { value: "500+", label: "Integrations Available" },
+  { value: "99.9%", label: "SLA Uptime" },
 ];
 
 export default function Hero() {
@@ -36,7 +36,7 @@ export default function Hero() {
         <div className="max-w-5xl pt-36 pb-20">
 
           {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-10">
+          <div className="flex items-center gap-3 mb-10 animate-fade-up">
             <div className="w-10 h-px bg-gold" />
             <span className="text-gold text-xs font-semibold tracking-[0.35em] uppercase">
               Enterprise AI Growth Platform
@@ -44,7 +44,7 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-[clamp(40px,6.5vw,88px)] font-bold text-white leading-[0.92] tracking-tight">
+          <h1 className="text-[clamp(40px,6.5vw,88px)] font-bold text-white leading-[0.92] tracking-tight animate-fade-up stagger-1">
             Transform Your Business
             <br />
             With AI, Automation
@@ -53,14 +53,14 @@ export default function Hero() {
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-10 text-silver text-lg md:text-xl leading-relaxed max-w-2xl">
+          <p className="mt-10 text-silver text-lg md:text-xl leading-relaxed max-w-2xl animate-fade-up stagger-2">
             Scale your company with intelligent agents, automated workflows,
             customer operations and digital transformation solutions — designed
             for modern businesses that compete to win.
           </p>
 
           {/* Value props inline */}
-          <div className="flex flex-wrap gap-x-8 gap-y-2 mt-8">
+          <div className="flex flex-wrap gap-x-8 gap-y-2 mt-8 animate-fade-up stagger-3">
             {["More Revenue", "More Clients", "Less Operating Cost", "24/7 Operations"].map((v) => (
               <div key={v} className="flex items-center gap-2">
                 <div className="w-1 h-1 rounded-full bg-gold" />
@@ -70,24 +70,24 @@ export default function Hero() {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-start gap-4 mt-12">
+          <div className="flex flex-col sm:flex-row items-start gap-4 mt-12 animate-fade-up stagger-4">
             <Link
               href="/consultation"
-              className="inline-block bg-gold text-obsidian px-9 py-4 text-xs font-bold tracking-widest uppercase hover:bg-gold-light transition-colors duration-200"
+              className="inline-block bg-gold text-obsidian px-9 py-4 text-xs font-bold tracking-widest uppercase hover:bg-gold-light active:scale-[0.98] transition-all duration-200"
             >
-              Get Started Free
+              Book a Free Demo
             </Link>
             <Link
               href="/platform"
-              className="inline-block border border-panel-3 text-silver px-9 py-4 text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white transition-all duration-200"
+              className="inline-block border border-panel-3 text-silver px-9 py-4 text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white active:scale-[0.98] transition-all duration-200"
             >
               See How It Works
             </Link>
           </div>
 
           {/* Trust line */}
-          <p className="mt-6 text-muted text-xs tracking-wider">
-            No credit card required · 14-day free trial · Cancel anytime · GDPR compliant
+          <p className="mt-6 text-muted text-xs tracking-wider animate-fade-up stagger-5">
+            Free 30-min strategy session · No commitment · GDPR compliant · Response within 24h
           </p>
         </div>
       </Container>
