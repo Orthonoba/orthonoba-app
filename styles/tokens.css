@@ -37,8 +37,8 @@
   --text-tertiary:    var(--orthonoba-muted);
 
   /* ── Gold Gradient Presets ─────────────────────────────────────────────── */
-  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%);
-  --gradient-gold-text: linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%);
+  --gradient-gold:        linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%);
+  --gradient-gold-text:   linear-gradient(135deg, #D4AF37 0%, #F5C542 55%, #D4AF37 100%);
   --gradient-gold-subtle: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(212,175,55,0.18) 0%, transparent 65%);
-  --gradient-gold-glow: rgba(212, 175, 55, 0.25);
+  --gradient-gold-glow:   rgba(212, 175, 55, 0.25);
 }

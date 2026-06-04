@@ -1,11 +1,11 @@
-import Header from "@/components/Header";
+import PageHeader from "@/components/dashboard/PageHeader";
 
 const SLOTS = 4;
 
 export default function DashboardPage() {
   return (
     <>
-      <Header title="Dashboard" />
+      <PageHeader title="Dashboard" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {Array.from({ length: SLOTS }).map((_, i) => (
           <div

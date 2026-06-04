@@ -1,9 +1,9 @@
-import Header from "@/components/Header";
+import PageHeader from "@/components/dashboard/PageHeader";
 
 export default function DashboardPage() {
   return (
     <>
-      <Header title="Dashboard" subtitle="Bienvenido a Orthonoba 🚀" />
+      <PageHeader title="Dashboard" subtitle="Bienvenido a Orthonoba" />
 
       <div
         style={{

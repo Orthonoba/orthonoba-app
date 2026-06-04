@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import ContactCTA from "@/components/sections/contact-cta";
 import { Lightbulb, BarChart3, Eye, Handshake } from "lucide-react";
 
 const VALUE_ICONS = [Lightbulb, BarChart3, Eye, Handshake];
@@ -56,7 +55,6 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
-      <ContactCTA />
     </>
   );
 }

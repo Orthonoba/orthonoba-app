@@ -1,6 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import AutomationSection from "@/components/sections/automation-section";
-import ContactCTA from "@/components/sections/contact-cta";
 import { Zap } from "lucide-react";
 
 export default async function AutomationPage({
@@ -25,8 +23,6 @@ export default async function AutomationPage({
           <p className="text-lg text-slate-400">{t("subtitle")}</p>
         </div>
       </section>
-      <AutomationSection />
-      <ContactCTA />
     </>
   );
 }

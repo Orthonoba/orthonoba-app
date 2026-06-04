@@ -1,6 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import WebDevSection from "@/components/sections/webdev-section";
-import ContactCTA from "@/components/sections/contact-cta";
 import { Globe } from "lucide-react";
 
 export default async function WebDevelopmentPage({
@@ -25,8 +23,6 @@ export default async function WebDevelopmentPage({
           <p className="text-lg text-slate-400">{t("subtitle")}</p>
         </div>
       </section>
-      <WebDevSection />
-      <ContactCTA />
     </>
   );
 }

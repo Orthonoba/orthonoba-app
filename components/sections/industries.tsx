@@ -1,55 +1,60 @@
-"use client";
+import Container from "@/components/ui/Container";
 
-import Link from "next/link";
-import { useParams } from "next/navigation";
-
-const INDUSTRIES = [
-  { label: "Dental Clinics",   href: "industries/dental" },
-  { label: "Healthcare",       href: "industries/healthcare" },
-  { label: "Real Estate",      href: "industries/real-estate" },
-  { label: "Law Firms",        href: "industries/legal" },
-  { label: "Logistics",        href: "industries/logistics" },
-  { label: "Local Business",   href: "industries/small-business" },
-  { label: "E-Commerce",       href: "industries/ecommerce" },
-  { label: "Startups",         href: "industries/startups" },
-  { label: "Luxury & Premium", href: "industries/luxury" },
+const industries = [
+  {
+    title: "Healthcare & Dental",
+    description:
+      "Digital infrastructure for clinics, dental labs, and health professionals. From patient management to CAD/CAM workflows.",
+  },
+  {
+    title: "Professional Services",
+    description:
+      "Automation and AI tools for law firms, consultancies, and agencies operating in regulated environments.",
+  },
+  {
+    title: "E-Commerce & Retail",
+    description:
+      "Intelligent workflows and customer engagement systems for online businesses looking to scale operations.",
+  },
+  {
+    title: "Manufacturing & CAD",
+    description:
+      "Digital production management and file handling for industrial and precision manufacturing workflows.",
+  },
 ];
 
 export default function Industries() {
-  const { locale } = useParams<{ locale: string }>();
-
   return (
-    <section className="bg-panel border-y border-white/5 py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-gold mb-3">
-              Industries
-            </p>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight">
-              Built for Your Sector
-            </h2>
-          </div>
-          <Link
-            href={`/${locale}/industries`}
-            className="text-sm font-semibold text-gold/75 hover:text-gold transition-colors self-start md:self-auto shrink-0"
-          >
-            All industries →
-          </Link>
+    <section className="bg-obsidian py-32">
+      <Container>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-px bg-gold" />
+          <span className="text-gold text-xs font-semibold tracking-[0.35em] uppercase">
+            Industries
+          </span>
         </div>
+        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight mb-16">
+          Who we work with.
+        </h2>
 
-        <div className="flex flex-wrap gap-3">
-          {INDUSTRIES.map(({ label, href }) => (
-            <Link
-              key={href}
-              href={`/${locale}/${href}`}
-              className="inline-flex items-center px-5 py-2.5 rounded-full border border-white/8 bg-panel-2 text-sm text-silver/75 font-medium hover:text-white hover:border-gold/25 hover:bg-gold/4 transition-all duration-200"
-            >
-              {label}
-            </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {industries.map((item, index) => (
+            <div key={item.title} className="flex gap-7 border-t border-panel-3 pt-8">
+              <span className="text-gold text-xs font-mono tracking-widest mt-1 flex-shrink-0">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 className="text-white text-base font-semibold tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-silver text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

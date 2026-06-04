@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import ContactCTA from "@/components/sections/contact-cta";
 import { TrendingUp, Mail, Target, BarChart3 } from "lucide-react";
 
 export default async function MarketingPage({
@@ -68,7 +67,6 @@ export default async function MarketingPage({
           ))}
         </div>
       </section>
-      <ContactCTA />
     </>
   );
 }

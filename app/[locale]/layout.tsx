@@ -4,8 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { locales, type Locale } from "@/src/i18n/config";
-import Nav from "@/components/nav";
-import Footer from "@/components/footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import "../globals.css";
 
 const inter = Inter({
@@ -37,9 +37,9 @@ export default async function LocaleLayout({
     <html lang={locale} className={inter.variable}>
       <body className="bg-obsidian text-white antialiased min-h-screen">
         <NextIntlClientProvider messages={messages}>
-          <Nav />
+          <Header />
           <main>{children}</main>
-          <Footer locale={locale} />
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

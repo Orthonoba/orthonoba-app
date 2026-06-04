@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import ContactCTA from "@/components/sections/contact-cta";
 import { Bot, Mic, MessageCircle, Mail, Database } from "lucide-react";
 
 export async function generateMetadata({
@@ -64,7 +63,6 @@ export default async function AIAgentsPage({
           })}
         </div>
       </section>
-      <ContactCTA />
     </>
   );
 }

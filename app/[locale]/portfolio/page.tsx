@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import ContactCTA from "@/components/sections/contact-cta";
 import { Briefcase } from "lucide-react";
 
 const PROJECTS = [
@@ -61,7 +60,6 @@ export default async function PortfolioPage({
           ))}
         </div>
       </section>
-      <ContactCTA />
     </>
   );
 }

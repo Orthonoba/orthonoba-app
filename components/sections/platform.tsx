@@ -1,99 +1,61 @@
-import {
-  BrainCircuit,
-  Zap,
-  Users,
-  Code2,
-  Globe,
-  BarChart2,
-  Link2,
-  TrendingUp,
-  Settings2,
-} from "lucide-react";
+import Container from "@/components/ui/Container";
 
-const CAPABILITIES = [
-  {
-    icon: BrainCircuit,
-    label: "AI Agents",
-    desc: "Custom intelligent agents for every business process",
-  },
-  {
-    icon: Zap,
-    label: "Automation",
-    desc: "Intelligent flows that eliminate manual repetitive work",
-  },
-  {
-    icon: Users,
-    label: "CRM & Sales",
-    desc: "Pipeline management and automated customer nurturing",
-  },
-  {
-    icon: Code2,
-    label: "Custom Software",
-    desc: "Web apps and platforms built exactly to specification",
-  },
-  {
-    icon: Globe,
-    label: "SaaS Development",
-    desc: "Scalable software products ready for the digital market",
-  },
-  {
-    icon: TrendingUp,
-    label: "Digital Marketing",
-    desc: "SEO, paid advertising and marketing automation",
-  },
-  {
-    icon: BarChart2,
-    label: "Data & Analytics",
-    desc: "Dashboards and BI for real-time business insight",
-  },
-  {
-    icon: Link2,
-    label: "Integrations",
-    desc: "Connect all your existing tools and data sources",
-  },
-  {
-    icon: Settings2,
-    label: "Enterprise Management",
-    desc: "End-to-end digital operations for growing companies",
-  },
+const stack = [
+  { name: "Next.js 15", role: "Frontend Framework" },
+  { name: "OpenAI GPT-4o", role: "Language Model" },
+  { name: "Anthropic Claude", role: "AI Reasoning" },
+  { name: "n8n", role: "Workflow Automation" },
+  { name: "Coolify", role: "Self-hosted Infra" },
+  { name: "PostgreSQL", role: "Data Layer" },
+  { name: "Prisma ORM", role: "Database Access" },
+  { name: "Twenty CRM", role: "Customer Relations" },
 ];
 
 export default function Platform() {
   return (
-    <section className="bg-obsidian py-28 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header — left aligned */}
-        <div className="max-w-3xl mb-20">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-gold mb-4">
-            The Platform
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-6 leading-[1.1]">
-            ORTHONOBA is not just an agency.
-          </h2>
-          <p className="text-silver/75 text-lg leading-relaxed">
-            It is a technology platform that integrates everything your business
-            needs to operate, grow and scale in the digital era.
-          </p>
-        </div>
-
-        {/* Capabilities grid — border grid effect */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl overflow-hidden border border-white/[0.05] bg-white/[0.04]">
-          {CAPABILITIES.map(({ icon: Icon, label, desc }) => (
-            <div
-              key={label}
-              className="bg-obsidian p-8 hover:bg-panel transition-colors duration-200 group"
-            >
-              <div className="w-9 h-9 rounded-lg bg-gold/10 border border-gold/15 flex items-center justify-center text-gold mb-5">
-                <Icon size={16} />
-              </div>
-              <p className="text-sm font-bold text-white mb-2 group-hover:text-gold transition-colors duration-200">
-                {label}
-              </p>
-              <p className="text-xs text-silver/55 leading-relaxed">{desc}</p>
+    <section className="bg-panel py-32">
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+          {/* Text */}
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-px bg-gold" />
+              <span className="text-gold text-xs font-semibold tracking-[0.35em] uppercase">
+                Platform
+              </span>
             </div>
-          ))}
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+              Built on proven<br />technology.
+            </h2>
+            <p className="mt-6 text-silver text-base leading-relaxed max-w-md">
+              We combine best-in-class enterprise tools into cohesive systems
+              that integrate seamlessly with how your business already works.
+            </p>
+            <div className="mt-10 pt-8 border-t border-panel-3">
+              <p className="text-muted text-xs tracking-widest uppercase">
+                All infrastructure is self-hosted, auditable, and owned by you.
+              </p>
+            </div>
+          </div>
+
+          {/* Stack grid */}
+          <div className="grid grid-cols-2 gap-px bg-panel-3">
+            {stack.map((item) => (
+              <div
+                key={item.name}
+                className="bg-panel p-6 hover:bg-panel-2 transition-colors duration-200"
+              >
+                <div className="text-white text-sm font-semibold">
+                  {item.name}
+                </div>
+                <div className="text-muted text-xs mt-1 tracking-wider">
+                  {item.role}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

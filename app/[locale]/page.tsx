@@ -1,13 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import Hero from "@/components/sections/hero";
-import TrustBar from "@/components/sections/trust-bar";
-import CoreSolutions from "@/components/sections/core-solutions";
-import Industries from "@/components/sections/industries";
-import Platform from "@/components/sections/platform";
-import FounderStory from "@/components/sections/founder-story";
-import WhyOrthonoba from "@/components/sections/why-orthonoba";
-import HomeCTA from "@/components/sections/home-cta";
+import Hero from "@/components/sections/Hero";
+import Services from "@/components/sections/Services";
+import Platform from "@/components/sections/Platform";
+import Industries from "@/components/sections/Industries";
+import Founder from "@/components/sections/Founder";
+import CTA from "@/components/sections/CTA";
 
 export async function generateMetadata({
   params,
@@ -43,13 +41,11 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
-      <CoreSolutions />
-      <Industries />
+      <Services />
       <Platform />
-      <FounderStory />
-      <WhyOrthonoba />
-      <HomeCTA />
+      <Industries />
+      <Founder />
+      <CTA />
     </>
   );
 }

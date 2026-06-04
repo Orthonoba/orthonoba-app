@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import ContactForm from "@/components/contact-form";
 import { Mail, Clock } from "lucide-react";
 
 export async function generateMetadata({
@@ -33,7 +32,9 @@ export default async function ContactPage({
 
         <div className="grid lg:grid-cols-5 gap-12">
           <div className="lg:col-span-3">
-            <ContactForm locale={locale} />
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-slate-400 text-sm">
+              Contact form coming soon.
+            </div>
           </div>
 
           <div className="lg:col-span-2 flex flex-col gap-6">
