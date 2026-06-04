@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 
 import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import Platform from "@/components/sections/Platform";
-import VoiceAgents from "@/components/sections/VoiceAgents";
-import AutomationSection from "@/components/sections/AutomationSection";
+import AIWorkforceSection from "@/components/sections/AIWorkforceSection";
+import VoiceIntelligenceSection from "@/components/sections/VoiceIntelligenceSection";
+import BusinessAutomationSection from "@/components/sections/BusinessAutomationSection";
+import CustomerOperationsSection from "@/components/sections/CustomerOperationsSection";
+import MarketingGrowthSection from "@/components/sections/MarketingGrowthSection";
+import DigitalTransformationSection from "@/components/sections/DigitalTransformationSection";
+import WhyOrthonobaSection from "@/components/sections/WhyOrthonobaSection";
+import EnterpriseIntegrationsSection from "@/components/sections/EnterpriseIntegrationsSection";
 import Industries from "@/components/sections/Industries";
-import MetricsSection from "@/components/sections/MetricsSection";
-import PricingPreview from "@/components/sections/PricingPreview";
+import BusinessOutcomesSection from "@/components/sections/BusinessOutcomesSection";
 import SecuritySection from "@/components/sections/SecuritySection";
 import CTA from "@/components/sections/CTA";
 
@@ -20,17 +22,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const titles: Record<string, string> = {
-    en: "ORTHONOBA — AI Business Operating System",
-    it: "ORTHONOBA — Sistema Operativo AI per le Aziende",
-    de: "ORTHONOBA — KI-Betriebssystem für Unternehmen",
-    fr: "ORTHONOBA — Système d'Exploitation IA pour Entreprises",
+    en: "ORTHONOBA — Enterprise AI Growth Platform",
+    it: "ORTHONOBA — Piattaforma AI per la Crescita Aziendale",
+    de: "ORTHONOBA — Enterprise KI-Wachstumsplattform",
+    fr: "ORTHONOBA — Plateforme IA de Croissance Entreprise",
   };
 
   const descriptions: Record<string, string> = {
-    en: "AI agents, voice automation, CRM and enterprise workflows for any industry. Transform your business operations with the ORTHONOBA platform.",
-    it: "Agenti AI, automazione vocale, CRM e workflow aziendali per qualsiasi settore.",
-    de: "KI-Agenten, Sprachautomatisierung, CRM und Unternehmens-Workflows für jede Branche.",
-    fr: "Agents IA, automatisation vocale, CRM et workflows d'entreprise pour tous les secteurs.",
+    en: "Transform your business with AI agents, intelligent automation and digital transformation. More revenue, more clients, less operating cost. Scale with Orthonoba.",
+    it: "Trasforma la tua azienda con agenti AI, automazione intelligente e trasformazione digitale. Più ricavi, più clienti, meno costi operativi.",
+    de: "Transformieren Sie Ihr Unternehmen mit KI-Agenten, intelligenter Automatisierung und digitaler Transformation. Mehr Umsatz, mehr Kunden, weniger Betriebskosten.",
+    fr: "Transformez votre entreprise avec des agents IA, l'automatisation intelligente et la transformation digitale. Plus de revenus, plus de clients, moins de coûts.",
   };
 
   const title = titles[locale] ?? titles.en;
@@ -61,34 +63,43 @@ export async function generateMetadata({
 export default function HomePage() {
   return (
     <>
-      {/* 1. Hero — AI Business Operating System */}
+      {/* 1. Hero — Enterprise AI Growth Platform */}
       <Hero />
 
-      {/* 2. Platform Capabilities — 6 core modules */}
-      <Services />
+      {/* 2. AI Workforce — 6 specialized agents */}
+      <AIWorkforceSection />
 
-      {/* 3. AI Agents Ecosystem */}
-      <Platform />
+      {/* 3. Voice Intelligence */}
+      <VoiceIntelligenceSection />
 
-      {/* 4. Voice Agents */}
-      <VoiceAgents />
+      {/* 4. Business Automation */}
+      <BusinessAutomationSection />
 
-      {/* 5. Business Automation */}
-      <AutomationSection />
+      {/* 5. Customer Operations */}
+      <CustomerOperationsSection />
 
-      {/* 6. Industry Solutions — 8 verticals */}
+      {/* 6. Marketing Growth */}
+      <MarketingGrowthSection />
+
+      {/* 7. Digital Transformation */}
+      <DigitalTransformationSection />
+
+      {/* 8. Why Orthonoba */}
+      <WhyOrthonobaSection />
+
+      {/* 9. Enterprise Integrations */}
+      <EnterpriseIntegrationsSection />
+
+      {/* 10. Industries */}
       <Industries />
 
-      {/* 7. Success Metrics */}
-      <MetricsSection />
+      {/* 11. Business Outcomes — Real results */}
+      <BusinessOutcomesSection />
 
-      {/* 8. Pricing Preview */}
-      <PricingPreview />
-
-      {/* 9. Enterprise Security */}
+      {/* 12. Enterprise Security */}
       <SecuritySection />
 
-      {/* 10. Final CTA — Book Demo */}
+      {/* 13. Final CTA */}
       <CTA />
     </>
   );

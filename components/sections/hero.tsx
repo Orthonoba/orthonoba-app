@@ -2,31 +2,33 @@ import { Link } from "@/src/i18n/navigation";
 import Container from "@/components/ui/Container";
 
 const stats = [
-  { value: "500+", label: "Companies" },
-  { value: "8", label: "Industries" },
-  { value: "10M+", label: "Automations Run" },
+  { value: "500+", label: "Companies Scaled" },
+  { value: "12M+", label: "Automations Executed" },
+  { value: "8", label: "Industries Served" },
   { value: "99.9%", label: "Platform Uptime" },
 ];
 
 export default function Hero() {
   return (
     <section className="min-h-screen bg-obsidian flex flex-col justify-center relative overflow-hidden">
-      {/* Dot grid background */}
+      {/* Dot grid */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, #D4AF37 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, #D4AF37 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
 
-      {/* Gold glow — top left */}
+      {/* Gold radial glow — top right */}
       <div
-        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-[0.04]"
-        style={{
-          background: "radial-gradient(circle, #D4AF37, transparent 70%)",
-        }}
+        className="absolute -top-60 -right-60 w-[700px] h-[700px] rounded-full opacity-[0.05]"
+        style={{ background: "radial-gradient(circle, #D4AF37, transparent 70%)" }}
+      />
+      {/* Subtle glow — bottom left */}
+      <div
+        className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.03]"
+        style={{ background: "radial-gradient(circle, #D4AF37, transparent 70%)" }}
       />
 
       {/* Main content */}
@@ -37,26 +39,35 @@ export default function Hero() {
           <div className="flex items-center gap-3 mb-10">
             <div className="w-10 h-px bg-gold" />
             <span className="text-gold text-xs font-semibold tracking-[0.35em] uppercase">
-              Enterprise AI Platform
+              Enterprise AI Growth Platform
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-[clamp(44px,7vw,92px)] font-bold text-white leading-[0.9] tracking-tight">
-            AI Agents.
+          <h1 className="text-[clamp(40px,6.5vw,88px)] font-bold text-white leading-[0.92] tracking-tight">
+            Transform Your Business
             <br />
-            Automation.
+            With AI, Automation
             <br />
-            <span className="text-gold">Business Operations.</span>
-            <br />
-            One Platform.
+            <span className="text-gold">&amp; Intelligent Operations.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="mt-10 text-silver text-lg md:text-xl leading-relaxed max-w-2xl">
-            Transform your company with intelligent agents, voice automation,
-            CRM and enterprise workflows — built for any industry, any scale.
+            Scale your company with intelligent agents, automated workflows,
+            customer operations and digital transformation solutions — designed
+            for modern businesses that compete to win.
           </p>
+
+          {/* Value props inline */}
+          <div className="flex flex-wrap gap-x-8 gap-y-2 mt-8">
+            {["More Revenue", "More Clients", "Less Operating Cost", "24/7 Operations"].map((v) => (
+              <div key={v} className="flex items-center gap-2">
+                <div className="w-1 h-1 rounded-full bg-gold" />
+                <span className="text-muted text-xs tracking-wider">{v}</span>
+              </div>
+            ))}
+          </div>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-start gap-4 mt-12">
@@ -64,19 +75,19 @@ export default function Hero() {
               href="/consultation"
               className="inline-block bg-gold text-obsidian px-9 py-4 text-xs font-bold tracking-widest uppercase hover:bg-gold-light transition-colors duration-200"
             >
-              Book Demo
+              Get Started Free
             </Link>
             <Link
               href="/platform"
               className="inline-block border border-panel-3 text-silver px-9 py-4 text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white transition-all duration-200"
             >
-              Watch Platform Tour
+              See How It Works
             </Link>
           </div>
 
           {/* Trust line */}
           <p className="mt-6 text-muted text-xs tracking-wider">
-            No credit card required · 14-day free trial · Cancel anytime
+            No credit card required · 14-day free trial · Cancel anytime · GDPR compliant
           </p>
         </div>
       </Container>

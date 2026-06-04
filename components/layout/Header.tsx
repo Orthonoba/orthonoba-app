@@ -8,97 +8,216 @@ import type { NavDropdown } from "@/types";
 
 // ── Navigation Data ───────────────────────────────
 
-const platformMenu: NavDropdown = {
-  label: "Platform",
-  cols: 2,
+const servicesMenu: NavDropdown = {
+  label: "Services",
+  cols: 3,
   sections: [
     {
-      title: "Core Modules",
+      title: "AI Workforce",
       items: [
         {
-          label: "AI Agents",
-          href: "/platform/ai-agents",
-          description: "Custom intelligent agents for any workflow",
+          label: "AI Receptionist",
+          href: "/products/ai-receptionist",
+          description: "Front desk AI — 24/7 across all channels",
         },
         {
-          label: "Voice Agents",
-          href: "/platform/voice-agents",
-          description: "24/7 AI voice reception in any language",
+          label: "AI Sales Agent",
+          href: "/products/ai-sales",
+          description: "Automated pipeline — lead to close",
         },
         {
-          label: "CRM",
-          href: "/platform/crm",
-          description: "Full customer lifecycle management",
+          label: "AI Customer Support",
+          href: "/products/ai-support",
+          description: "Instant resolution at 95% CSAT",
+        },
+        {
+          label: "AI Lead Qualifier",
+          href: "/products/lead-qualifier",
+          description: "Score and qualify every inbound lead",
+        },
+        {
+          label: "AI Appointment Assistant",
+          href: "/products/appointments",
+          description: "Zero friction scheduling — 60% fewer no-shows",
+        },
+        {
+          label: "AI Knowledge Assistant",
+          href: "/products/knowledge",
+          description: "Instant answers from your business knowledge",
         },
       ],
     },
     {
-      title: "Tools",
+      title: "Voice Intelligence",
       items: [
         {
-          label: "Automation",
-          href: "/platform/automation",
-          description: "Visual workflow builder — 500+ integrations",
+          label: "Voice Receptionist",
+          href: "/platform/voice-agents",
+          description: "Every call answered, every opportunity captured",
         },
         {
-          label: "Knowledge Base",
-          href: "/platform/knowledge-base",
-          description: "AI-powered document intelligence",
+          label: "Call Automation",
+          href: "/automation/voice",
+          description: "Outbound campaigns at scale",
         },
         {
-          label: "Analytics",
-          href: "/platform/analytics",
-          description: "Real-time business intelligence",
+          label: "Appointment Confirmation",
+          href: "/products/appointments",
+          description: "Automated reminders and confirmations",
+        },
+        {
+          label: "Customer Follow-Up",
+          href: "/automation/crm",
+          description: "Post-service calls that recover and retain",
+        },
+      ],
+    },
+    {
+      title: "Business Automation",
+      items: [
+        {
+          label: "Workflow Automation",
+          href: "/automation",
+          description: "End-to-end process automation",
+        },
+        {
+          label: "Sales Automation",
+          href: "/automation/sales",
+          description: "Pipeline on autopilot",
+        },
+        {
+          label: "Customer Journey Automation",
+          href: "/automation/crm",
+          description: "Lifecycle flows that adapt in real time",
+        },
+        {
+          label: "Marketing Automation",
+          href: "/automation/marketing",
+          description: "Campaigns that run themselves",
         },
       ],
     },
   ],
 };
 
-const solutionsMenu: NavDropdown = {
-  label: "Solutions",
+const growthMenu: NavDropdown = {
+  label: "Growth",
   cols: 2,
   sections: [
     {
+      title: "Customer Operations",
       items: [
         {
-          label: "Dental",
-          href: "/solutions/dental",
-          description: "Digital dental platform & lab management",
+          label: "Lead Management",
+          href: "/platform/crm",
+          description: "Capture, qualify and convert every lead",
         },
         {
-          label: "Healthcare",
-          href: "/solutions/healthcare",
-          description: "Patient management & clinical workflows",
+          label: "Pipeline Management",
+          href: "/platform/crm",
+          description: "AI-powered forecasting and deal intelligence",
         },
         {
-          label: "Legal",
-          href: "/solutions/legal",
-          description: "Case management & document automation",
+          label: "Communication Hub",
+          href: "/platform/crm",
+          description: "All channels unified — email, WhatsApp, voice",
         },
         {
-          label: "Real Estate",
-          href: "/solutions/real-estate",
-          description: "Property CRM & client automation",
+          label: "Customer Intelligence",
+          href: "/platform/analytics",
+          description: "Predict churn, identify upsell, act on data",
         },
       ],
     },
     {
+      title: "Marketing Growth",
       items: [
         {
+          label: "SEO & Local SEO",
+          href: "/marketing",
+          description: "Dominate search in your market",
+        },
+        {
+          label: "Google Ads",
+          href: "/marketing",
+          description: "Performance campaigns with AI optimization",
+        },
+        {
+          label: "Meta Ads",
+          href: "/marketing",
+          description: "Social advertising at scale",
+        },
+        {
+          label: "Lead Generation",
+          href: "/marketing",
+          description: "Predictable pipeline from multiple channels",
+        },
+        {
+          label: "Conversion Optimization",
+          href: "/marketing",
+          description: "Turn more visitors into paying customers",
+        },
+      ],
+    },
+  ],
+};
+
+const transformationMenu: NavDropdown = {
+  label: "Transformation",
+  cols: 2,
+  sections: [
+    {
+      title: "Digital Transformation",
+      items: [
+        {
+          label: "Software Development",
+          href: "/web-development",
+          description: "Custom apps, platforms and SaaS products",
+        },
+        {
+          label: "Business Systems Integration",
+          href: "/platform",
+          description: "Connect your entire technology stack",
+        },
+        {
+          label: "AI Adoption",
+          href: "/ai-agents",
+          description: "Embed AI into your existing processes",
+        },
+        {
+          label: "Digital Infrastructure",
+          href: "/platform",
+          description: "Scalable, secure modern foundations",
+        },
+      ],
+    },
+    {
+      title: "Industries",
+      items: [
+        {
+          label: "Healthcare & Dental",
+          href: "/industries/healthcare",
+          description: "Patient operations, clinical workflows",
+        },
+        {
+          label: "Legal",
+          href: "/industries/legal",
+          description: "Case management and client automation",
+        },
+        {
+          label: "Real Estate",
+          href: "/industries/real-estate",
+          description: "Property CRM and client engagement",
+        },
+        {
+          label: "Consulting & Professional Services",
+          href: "/industries/consulting",
+          description: "Project delivery and client intelligence",
+        },
+        {
           label: "Education",
-          href: "/solutions/education",
-          description: "LMS & student management",
-        },
-        {
-          label: "Consulting",
-          href: "/solutions/consulting",
-          description: "Project & client management",
-        },
-        {
-          label: "E-Commerce",
-          href: "/solutions/ecommerce",
-          description: "Order & customer automation",
+          href: "/industries/education",
+          description: "Student management and learning automation",
         },
         {
           label: "Enterprise",
@@ -110,108 +229,21 @@ const solutionsMenu: NavDropdown = {
   ],
 };
 
-const productsMenu: NavDropdown = {
-  label: "Products",
-  cols: 2,
-  sections: [
-    {
-      title: "AI Products",
-      items: [
-        {
-          label: "AI Receptionist",
-          href: "/products/ai-receptionist",
-          description: "Voice & chat front desk, always on",
-        },
-        {
-          label: "AI Sales Agent",
-          href: "/products/ai-sales",
-          description: "Automated sales pipeline management",
-        },
-        {
-          label: "AI Support",
-          href: "/products/ai-support",
-          description: "24/7 intelligent customer support",
-        },
-        {
-          label: "AI Lead Qualifier",
-          href: "/products/lead-qualifier",
-          description: "Qualify and score leads automatically",
-        },
-      ],
-    },
-    {
-      title: "Specialized",
-      items: [
-        {
-          label: "AI Voice Assistant",
-          href: "/products/voice-assistant",
-          description: "Voice-first conversational interface",
-        },
-        {
-          label: "AI Appointment System",
-          href: "/products/appointments",
-          description: "Smart scheduling without back-and-forth",
-        },
-        {
-          label: "AI Knowledge Assistant",
-          href: "/products/knowledge",
-          description: "Answer anything from your documents",
-        },
-      ],
-    },
-  ],
-};
-
-const automationsMenu: NavDropdown = {
-  label: "Automations",
-  cols: 1,
-  sections: [
-    {
-      items: [
-        {
-          label: "WhatsApp Automation",
-          href: "/automation/whatsapp",
-          description: "Conversational flows on WhatsApp Business",
-        },
-        {
-          label: "Email Automation",
-          href: "/automation/email",
-          description: "Intelligent email sequences & campaigns",
-        },
-        {
-          label: "CRM Automation",
-          href: "/automation/crm",
-          description: "Automate your entire sales pipeline",
-        },
-        {
-          label: "Sales Automation",
-          href: "/automation/sales",
-          description: "Lead to close on autopilot",
-        },
-        {
-          label: "Marketing Automation",
-          href: "/automation/marketing",
-          description: "AI-powered campaign orchestration",
-        },
-      ],
-    },
-  ],
-};
-
 const simpleNavLinks = [
   { label: "Pricing", href: "/pricing" },
-  { label: "Partners", href: "/partners" },
   { label: "Resources", href: "/resources" },
 ];
 
 const mobileLinks = [
-  { label: "Platform", href: "/platform" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Products", href: "/products" },
-  { label: "Automations", href: "/automation" },
+  { label: "Services", href: "/solutions" },
+  { label: "AI Workforce", href: "/products" },
+  { label: "Voice Intelligence", href: "/platform/voice-agents" },
+  { label: "Business Automation", href: "/automation" },
+  { label: "Customer Operations", href: "/platform/crm" },
+  { label: "Marketing Growth", href: "/marketing" },
+  { label: "Digital Transformation", href: "/web-development" },
+  { label: "Industries", href: "/industries" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Partners", href: "/partners" },
-  { label: "Resources", href: "/resources" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -240,10 +272,9 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-7">
-            <MegaMenu {...platformMenu} />
-            <MegaMenu {...solutionsMenu} />
-            <MegaMenu {...productsMenu} />
-            <MegaMenu {...automationsMenu} />
+            <MegaMenu {...servicesMenu} />
+            <MegaMenu {...growthMenu} />
+            <MegaMenu {...transformationMenu} />
             {simpleNavLinks.map((link) => (
               <Link
                 key={link.href}
