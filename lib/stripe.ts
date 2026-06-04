@@ -1,9 +1,14 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-05-27.dahlia",
-  typescript: true,
-});
+let _stripe: Stripe | null = null;
+
+export function getStripe(): Stripe {
+  if (_stripe) return _stripe;
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error("Missing STRIPE_SECRET_KEY environment variable");
+  _stripe = new Stripe(key, { apiVersion: "2026-05-27.dahlia", typescript: true });
+  return _stripe;
+}
 
 export type PlanConfig = {
   id: string;

@@ -1,4 +1,4 @@
-import { stripe, PLANS } from "@/lib/stripe";
+import { getStripe, PLANS } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 import type { PlanTier, SubscriptionStatus } from "@prisma/client";
 import type Stripe from "stripe";
@@ -12,7 +12,7 @@ export async function getOrCreateStripeCustomer(organizationId: string): Promise
 
   if (org.billingCustomerId) return org.billingCustomerId;
 
-  const customer = await stripe.customers.create({
+  const customer = await getStripe().customers.create({
     email: org.billingEmail ?? undefined,
     name: org.name,
     metadata: { organizationId },
@@ -37,7 +37,7 @@ export async function createCheckoutSession(
 
   const customerId = await getOrCreateStripeCustomer(organizationId);
 
-  const session = await stripe.checkout.sessions.create({
+  const session = await getStripe().checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     payment_method_types: ["card"],
@@ -60,7 +60,7 @@ export async function createPortalSession(
 ): Promise<string> {
   const customerId = await getOrCreateStripeCustomer(organizationId);
 
-  const session = await stripe.billingPortal.sessions.create({
+  const session = await getStripe().billingPortal.sessions.create({
     customer: customerId,
     return_url: returnUrl,
   });
@@ -126,7 +126,7 @@ export async function handleCheckoutCompleted(event: Stripe.CheckoutSessionCompl
   const organizationId = session.metadata?.organizationId;
   if (!organizationId) return;
 
-  const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+  const subscription = await getStripe().subscriptions.retrieve(session.subscription as string);
   await upsertSubscription(subscription, organizationId);
 }
 

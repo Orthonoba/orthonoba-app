@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Check, Loader2 } from "lucide-react";
 import StepHeader from "../_components/StepHeader";
@@ -55,7 +55,7 @@ const PLANS = [
   },
 ];
 
-export default function OnboardingPlanPage() {
+function OnboardingPlanContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState<string | null>(null);
@@ -201,5 +201,13 @@ export default function OnboardingPlanPage() {
         Powered by Stripe · Secure payments · Cancel anytime
       </p>
     </div>
+  );
+}
+
+export default function OnboardingPlanPage() {
+  return (
+    <Suspense>
+      <OnboardingPlanContent />
+    </Suspense>
   );
 }
