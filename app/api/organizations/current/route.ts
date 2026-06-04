@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
-  const ctx = getRequestAuth(req);
+  const ctx = await getRequestAuth(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const org = await prisma.organization.findUnique({
@@ -20,7 +20,7 @@ export async function GET(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const ctx = getRequestAuth(req);
+  const ctx = await getRequestAuth(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   let rawBody: unknown;

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { vi } from 'vitest'
+import { vi, beforeEach } from 'vitest'
 
 // Mock environment variables for all tests
 process.env.DATABASE_URL = 'postgresql://test:test@localhost/test'
@@ -7,7 +7,7 @@ process.env.JWT_SECRET = 'test-secret-at-least-32-characters-long-for-tests'
 process.env.STRIPE_SECRET_KEY = 'sk_test_mock_key_for_testing_only'
 process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test_mock_secret'
 process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000'
-process.env.NODE_ENV = 'test'
+// NODE_ENV is managed by vitest — do not override here
 
 // Mock Prisma to avoid real DB connections in unit tests
 vi.mock('@/lib/prisma', () => ({
@@ -57,6 +57,6 @@ vi.mock('@/lib/stripe', () => ({
 }))
 
 // Clear all mocks before each test
-beforeEach(() => {
+beforeEach((): void => {
   vi.clearAllMocks()
 })

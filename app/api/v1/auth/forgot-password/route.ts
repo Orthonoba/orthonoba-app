@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export async function POST(req: Request) {
   // Rate limiting prevents email enumeration via timing and spam abuse
   const ip = getClientIp(req);
-  const rl = authLimiter(ip);
+  const rl = await authLimiter(ip);
   if (!rl.success) {
     return NextResponse.json(
       { error: `Demasiados intentos. Espera ${rl.retryAfterSecs} segundos.` },

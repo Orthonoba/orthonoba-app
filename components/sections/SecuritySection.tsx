@@ -60,8 +60,7 @@ export default function SecuritySection() {
             Security that<br />enterprises trust.
           </h2>
           <p className="text-silver text-base leading-relaxed max-w-md">
-            Built with enterprise-grade security from the ground up. Your data
-            stays in Europe. Your customers' trust stays intact.
+            {"Built with enterprise-grade security from the ground up. Your data stays in Europe. Your customers' trust stays intact."}
           </p>
         </div>
 

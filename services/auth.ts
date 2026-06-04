@@ -157,7 +157,7 @@ export async function login(
       data: { lastLoginAt: new Date() },
     });
 
-    const token = signToken({
+    const token = await signToken({
       userId: user.id,
       organizationId: membership.organizationId,
       role: membership.role,

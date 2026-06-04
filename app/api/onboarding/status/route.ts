@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
-  const ctx = verifyRequestToken(req);
+  const ctx = await verifyRequestToken(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const [org, agentCount, waCount] = await Promise.all([

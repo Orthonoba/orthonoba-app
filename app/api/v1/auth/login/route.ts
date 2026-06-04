@@ -16,7 +16,7 @@ function loginErrorStatus(message: string): number {
 export async function POST(req: Request) {
   // Rate limiting: shared auth bucket (5 per 15 min per IP)
   const ip = getClientIp(req);
-  const rl = authLimiter(ip);
+  const rl = await authLimiter(ip);
   if (!rl.success) {
     return NextResponse.json(
       { error: `Too many attempts. Retry after ${rl.retryAfterSecs} seconds.` },

@@ -1,45 +1,20 @@
-type LogLevel = 'debug' | 'info' | 'warn' | 'error'
+import pino from 'pino'
 
-interface LogEntry {
-  level: LogLevel
-  message: string
-  context?: string
-  data?: unknown
-  timestamp: string
-  env: string
-}
+const isProduction = process.env.NODE_ENV === 'production'
 
-function log(level: LogLevel, message: string, context?: string, data?: unknown) {
-  const entry: LogEntry = {
-    level,
-    message,
-    context,
-    data,
-    timestamp: new Date().toISOString(),
-    env: process.env.NODE_ENV ?? 'development',
-  }
-
-  if (process.env.NODE_ENV === 'production') {
-    // Structured JSON logging for Vercel / log aggregators
-    const fn = level === 'error' ? console.error : level === 'warn' ? console.warn : console.log
-    fn(JSON.stringify(entry))
-  } else {
-    // Pretty logging in development
-    const prefix = {
-      debug: '🔍',
-      info: 'ℹ️ ',
-      warn: '⚠️ ',
-      error: '❌',
-    }[level]
-    const ctx = context ? `[${context}]` : ''
-    const fn = level === 'error' ? console.error : level === 'warn' ? console.warn : console.log
-    fn(`${prefix} ${ctx} ${message}`, data !== undefined ? data : '')
-  }
-}
+const pinoLogger = pino({
+  level: process.env.LOG_LEVEL ?? (isProduction ? 'info' : 'debug'),
+  // In production: pure JSON for Vercel Log Drains / Datadog / Logtail
+  // In development: pipe through `| npx pino-pretty` for readable output
+})
 
 export const logger = {
-  debug: (message: string, context?: string, data?: unknown) => log('debug', message, context, data),
-  info:  (message: string, context?: string, data?: unknown) => log('info', message, context, data),
-  warn:  (message: string, context?: string, data?: unknown) => log('warn', message, context, data),
-  error: (message: string, context?: string, data?: unknown) => log('error', message, context, data),
+  debug: (message: string, context?: string, data?: unknown) =>
+    pinoLogger.debug({ context, data }, message),
+  info: (message: string, context?: string, data?: unknown) =>
+    pinoLogger.info({ context, data }, message),
+  warn: (message: string, context?: string, data?: unknown) =>
+    pinoLogger.warn({ context, data }, message),
+  error: (message: string, context?: string, data?: unknown) =>
+    pinoLogger.error({ context, data }, message),
 }

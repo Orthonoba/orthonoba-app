@@ -16,7 +16,7 @@ const demoRequestEsSchema = z.object({
 
 export async function POST(req: Request) {
   const ip = getClientIp(req);
-  const rl = apiLimiter(ip);
+  const rl = await apiLimiter(ip);
   if (!rl.success) {
     return NextResponse.json(
       { error: `Demasiadas solicitudes. Intenta en ${rl.retryAfterSecs} segundos.` },

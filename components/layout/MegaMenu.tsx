@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "@/src/i18n/navigation";
 import type { NavDropdown } from "@/types";
 
-interface MegaMenuProps extends NavDropdown {}
+type MegaMenuProps = NavDropdown
 
 export default function MegaMenu({ label, sections, cols = 1 }: MegaMenuProps) {
   const [open, setOpen] = useState(false);

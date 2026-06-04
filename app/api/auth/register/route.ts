@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { register } from "@/services/auth";
 import { authLimiter, getClientIp } from "@/lib/rate-limit";
 import { registerSchema } from "@/lib/validations";
+import { signToken } from "@/lib/auth-helpers";
 import { logger } from "@/lib/logger";
 
 export const runtime = "nodejs";
@@ -18,7 +19,7 @@ function registerErrorStatus(message: string): number {
 export async function POST(req: Request) {
   // Rate limiting: shared auth bucket with login (5 per 15 min per IP)
   const ip = getClientIp(req);
-  const rl = authLimiter(ip);
+  const rl = await authLimiter(ip);
   if (!rl.success) {
     return NextResponse.json(
       { error: `Demasiados intentos. Espera ${rl.retryAfterSecs} segundos.` },
@@ -76,7 +77,28 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ ok: true, user: result.data }, { status: 201 });
+    const { userId, organizationId } = result.data!;
+
+    // Sign token and set auth cookie so user is immediately authenticated
+    const token = await signToken({
+      userId,
+      organizationId,
+      role: "OWNER",
+      email: result.data!.email,
+    });
+
+    const response = NextResponse.json(
+      { ok: true, user: result.data },
+      { status: 201 }
+    );
+    response.cookies.set("auth_token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      secure: process.env.NODE_ENV === "production",
+    });
+    return response;
   } catch (err) {
     logger.error("Register failed", "api/auth/register", err);
 

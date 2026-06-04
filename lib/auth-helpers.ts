@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import type { OrgRole } from "@prisma/client";
@@ -17,19 +17,33 @@ export type AuthContext = {
   email: string;
 };
 
-function getSecret(): string {
+function getSecretBytes(): Uint8Array {
   const secret = process.env.JWT_SECRET?.trim();
   if (!secret) throw new Error("JWT_SECRET is not configured");
-  return secret;
+  return new TextEncoder().encode(secret);
 }
 
-export function signToken(payload: JwtPayload): string {
-  return jwt.sign(payload, getSecret(), { expiresIn: "7d" });
+export async function signToken(payload: JwtPayload): Promise<string> {
+  return new SignJWT({ ...payload })
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("7d")
+    .sign(getSecretBytes());
 }
 
-export function verifyToken(token: string): JwtPayload | null {
+export async function verifyToken(token: string): Promise<JwtPayload | null> {
   try {
-    return jwt.verify(token, getSecret()) as JwtPayload;
+    const { payload } = await jwtVerify(token, getSecretBytes());
+    const { userId, organizationId, role, email } = payload as Record<string, unknown>;
+    if (
+      typeof userId !== "string" ||
+      typeof organizationId !== "string" ||
+      typeof role !== "string" ||
+      typeof email !== "string"
+    ) {
+      return null;
+    }
+    return { userId, organizationId, role: role as OrgRole, email };
   } catch {
     return null;
   }
@@ -91,7 +105,7 @@ export function extractTokenFromHeader(req: Request): string | null {
   return auth.slice(7);
 }
 
-export function verifyRequestToken(req: Request): JwtPayload | null {
+export async function verifyRequestToken(req: Request): Promise<JwtPayload | null> {
   const token = extractTokenFromHeader(req);
   if (!token) return null;
   return verifyToken(token);
@@ -102,15 +116,15 @@ export function verifyRequestToken(req: Request): JwtPayload | null {
  * 1. Requests through middleware (cookie auth): reads x-user-id / x-org-id / x-user-role
  * 2. Direct API calls: verifies Authorization: Bearer token
  */
-export function getRequestAuth(req: Request): AuthContext | null {
-  const userId = req.headers.get('x-user-id')
-  const orgId = req.headers.get('x-org-id')
-  const role = req.headers.get('x-user-role') as OrgRole | null
+export async function getRequestAuth(req: Request): Promise<AuthContext | null> {
+  const userId = req.headers.get("x-user-id");
+  const orgId = req.headers.get("x-org-id");
+  const role = req.headers.get("x-user-role") as OrgRole | null;
 
   if (userId && orgId && role) {
-    return { userId, organizationId: orgId, role, email: req.headers.get('x-user-email') ?? '' }
+    return { userId, organizationId: orgId, role, email: req.headers.get("x-user-email") ?? "" };
   }
 
   // Fallback: Bearer token for programmatic API clients
-  return verifyRequestToken(req)
+  return verifyRequestToken(req);
 }

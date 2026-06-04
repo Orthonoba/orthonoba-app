@@ -71,25 +71,25 @@ declare module "*.module.css" {
 }
 
 declare module "*.json" {
-  const value: any;
+  const value: unknown;
   export default value;
 }
 
 declare module "three/examples/jsm/loaders/STLLoader" {
   export class STLLoader {
-    load(url: string, onLoad: (geometry: any) => void): void;
+    load(url: string, onLoad: (geometry: unknown) => void): void;
   }
 }
 
 declare module "three/examples/jsm/loaders/OBJLoader" {
   export class OBJLoader {
-    load(url: string, onLoad: (object: any) => void): void;
+    load(url: string, onLoad: (object: unknown) => void): void;
   }
 }
 
 declare module "three/examples/jsm/controls/OrbitControls" {
   export class OrbitControls {
-    constructor(camera: any, domElement: any);
+    constructor(camera: unknown, domElement: unknown);
     enableDamping: boolean;
     dampingFactor: number;
     update(): void;

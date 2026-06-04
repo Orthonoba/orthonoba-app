@@ -32,9 +32,10 @@ export async function POST(req: Request) {
       data: result.rows[0],
       message: "Paciente creado",
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error interno"
     return NextResponse.json(
-      { error: error?.message || "Error interno" },
+      { error: message },
       { status: 500 },
     );
   }

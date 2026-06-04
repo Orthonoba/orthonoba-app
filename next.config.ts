@@ -1,4 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin'
+import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
@@ -31,10 +32,6 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
-  // TODO: Remove ignoreBuildErrors after resolving all TypeScript errors.
-  // This is commented out intentionally — fix TS errors before enabling strict builds.
-  // typescript: { ignoreBuildErrors: true },
-
   async headers() {
     return [
       {
@@ -53,4 +50,11 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withNextIntl(nextConfig)
+export default withSentryConfig(withNextIntl(nextConfig), {
+  // Suppress build output unless SENTRY_AUTH_TOKEN is set
+  silent: !process.env.SENTRY_AUTH_TOKEN,
+  // Upload source maps only when auth token is available
+  sourcemaps: {
+    disable: !process.env.SENTRY_AUTH_TOKEN,
+  },
+})

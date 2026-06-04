@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { login } from "@/services/auth";
 import { authLimiter, getClientIp } from "@/lib/rate-limit";
 import { loginSchema } from "@/lib/validations";
+import { logger } from "@/lib/logger";
 
 /** `pg`, bcrypt y JWT requieren runtime Node en Route Handlers. */
 export const runtime = "nodejs";
@@ -22,7 +23,7 @@ function loginErrorStatus(message: string): number {
 export async function POST(req: Request) {
   // Rate limiting: 5 attempts per 15 minutes per IP
   const ip = getClientIp(req)
-  const rl = authLimiter(ip)
+  const rl = await authLimiter(ip)
   if (!rl.success) {
     return NextResponse.json(
       { error: `Demasiados intentos. Espera ${rl.retryAfterSecs} segundos.` },
@@ -89,7 +90,7 @@ export async function POST(req: Request) {
     });
     return response;
   } catch (err) {
-    console.error("[api/auth/login]", err);
+    logger.error("Login failed", "api/auth/login", err);
 
     const isDbConfig =
       err instanceof Error &&

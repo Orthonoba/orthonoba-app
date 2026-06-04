@@ -92,7 +92,7 @@ function OnboardingPlanContent() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Checkout failed");
 
-      window.location.href = data.url;
+      window.location.assign(data.url);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
       setLoading(null);
@@ -100,7 +100,7 @@ function OnboardingPlanContent() {
   };
 
   const handleContactEnterprise = () => {
-    window.location.href = "mailto:sales@orthonoba.app?subject=Enterprise Plan";
+    window.location.assign("mailto:sales@orthonoba.app?subject=Enterprise Plan");
   };
 
   return (

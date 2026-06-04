@@ -4,11 +4,12 @@ import { z } from 'zod'
 
 export const loginSchema = z.object({
   email: z
-    .string({ required_error: 'Email requerido' })
+    .string()
+    .min(1, 'Email requerido')
     .email('Email no válido')
     .max(255),
   password: z
-    .string({ required_error: 'Contraseña requerida' })
+    .string()
     .min(8, 'Mínimo 8 caracteres')
     .max(128),
 })

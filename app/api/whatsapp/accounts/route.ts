@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
-  const ctx = verifyRequestToken(req);
+  const ctx = await verifyRequestToken(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const accounts = await prisma.whatsAppAccount.findMany({
@@ -19,7 +19,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const ctx = verifyRequestToken(req);
+  const ctx = await verifyRequestToken(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   let body: { phoneNumberId?: string; wabaId?: string; accessToken?: string; displayName?: string; webhookSecret?: string };

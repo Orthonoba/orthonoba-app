@@ -1,6 +1,12 @@
 # CLAUDE.md — ORTHONOBA.APP
-**Última actualización:** 2026-06-04 · Versión 4.0 (Post Security Hardening + Enterprise Architecture)
-**Score global:** 67/100 → **82/100** (tras Fases A–H) → **85/100** objetivo completo
+**Última actualización:** 2026-06-04 · Versión 7.0 (Post Sprint 1 + Sprint 2)
+**Score global (REAL verificado):** 72/100 (post Sprint 2) → **85/100** objetivo Sprint 4 → **95/100** objetivo Enterprise
+
+> **Estado Sprint 1:** ✅ COMPLETADO — build/lint/type-check pasan.  
+> **Estado Sprint 2:** ✅ COMPLETADO — rate limiting serverless, HMAC WhatsApp, pino, plan limits, CI/CD.  
+> **Score Sprint 1:** 53 → 63 (+10). **Score Sprint 2:** 63 → 72 (+9).  
+> Ver `docs/SPRINT2_COMPLETION_REPORT.md` para el reporte de Sprint 2.  
+> Ver `docs/FINAL_AUDIT_REPORT_V1.md` para la auditoría original.
 
 ---
 
@@ -128,20 +134,24 @@ orthonoba-app/
 
 | Control | Implementado | Archivo |
 |---------|-------------|---------|
-| JWT en httpOnly cookie | ✅ | `api/auth/login/route.ts` |
+| JWT en httpOnly cookie | ✅ | `api/auth/login/route.ts` + `api/auth/register/route.ts` |
 | Token FUERA de localStorage | ✅ **CORREGIDO** | `app/(auth)/login/page.tsx` |
-| Middleware de protección de rutas | ✅ **NUEVO** | `middleware.ts` |
-| Security Headers (CSP, HSTS, etc.) | ✅ **NUEVO** | `next.config.ts` |
-| Rate Limiting auth (5/15min) | ✅ **NUEVO** | `lib/rate-limit.ts` |
-| Zod validation en login | ✅ **NUEVO** | `app/api/auth/login/route.ts` |
-| Zod schemas completos | ✅ **NUEVO** | `lib/validations.ts` |
-| bcrypt 10 rounds | ✅ existente | `services/auth.ts` |
-| Stripe webhook HMAC | ✅ existente | `api/stripe/webhook/route.ts` |
-| Stripe event idempotency | ✅ existente | `services/billing.ts` |
-| Password min 12 chars + complejidad | ⏳ pendiente | `registerSchema` ya tiene reglas |
-| Email verification | ⏳ pendiente | necesita Resend |
-| Forgot-password | ⏳ pendiente | TODO activo |
-| Audit logs activos | ⏳ pendiente | modelo existe |
+| Middleware de protección de rutas | ✅ | `middleware.ts` |
+| Security Headers (CSP, HSTS, etc.) | ✅ | `next.config.ts` |
+| Rate Limiting auth (5/15min) | ✅ | `lib/rate-limit.ts` |
+| Zod validation en login/register | ✅ | `app/api/auth/login/route.ts` |
+| Zod schemas completos | ✅ | `lib/validations.ts` |
+| bcrypt 10 rounds | ✅ | `services/auth.ts` |
+| Stripe webhook HMAC | ✅ | `api/stripe/webhook/route.ts` |
+| Stripe event idempotency | ✅ | `services/billing.ts` |
+| Jose (única lib JWT) | ✅ **Sprint 1** | `lib/auth-helpers.ts` — jsonwebtoken eliminado |
+| Register establece cookie | ✅ **Sprint 1** | `app/api/auth/register/route.ts` |
+| Sentry error tracking | ✅ **Sprint 1** (inactivo sin DSN) | `sentry.*.config.ts` + `instrumentation.ts` |
+| Rate limiting distribuido (Upstash) | ✅ **Sprint 2** (requiere UPSTASH_* vars) | `lib/rate-limit.ts` dual-mode |
+| WhatsApp HMAC Meta verification | ✅ **Sprint 2** (requiere WHATSAPP_APP_SECRET) | `api/whatsapp/webhook/route.ts` |
+| Email verification | ⏳ Sprint 4 | necesita Resend |
+| Forgot-password | ⏳ Sprint 4 | stub activo |
+| Audit logs activos | ⏳ Sprint 3 | modelo existe |
 
 ---
 
@@ -504,50 +514,90 @@ TypeScript:    strict: true · no any · tipos en types/index.ts
 
 ## DOCUMENTACIÓN TÉCNICA
 
-| Documento | Contenido |
-|-----------|-----------|
-| `docs/AUDIT_V2.md` | Auditoría completa + scores |
-| `docs/SECURITY_CHECKLIST.md` | Controles de seguridad + estado |
-| `docs/SECURITY_REPORT.md` | Vulnerabilidades + remediaciones |
-| `docs/MULTITENANT_ENTERPRISE.md` | Arquitectura multi-tenant enterprise |
-| `docs/VOICE_CENTER_ARCHITECTURE.md` | Voice AI + AI Center |
-| `docs/PRODUCTION_READINESS.md` | Checklist producción + disaster recovery |
-| `docs/TESTING_STRATEGY.md` | Estrategia de tests + roadmap coverage |
-| `docs/TAILWIND_PLUS_MIGRATION_V2.md` | Plan migración dashboard UI |
-| `docs/CRUIP_PRO_MIGRATION_V2.md` | Plan migración marketing pages |
-| `docs/SAAS_ARCHITECTURE.md` | SaaS + multi-tenant completo |
-| `docs/DEPENDENCIES_V2.md` | Estado de todas las dependencias |
-| `docs/PERFORMANCE_REPORT.md` | Análisis de rendimiento |
+| Documento | Contenido | Estado |
+|-----------|-----------|--------|
+| `docs/FINAL_AUDIT_REPORT_V1.md` | **Auditoría real 2026-06-04 — score verificado** | ✅ Actual |
+| `docs/TECHNICAL_DEBT_REPORT.md` | **18 items deuda técnica con esfuerzo y fix** | ✅ Actual |
+| `docs/ROADMAP_2026.md` | **Sprints 1–5 con horas, riesgo, ROI** | ✅ Actual |
+| `docs/SECURITY_CHECKLIST.md` | Controles de seguridad + estado | ⚠️ Desactualizado |
+| `docs/MULTITENANT_ENTERPRISE.md` | Arquitectura multi-tenant enterprise | ⚠️ Parcial |
+| `docs/VOICE_CENTER_ARCHITECTURE.md` | Voice AI + AI Center | ⏳ Fase C |
+| `docs/PRODUCTION_READINESS.md` | Checklist producción + disaster recovery | ⚠️ Desactualizado |
+| `docs/TESTING_STRATEGY.md` | Estrategia de tests + roadmap coverage | ⚠️ No ejecutado |
+| `docs/SAAS_ARCHITECTURE.md` | SaaS + multi-tenant completo | ⚠️ Parcial |
+| `docs/PERFORMANCE_REPORT.md` | Análisis de rendimiento | ⚠️ Desactualizado |
 
 ---
 
-## PROBLEMAS CONOCIDOS — PENDIENTES
+## PROBLEMAS CONOCIDOS — PENDIENTES (post Sprint 1, 2026-06-04)
 
-| ID | Problema | Prioridad |
-|----|----------|-----------|
-| P1 | `ignoreBuildErrors` comentado — resolver errores TS | P0 |
-| P2 | Dashboard con 100% placeholders | P0 |
-| P3 | Forgot-password sin implementar | P1 |
-| P4 | Email verification sin implementar | P1 |
-| P5 | Feature flags no activos en endpoints | P1 |
-| P6 | `@anthropic-ai/sdk` instalado pero no conectado | P1 |
-| P7 | WHATSAPP_ACCESS_TOKEN + vars faltantes | P1 |
-| P8 | NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY faltante | P1 |
-| P9 | Audit logs modelo existe pero sin uso | P2 |
-| P10 | RLS en Neon sin implementar | P2 |
+### ✅ Resueltos en Sprint 1
+| ID | Problema | Estado |
+|----|----------|--------|
+| P0 | **BUILD ROTO** — Zod v4 `required_error` en `lib/validations.ts` | ✅ RESUELTO |
+| P1 | `test/setup.ts` — `NODE_ENV` readonly + `beforeEach` sin tipos | ✅ RESUELTO |
+| P2 | `npm run lint` script roto | ✅ RESUELTO |
+| P3 | `jsonwebtoken` en uso en `auth-helpers.ts` | ✅ RESUELTO (jose completo) |
+| P4 | Sentry sin config files | ✅ RESUELTO (3 configs + instrumentation) |
+| P7 | Register no establece cookie de sesión | ✅ RESUELTO |
+
+### ⏳ Pendientes Sprint 2+
+| ID | Problema | Sprint | Prioridad |
+|----|----------|--------|-----------|
+| P5 | Rate limiter in-memory — bypasseable en serverless | S2 | P0 |
+| P6 | WhatsApp webhook sin HMAC Meta verification | S2 | P0 |
+| P8 | Dashboard con 100% placeholders | S3 | P0 |
+| P9 | `/dashboard/agents/new` da 404 (ruta enlazada) | S3 | P0 |
+| P10 | Contacts y Leads: schema OK, endpoints no existen | S3 | P1 |
+| P11 | `@anthropic-ai/sdk` instalado pero no conectado | S4 | P1 |
+| P12 | Forgot-password sin implementar | S4 | P1 |
+| P13 | Email verification sin implementar | S4 | P1 |
+| P14 | Plan limits no se aplican en ningún endpoint | S2 | P1 |
+| P15 | Feature flags (@vercel/flags) no cableados | S4 | P2 |
+| P16 | Audit logs modelo existe pero nada escribe | S3 | P2 |
+| P17 | RLS en Neon sin implementar | S5 | P2 |
+| P18 | pino instalado pero logger.ts usa console.log | S2 | P2 |
 
 ---
 
-## SCORE ACTUAL (post Fases A–H)
+## COMANDOS (post Sprint 1 — todos funcionales)
 
-| Dimensión | Score |
-|-----------|-------|
-| Arquitectura | **86/100** ↑ |
-| Seguridad | **78/100** ↑↑ |
-| Escalabilidad | **83/100** ↑ |
-| Rendimiento | **68/100** → |
-| SaaS Readiness | **82/100** ↑ |
-| Multi-Tenant | **80/100** ↑ |
-| UI Readiness | **78/100** → |
-| Production Readiness | **80/100** ↑↑ |
-| **TOTAL** | **82/100** ↑↑ |
+```bash
+npm run dev              # desarrollo local
+npm run build            # producción (prisma generate + next build) ✅
+npm run type-check       # tsc --noEmit ✅
+npm run lint             # eslint . ✅ (0 errores)
+npm run test             # vitest en modo watch
+npm run test:run         # vitest una vez
+npm run test:coverage    # coverage con thresholds
+
+# Prisma
+npx prisma studio
+npx prisma migrate dev --name <desc>   # desarrollo
+npx prisma migrate deploy              # PRODUCCIÓN
+
+# Limpiar caché (Windows)
+Remove-Item -Recurse -Force .next
+```
+
+---
+
+## SCORE REAL
+
+| Dimensión | Auditoría (53) | Post S1 (63) | Post S2 (72) | Objetivo S4 |
+|-----------|---------------|-------------|-------------|------------|
+| Arquitectura | 72/100 | 76/100 | **76/100** | 90/100 |
+| Seguridad | 61/100 | 70/100 | **82/100** | 85/100 |
+| Frontend/UI | 42/100 | 44/100 | **44/100** | 80/100 |
+| Backend/API | 58/100 | 65/100 | **72/100** | 85/100 |
+| Multi-Tenant | 62/100 | 64/100 | **68/100** | 88/100 |
+| Observabilidad | 15/100 | 35/100 | **55/100** | 80/100 |
+| Escalabilidad | 65/100 | 65/100 | **70/100** | 85/100 |
+| Production Ready | 38/100 | 60/100 | **72/100** | 90/100 |
+| Documentación | 60/100 | 68/100 | **72/100** | 80/100 |
+| **TOTAL** | **53/100** | **63/100** | **72/100** | **85/100** |
+
+> Ver `docs/SPRINT1_COMPLETION_REPORT.md` para reporte de Sprint 1.  
+> Ver `docs/FINAL_AUDIT_REPORT_V1.md` para auditoría original.  
+> Ver `docs/TECHNICAL_DEBT_REPORT.md` para todos los items de deuda.  
+> Ver `docs/ROADMAP_2026.md` para el plan de ejecución.

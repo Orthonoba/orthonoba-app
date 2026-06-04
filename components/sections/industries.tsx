@@ -75,8 +75,7 @@ export default function Industries() {
             Built for your industry.<br />Ready from day one.
           </h2>
           <p className="text-silver text-base leading-relaxed max-w-sm">
-            Each vertical ships with pre-configured agents, workflows and
-            dashboards designed for that specific industry's needs.
+            {"Each vertical ships with pre-configured agents, workflows and dashboards designed for that specific industry's needs."}
           </p>
         </div>
 
