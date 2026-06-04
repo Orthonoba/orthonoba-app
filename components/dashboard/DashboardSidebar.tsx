@@ -87,7 +87,7 @@ export default function DashboardSidebar() {
                 const active = isActive(href, exact);
                 return (
                   <Link
-                    key={href}
+                    key={`${href}-${label}`}
                     href={href}
                     className={`flex items-center gap-2.5 px-2.5 py-2 rounded-md text-xs transition-all duration-150 group ${
                       active

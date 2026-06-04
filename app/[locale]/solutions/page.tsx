@@ -95,7 +95,7 @@ export default async function SolutionsPage({
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 pl-0">
                 {solutions.map(({ icon: SIcon, label: slabel, href, desc: sdesc }) => (
                   <Link
-                    key={href}
+                    key={`${href}-${slabel}`}
                     href={`/${locale}/${href}`}
                     className="group bg-panel border border-white/6 rounded-2xl p-5 hover:border-gold/20 hover:bg-panel-2 transition-all"
                   >

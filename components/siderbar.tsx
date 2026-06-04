@@ -35,7 +35,7 @@ export default function Sidebar() {
           const isActive = pathname === href;
           return (
             <Link
-              key={href}
+              key={`${href}-${label}`}
               href={href}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}
             >

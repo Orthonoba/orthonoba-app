@@ -70,7 +70,7 @@ export default async function ResourcesPage({
           <div className="grid md:grid-cols-3 gap-4">
             {RESOURCE_HUBS.map(({ icon: Icon, label, href, desc, tag }) => (
               <Link
-                key={href}
+                key={`${href}-${label}`}
                 href={`/${locale}/${href}`}
                 className="group bg-panel border border-white/6 rounded-2xl p-6 hover:border-gold/20 hover:bg-panel-2 transition-all"
               >
@@ -100,7 +100,7 @@ export default async function ResourcesPage({
           <div className="grid md:grid-cols-3 gap-4">
             {RESOURCE_TYPES.map(({ icon: Icon, label, href, desc }) => (
               <Link
-                key={href}
+                key={`${href}-${label}`}
                 href={`/${locale}/${href}`}
                 className="group flex items-start gap-4 bg-panel border border-white/6 rounded-2xl p-5 hover:border-gold/20 hover:bg-panel-2 transition-all"
               >

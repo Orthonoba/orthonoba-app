@@ -83,7 +83,7 @@ export default async function CompanyPage({
         <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {COMPANY_LINKS.map(({ icon: Icon, label, href, desc }) => (
             <Link
-              key={href}
+              key={`${href}-${label}`}
               href={`/${locale}/${href}`}
               className="group bg-panel border border-white/6 rounded-2xl p-6 hover:border-gold/20 hover:bg-panel-2 transition-all"
             >

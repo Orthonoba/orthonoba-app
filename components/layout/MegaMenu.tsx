@@ -87,7 +87,7 @@ export default function MegaMenu({ label, sections, cols = 1 }: MegaMenuProps) {
 
         <div className={`grid ${gridClass} divide-x divide-panel-3`}>
           {sections.map((section, si) => (
-            <div key={si} className="py-3">
+            <div key={section.title ?? `section-${si}`} className="py-3">
               {section.title && (
                 <div className="px-5 pt-2 pb-3 text-muted text-[9px] font-bold tracking-[0.3em] uppercase border-b border-panel-3 mb-1">
                   {section.title}

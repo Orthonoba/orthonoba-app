@@ -79,17 +79,17 @@ const growthMenu: NavDropdown = {
       items: [
         {
           label: "Lead Management",
-          href: "/platform/crm",
+          href: "/platform/crm#lead-management",
           description: "Capture, qualify and convert every lead",
         },
         {
           label: "Pipeline Management",
-          href: "/platform/crm",
+          href: "/platform/crm#pipeline",
           description: "AI-powered forecasting and deal intelligence",
         },
         {
           label: "Communication Hub",
-          href: "/platform/crm",
+          href: "/platform/crm#communication",
           description: "Email, WhatsApp and voice in one inbox",
         },
       ],
@@ -99,17 +99,17 @@ const growthMenu: NavDropdown = {
       items: [
         {
           label: "SEO & Local SEO",
-          href: "/marketing",
+          href: "/marketing#seo",
           description: "Dominate search in your market",
         },
         {
           label: "Performance Ads",
-          href: "/marketing",
+          href: "/marketing#ads",
           description: "Google Ads + Meta Ads with AI optimization",
         },
         {
           label: "Lead Generation",
-          href: "/marketing",
+          href: "/marketing#lead-generation",
           description: "Predictable pipeline from all channels",
         },
       ],

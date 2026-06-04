@@ -55,7 +55,7 @@ export default async function PortalPage({
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {PORTAL_SECTIONS.map(({ icon: Icon, label, href, desc }) => (
               <div
-                key={href}
+                key={`${href}-${label}`}
                 className="bg-panel border border-white/6 rounded-2xl p-5 opacity-60 cursor-not-allowed"
               >
                 <div className="w-8 h-8 rounded-lg bg-gold/8 border border-gold/10 flex items-center justify-center text-gold mb-4">
