@@ -1,32 +1,37 @@
 import { NextResponse } from "next/server";
+import { authLimiter, getClientIp } from "@/lib/rate-limit";
+import { forgotPasswordSchema } from "@/lib/validations";
 
-/**
- * Endpoint seguro por defecto:
- * - Siempre responde 200 (no filtra si el email existe).
- * - Útil para UI/UX y para integrar más tarde con un proveedor de email.
- */
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
-  try {
-    const body = await req.json().catch(() => ({}));
-    const email = String(body?.email ?? "").trim();
-
-    if (!email) {
-      return NextResponse.json(
-        { error: "Email obligatorio" },
-        { status: 400 },
-      );
-    }
-
-    // TODO: integrar proveedor de email + token de reseteo.
+  // Rate limiting prevents email enumeration via timing and spam abuse
+  const ip = getClientIp(req);
+  const rl = authLimiter(ip);
+  if (!rl.success) {
     return NextResponse.json(
-      { ok: true, message: "Si el correo existe, recibirás instrucciones." },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || "Error interno" },
-      { status: 500 },
+      { error: `Demasiados intentos. Espera ${rl.retryAfterSecs} segundos.` },
+      { status: 429, headers: { "Retry-After": String(rl.retryAfterSecs) } }
     );
   }
-}
 
+  let rawBody: unknown;
+  try {
+    rawBody = await req.json().catch(() => ({}));
+  } catch {
+    return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
+  }
+
+  const parsed = forgotPasswordSchema.safeParse(rawBody);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Email obligatorio" }, { status: 400 });
+  }
+
+  // Always respond 200 regardless of whether the email exists — prevents enumeration.
+  // TODO: integrate email provider (Resend) + reset token generation.
+  return NextResponse.json(
+    { ok: true, message: "Si el correo existe, recibirás instrucciones." },
+    { status: 200 }
+  );
+}

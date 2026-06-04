@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import { login } from "@/services/auth";
+import { authLimiter, getClientIp } from "@/lib/rate-limit";
+import { loginSchema } from "@/lib/validations";
 
 /** `pg`, bcrypt y JWT requieren runtime Node en Route Handlers. */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-type LoginBody = {
-  email?: unknown;
-  password?: unknown;
-};
 
 function loginErrorStatus(message: string): number {
   if (message === "Credenciales incorrectas.") return 401;
@@ -23,6 +20,23 @@ function loginErrorStatus(message: string): number {
 }
 
 export async function POST(req: Request) {
+  // Rate limiting: 5 attempts per 15 minutes per IP
+  const ip = getClientIp(req)
+  const rl = authLimiter(ip)
+  if (!rl.success) {
+    return NextResponse.json(
+      { error: `Demasiados intentos. Espera ${rl.retryAfterSecs} segundos.` },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(rl.retryAfterSecs),
+          'X-RateLimit-Limit': '5',
+          'X-RateLimit-Remaining': '0',
+        },
+      }
+    )
+  }
+
   if (!process.env.DATABASE_URL?.trim()) {
     return NextResponse.json(
       {
@@ -33,9 +47,9 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: LoginBody;
+  let rawBody: unknown;
   try {
-    body = await req.json();
+    rawBody = await req.json();
   } catch {
     return NextResponse.json(
       { error: "El cuerpo de la petición no es JSON válido." },
@@ -43,15 +57,15 @@ export async function POST(req: Request) {
     );
   }
 
-  const email = typeof body.email === "string" ? body.email : "";
-  const password = typeof body.password === "string" ? body.password : "";
-
-  if (!email.trim() || !password) {
+  const parsed = loginSchema.safeParse(rawBody);
+  if (!parsed.success) {
     return NextResponse.json(
-      { error: "Introduce email y contraseña." },
+      { error: "Introduce email y contraseña válidos.", details: parsed.error.flatten().fieldErrors },
       { status: 400 }
     );
   }
+
+  const { email, password } = parsed.data;
 
   try {
     const result = await login(email, password);
@@ -63,7 +77,9 @@ export async function POST(req: Request) {
       );
     }
 
-    const response = NextResponse.json(result.data, { status: 200 });
+    // Strip the raw token from the response body — the client reads it from the httpOnly cookie.
+    const { token: _token, ...publicData } = result.data!;
+    const response = NextResponse.json(publicData, { status: 200 });
     response.cookies.set("auth_token", result.data!.token, {
       httpOnly: true,
       sameSite: "lax",

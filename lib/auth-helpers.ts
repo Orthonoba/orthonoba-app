@@ -96,3 +96,21 @@ export function verifyRequestToken(req: Request): JwtPayload | null {
   if (!token) return null;
   return verifyToken(token);
 }
+
+/**
+ * Resolves auth context for Route Handlers, handling two cases:
+ * 1. Requests through middleware (cookie auth): reads x-user-id / x-org-id / x-user-role
+ * 2. Direct API calls: verifies Authorization: Bearer token
+ */
+export function getRequestAuth(req: Request): AuthContext | null {
+  const userId = req.headers.get('x-user-id')
+  const orgId = req.headers.get('x-org-id')
+  const role = req.headers.get('x-user-role') as OrgRole | null
+
+  if (userId && orgId && role) {
+    return { userId, organizationId: orgId, role, email: req.headers.get('x-user-email') ?? '' }
+  }
+
+  // Fallback: Bearer token for programmatic API clients
+  return verifyRequestToken(req)
+}

@@ -1,19 +1,11 @@
 import { NextResponse } from "next/server";
 import { register } from "@/services/auth";
+import { authLimiter, getClientIp } from "@/lib/rate-limit";
+import { registerSchema } from "@/lib/validations";
+import { logger } from "@/lib/logger";
 
-/** bcrypt y `pg` requieren runtime Node en Route Handlers. */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-/** Roles permitidos desde el cliente; cualquier otro valor se ignora y usa `user`. */
-const ALLOWED_ROLES = new Set(["user", "admin", "clinic"]);
-
-type RegisterBody = {
-  email?: unknown;
-  password?: unknown;
-  name?: unknown;
-  role?: unknown;
-};
 
 function registerErrorStatus(message: string): number {
   if (message.includes("Ya existe una cuenta")) return 409;
@@ -23,13 +15,24 @@ function registerErrorStatus(message: string): number {
   return 400;
 }
 
-function resolveRole(role: unknown): string {
-  if (typeof role !== "string") return "user";
-  const trimmed = role.trim();
-  return ALLOWED_ROLES.has(trimmed) ? trimmed : "user";
-}
-
 export async function POST(req: Request) {
+  // Rate limiting: shared auth bucket with login (5 per 15 min per IP)
+  const ip = getClientIp(req);
+  const rl = authLimiter(ip);
+  if (!rl.success) {
+    return NextResponse.json(
+      { error: `Demasiados intentos. Espera ${rl.retryAfterSecs} segundos.` },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rl.retryAfterSecs),
+          "X-RateLimit-Limit": "5",
+          "X-RateLimit-Remaining": "0",
+        },
+      }
+    );
+  }
+
   if (!process.env.DATABASE_URL?.trim()) {
     return NextResponse.json(
       {
@@ -40,9 +43,9 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: RegisterBody;
+  let rawBody: unknown;
   try {
-    body = await req.json();
+    rawBody = await req.json();
   } catch {
     return NextResponse.json(
       { error: "El cuerpo de la petición no es JSON válido." },
@@ -50,13 +53,21 @@ export async function POST(req: Request) {
     );
   }
 
-  const email = typeof body.email === "string" ? body.email : "";
-  const password = typeof body.password === "string" ? body.password : "";
-  const name = typeof body.name === "string" ? body.name : "";
-  const role = resolveRole(body.role);
+  const parsed = registerSchema.safeParse(rawBody);
+  if (!parsed.success) {
+    return NextResponse.json(
+      {
+        error: "Datos de registro no válidos.",
+        details: parsed.error.flatten().fieldErrors,
+      },
+      { status: 400 }
+    );
+  }
+
+  const { email, password, name, organizationName } = parsed.data;
 
   try {
-    const result = await register(email, password, name, role);
+    const result = await register(email, password, name, organizationName);
 
     if (result.error) {
       return NextResponse.json(
@@ -65,12 +76,9 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json(
-      { ok: true, user: result.data },
-      { status: 201 }
-    );
+    return NextResponse.json({ ok: true, user: result.data }, { status: 201 });
   } catch (err) {
-    console.error("[api/auth/register]", err);
+    logger.error("Register failed", "api/auth/register", err);
 
     const isDbConfig =
       err instanceof Error &&

@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import { login } from "@/services/auth";
+import { authLimiter, getClientIp } from "@/lib/rate-limit";
+import { loginSchema } from "@/lib/validations";
 
-/** `pg`, bcrypt y JWT requieren runtime Node en Route Handlers. */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-type LoginBody = {
-  email?: unknown;
-  password?: unknown;
-};
 
 function loginErrorStatus(message: string): number {
   if (message === "Credenciales incorrectas.") return 401;
@@ -18,43 +14,59 @@ function loginErrorStatus(message: string): number {
 }
 
 export async function POST(req: Request) {
+  // Rate limiting: shared auth bucket (5 per 15 min per IP)
+  const ip = getClientIp(req);
+  const rl = authLimiter(ip);
+  if (!rl.success) {
+    return NextResponse.json(
+      { error: `Too many attempts. Retry after ${rl.retryAfterSecs} seconds.` },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rl.retryAfterSecs),
+          "X-RateLimit-Limit": "5",
+          "X-RateLimit-Remaining": "0",
+        },
+      }
+    );
+  }
+
   if (!process.env.DATABASE_URL?.trim()) {
     return NextResponse.json(
-      {
-        error:
-          "DATABASE_URL no está configurada. En Neon: copia la connection string (URI) del proyecto y pégala en .env.local.",
-      },
-      { status: 503 },
+      { error: "Database not configured." },
+      { status: 503 }
     );
   }
 
-  let body: LoginBody;
+  let rawBody: unknown;
   try {
-    body = await req.json();
+    rawBody = await req.json();
   } catch {
     return NextResponse.json(
-      { error: "El cuerpo de la petición no es JSON válido." },
-      { status: 400 },
+      { error: "Request body is not valid JSON." },
+      { status: 400 }
     );
   }
 
-  const email = typeof body.email === "string" ? body.email : "";
-  const password = typeof body.password === "string" ? body.password : "";
-
-  if (!email.trim() || !password) {
+  const parsed = loginSchema.safeParse(rawBody);
+  if (!parsed.success) {
     return NextResponse.json(
-      { error: "Introduce email y contraseña." },
-      { status: 400 },
+      { error: "Invalid email or password.", details: parsed.error.flatten().fieldErrors },
+      { status: 400 }
     );
   }
 
+  const { email, password } = parsed.data;
   const result = await login(email, password);
+
   if (result.error) {
     return NextResponse.json(
       { error: result.error },
-      { status: loginErrorStatus(result.error) },
+      { status: loginErrorStatus(result.error) }
     );
   }
 
+  // API v1 intentionally returns the token in the response for programmatic clients.
+  // Store it securely (env var / secrets manager) — never in localStorage.
   return NextResponse.json(result.data, { status: 200 });
 }

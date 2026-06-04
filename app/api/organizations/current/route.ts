@@ -1,29 +1,13 @@
 import { NextResponse } from "next/server";
-import { verifyRequestToken } from "@/lib/auth-helpers";
+import { getRequestAuth } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
+import { updateOrganizationSchema } from "@/lib/validations";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const ALLOWED_INDUSTRIES = [
-  "digital_agency",
-  "marketing_agency",
-  "ecommerce",
-  "saas",
-  "consulting",
-  "law_firm",
-  "medical_clinic",
-  "dental_practice",
-  "restaurant",
-  "real_estate",
-  "retail",
-  "technology",
-  "finance",
-  "other",
-] as const;
-
 export async function GET(req: Request) {
-  const ctx = verifyRequestToken(req);
+  const ctx = getRequestAuth(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const org = await prisma.organization.findUnique({
@@ -36,14 +20,22 @@ export async function GET(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const ctx = verifyRequestToken(req);
+  const ctx = getRequestAuth(req);
   if (!ctx) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  let body: Record<string, unknown>;
+  let rawBody: unknown;
   try {
-    body = await req.json();
+    rawBody = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const parsed = updateOrganizationSchema.safeParse(rawBody);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: "Invalid data.", details: parsed.error.flatten().fieldErrors },
+      { status: 400 }
+    );
   }
 
   const org = await prisma.organization.findUnique({
@@ -53,24 +45,18 @@ export async function PATCH(req: Request) {
   if (!org) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
   const currentSettings = (org.settings as Record<string, unknown>) ?? {};
+  const { name, industry, website, phone, logoUrl, timezone, locale } = parsed.data;
 
-  const updates: Record<string, unknown> = {};
   const settingsUpdates: Record<string, unknown> = { ...currentSettings };
+  if (industry !== undefined) settingsUpdates.industry = industry;
+  if (website !== undefined) settingsUpdates.website = website || null;
+  if (phone !== undefined) settingsUpdates.phone = phone || null;
 
-  if (typeof body.industry === "string" && ALLOWED_INDUSTRIES.includes(body.industry as typeof ALLOWED_INDUSTRIES[number])) {
-    settingsUpdates.industry = body.industry;
-  }
-  if (typeof body.website === "string") {
-    settingsUpdates.website = body.website.trim() || null;
-  }
-  if (typeof body.phone === "string") {
-    settingsUpdates.phone = body.phone.trim() || null;
-  }
-  if (typeof body.logoUrl === "string") {
-    updates.logoUrl = body.logoUrl.trim() || null;
-  }
-
-  updates.settings = settingsUpdates;
+  const updates: Record<string, unknown> = { settings: settingsUpdates };
+  if (name !== undefined) updates.name = name;
+  if (logoUrl !== undefined) updates.logoUrl = logoUrl;
+  if (timezone !== undefined) updates.timezone = timezone;
+  if (locale !== undefined) updates.locale = locale;
 
   const updated = await prisma.organization.update({
     where: { id: ctx.organizationId },

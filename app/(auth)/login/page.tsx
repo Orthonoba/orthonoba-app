@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Eye, EyeOff, AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 
 type LoginResponse =
-  | { token: string; user: { id: number; email: string; role: string; name: string } }
+  | { user: { id: number; email: string; role: string; name: string } }
   | { error: string };
 
 export default function LoginPage() {
@@ -37,11 +37,8 @@ export default function LoginPage() {
         return;
       }
 
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem("token", data.token);
-        window.localStorage.setItem("user", JSON.stringify(data.user));
-      }
-
+      // Auth token is stored in httpOnly cookie by the server.
+      // No localStorage — eliminates XSS token theft vector.
       router.push("/dashboard");
       router.refresh();
     } catch {
